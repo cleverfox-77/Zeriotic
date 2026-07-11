@@ -40,14 +40,14 @@
     "areaServed": "Worldwide",
     "address": { "@type": "PostalAddress", "addressLocality": "Rajshahi", "addressCountry": "BD" },
     "serviceType": "Web application, e-commerce & SaaS development",
-    "email": "hello.zeriotic@gmail.com"
+    "email": "hello@zeriotic.com"
   }
   </script>
 
-  <!-- Fonts: Space Grotesk (display) · Inter (UI) · Space Mono (data) -->
+  <!-- Font: JetBrains Mono — the whole site speaks monospace -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Preload the hero sculpture so decoding starts ASAP -->
   <link rel="preload" as="fetch" href="./models/zeriotic-z.glb" crossorigin />
@@ -74,8 +74,8 @@
         <line id="pre-diag" x1="11" y1="28" x2="29" y2="10" stroke="url(#pgrad)" stroke-width="2.4" />
         <defs>
           <linearGradient id="pgrad" x1="11" y1="10" x2="29" y2="28" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#9d7bff" />
-            <stop offset="1" stop-color="#4fe3c1" />
+            <stop offset="0" stop-color="#ff5500" />
+            <stop offset="1" stop-color="#ffb380" />
           </linearGradient>
         </defs>
       </svg>
@@ -199,8 +199,99 @@
           <p class="reveal">A selection of recent engagements, each built to move a real business metric.</p>
         </div>
 
-        <!-- CASE 01 · OctaDezx -->
+        <!-- CASE 01 · Variant3D -->
         <article class="case reveal">
+          <div class="case__copy">
+            <div class="case__tag mono"><span>Immersive Product Experience</span><b>Variant3D</b></div>
+            <h3>Knitwear, rendered <span class="accent">thread by thread.</span></h3>
+            <p>A real-time 3D showcase for an on-demand knitting platform — garments presented as living geometry the visitor can orbit and explore in the browser, no video, no stills.</p>
+            <dl class="case__kv">
+              <div><dt class="mono">Domain</dt><dd>3D Fashion Tech</dd></div>
+              <div><dt class="mono">Stack</dt><dd>WebGL · Three.js</dd></div>
+              <div><dt class="mono">Focus</dt><dd>Product storytelling</dd></div>
+              <div><dt class="mono">Region</dt><dd>United States</dd></div>
+            </dl>
+          </div>
+          <div class="case__stage">
+            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
+              <div class="device device--browser">
+                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">variant3d / loom</span><em class="mono">● realtime</em></div>
+                <div class="device__body knit-mock">
+                  <div class="knit-mock__stage" data-atropos-offset="4">
+                    <div class="knit-mock__swatch"></div>
+                  </div>
+                  <div class="knit-mock__meta mono" data-atropos-offset="2">
+                    <span>LOOM · 3D KNITWEAR ENGINE</span><span>STITCH 04 / JERSEY</span><b>60 FPS</b>
+                  </div>
+                </div>
+              </div>
+            </div></div></div></div>
+          </div>
+        </article>
+
+        <!-- CASE 02 · Mira INC -->
+        <article class="case case--flip reveal">
+          <div class="case__copy">
+            <div class="case__tag mono"><span>Real-time Web Experience</span><b>Mira INC</b></div>
+            <h3>A product site that <span class="accent">computes itself.</span></h3>
+            <p>An interactive experience for an AI-driven product company — scroll-composed scenes and generative visuals rendered live, so the site demonstrates the product's intelligence instead of describing it.</p>
+            <dl class="case__kv">
+              <div><dt class="mono">Domain</dt><dd>AI / Product</dd></div>
+              <div><dt class="mono">Stack</dt><dd>WebGL · GSAP</dd></div>
+              <div><dt class="mono">Focus</dt><dd>Brand experience</dd></div>
+              <div><dt class="mono">Region</dt><dd>Global</dd></div>
+            </dl>
+          </div>
+          <div class="case__stage">
+            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
+              <div class="device device--browser">
+                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">mira / console</span></div>
+                <div class="device__body mira-mock mono">
+                  <div class="mira-mock__lines" data-atropos-offset="2">
+                    <span>&gt; mira.session.init()</span>
+                    <span class="dim">model loaded · 128ms</span>
+                    <span>&gt; compose(scene_04)</span>
+                    <span class="dim">generating…</span>
+                  </div>
+                  <div class="mira-mock__bars" data-atropos-offset="5">
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                  <span class="mira-mock__cursor" data-atropos-offset="3"></span>
+                </div>
+              </div>
+            </div></div></div></div>
+          </div>
+        </article>
+
+        <!-- CASE 03 · Melem Tokyo -->
+        <article class="case reveal">
+          <div class="case__copy">
+            <div class="case__tag mono"><span>Editorial Commerce</span><b>Melem Tokyo</b></div>
+            <h3>Tokyo precision, <span class="accent">shipped worldwide.</span></h3>
+            <p>A storefront for a Tokyo lifestyle brand where editorial art direction meets frictionless checkout — quiet layouts, exacting typography, and a purchase flow that never breaks the mood.</p>
+            <dl class="case__kv">
+              <div><dt class="mono">Domain</dt><dd>D2C Retail</dd></div>
+              <div><dt class="mono">Stack</dt><dd>Headless commerce</dd></div>
+              <div><dt class="mono">Focus</dt><dd>Brand &amp; conversion</dd></div>
+              <div><dt class="mono">Region</dt><dd>Japan</dd></div>
+            </dl>
+          </div>
+          <div class="case__stage">
+            <div class="atropos case-tilt case-tilt--phone"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
+              <div class="device device--phone">
+                <div class="device__screen">
+                  <span class="phone__brand" data-atropos-offset="-2">MELEM TOKYO</span>
+                  <div class="phone__hero" data-atropos-offset="4"><span>ISSUE 07<br/>木漏れ日 — Komorebi</span></div>
+                  <div class="phone__meta mono" data-atropos-offset="2"><span>Cotton twill</span><b>¥ 18,400</b></div>
+                  <div class="phone__cta mono" data-atropos-offset="3">カートに追加 — Add to cart</div>
+                </div>
+              </div>
+            </div></div></div></div>
+          </div>
+        </article>
+
+        <!-- CASE 04 · OctaDezx -->
+        <article class="case case--flip reveal">
           <div class="case__copy">
             <div class="case__tag mono"><span>AI Sales Assistant</span><b>OctaDezx</b></div>
             <h3>The 24/7 <span class="accent">sales brain.</span></h3>
@@ -213,70 +304,16 @@
             </dl>
           </div>
           <div class="case__stage">
-            <div class="device device--browser">
-              <div class="device__chrome"><i></i><i></i><i></i><span class="mono">octadezx.ai / assistant</span><em class="mono">● live</em></div>
-              <div class="device__body chat" id="octa-chat">
-                <div class="chat__head"><span class="chat__avatar">O</span><span>OctaDezx <em class="mono">online · 4 languages</em></span></div>
-                <div class="chat__log" id="octa-log"></div>
-                <div class="chat__input mono">Ask anything about our products… <b>↑</b></div>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- CASE 02 · Wholesale Products BD -->
-        <article class="case case--flip reveal">
-          <div class="case__copy">
-            <div class="case__tag mono"><span>E-commerce Platform</span><b>Wholesale Products BD</b></div>
-            <h3>Wholesale, rebuilt <span class="accent">for scale.</span></h3>
-            <p>A wholesale marketplace connecting suppliers with buyers — real-time inventory, tiered bulk pricing, and order management that scales from small shops to nationwide distribution.</p>
-            <dl class="case__kv">
-              <div><dt class="mono">Domain</dt><dd>B2B Commerce</dd></div>
-              <div><dt class="mono">Stack</dt><dd>Headless · Postgres</dd></div>
-              <div><dt class="mono">Launch</dt><dd>2024</dd></div>
-              <div><dt class="mono">Region</dt><dd>Bangladesh</dd></div>
-            </dl>
-          </div>
-          <div class="case__stage">
-            <div class="device device--browser">
-              <div class="device__chrome"><i></i><i></i><i></i><span class="mono">wholesaleproductsbd.com / catalog</span></div>
-              <div class="device__body grid-mock">
-                <div class="grid-mock__filters mono"><span class="on">All 12,842</span><span>Electronics</span><span>Apparel</span><span>Home</span><span class="moq">MOQ 50+</span></div>
-                <div class="grid-mock__cells">
-                  <div class="cell"><i class="p1"></i><span class="mono">SKU/0142 <b>৳120</b></span></div>
-                  <div class="cell"><i class="p2"></i><span class="mono">SKU/0284 <b>৳240</b></span></div>
-                  <div class="cell"><i class="p1"></i><span class="mono">SKU/0426 <b>৳360</b></span></div>
-                  <div class="cell"><i class="p2"></i><span class="mono">SKU/0568 <b>৳480</b></span></div>
-                  <div class="cell"><i class="p1"></i><span class="mono">SKU/0710 <b>৳600</b></span></div>
-                  <div class="cell"><i class="p2"></i><span class="mono">SKU/0852 <b>৳720</b></span></div>
+            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
+              <div class="device device--browser">
+                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">octadezx.ai / assistant</span><em class="mono">● live</em></div>
+                <div class="device__body chat" id="octa-chat">
+                  <div class="chat__head" data-atropos-offset="-1"><span class="chat__avatar">O</span><span>OctaDezx <em class="mono">online · 4 languages</em></span></div>
+                  <div class="chat__log" id="octa-log" data-atropos-offset="3"></div>
+                  <div class="chat__input mono" data-atropos-offset="1">Ask anything about our products… <b>↑</b></div>
                 </div>
               </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- CASE 03 · DezxLeather -->
-        <article class="case reveal">
-          <div class="case__copy">
-            <div class="case__tag mono"><span>E-commerce Website</span><b>DezxLeather</b></div>
-            <h3>Leather, <span class="accent">storied.</span></h3>
-            <p>A premium leather goods store with elegant product showcases, a smooth custom checkout, and editorial brand storytelling that positions craftsmanship above price.</p>
-            <dl class="case__kv">
-              <div><dt class="mono">Domain</dt><dd>D2C Retail</dd></div>
-              <div><dt class="mono">Stack</dt><dd>Astro · Stripe</dd></div>
-              <div><dt class="mono">Launch</dt><dd>2024</dd></div>
-              <div><dt class="mono">Region</dt><dd>International</dd></div>
-            </dl>
-          </div>
-          <div class="case__stage">
-            <div class="device device--phone">
-              <div class="device__screen">
-                <span class="phone__brand">DezxLeather</span>
-                <div class="phone__hero"><span>The Nova<br/>Weekender</span></div>
-                <div class="phone__meta mono"><span>Full-grain</span><b>$ 428</b></div>
-                <div class="phone__cta mono">Add to bag</div>
-              </div>
-            </div>
+            </div></div></div></div>
           </div>
         </article>
       </div>
@@ -411,9 +448,19 @@
         <div class="eyebrow reveal"><span>Ready when you are</span></div>
         <h2 class="reveal">Let's build something <span class="accent">remarkable.</span></h2>
         <p class="contact__sub reveal">We take on a handful of engagements each quarter. If you're shipping something ambitious, we'd love to hear about it.</p>
-        <a class="contact__email reveal" href="mailto:hello.zeriotic@gmail.com">hello.zeriotic@gmail.com <i>→</i></a>
+        <form class="form reveal" id="enquiry" novalidate>
+          <div class="form__row">
+            <div class="field"><input type="text" name="name" required placeholder=" " autocomplete="name" /><label>Name</label></div>
+            <div class="field"><input type="email" name="email" required placeholder=" " autocomplete="email" /><label>Email</label></div>
+          </div>
+          <div class="field"><textarea name="message" rows="4" required placeholder=" "></textarea><label>What are you building?</label></div>
+          <!-- honeypot — humans never see this -->
+          <div class="field field--hp" aria-hidden="true"><input type="text" name="company" tabindex="-1" autocomplete="off" /></div>
+          <button type="submit" class="btn">Send message <i>→</i></button>
+          <p class="form__status mono" id="form-status" role="status"></p>
+        </form>
         <div class="contact__cells reveal">
-          <div><span class="mono">Email</span><b>hello.zeriotic@gmail.com</b></div>
+          <div><span class="mono">Email</span><b><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a></b></div>
           <div><span class="mono">New work</span><b>Available Q2 / Q3 2026</b></div>
           <div><span class="mono">Response time</span><b>Within 24 hours</b></div>
         </div>
@@ -428,7 +475,7 @@
           <div><h4 class="mono">Studio</h4><p>Zeriotic is a premium web development studio building high-performance applications, e-commerce platforms and SaaS products for a handful of clients each year.</p></div>
           <div><h4 class="mono">Services</h4><a href="#services">Web applications</a><a href="#services">E-commerce</a><a href="#services">SaaS products</a></div>
           <div><h4 class="mono">Studio</h4><a href="#work">Work</a><a href="#process">Process</a><a href="#studio">About</a><a href="#contact">Contact</a></div>
-          <div><h4 class="mono">Elsewhere</h4><a href="https://facebook.com/zeriotic" rel="noopener">Facebook</a><a href="https://instagram.com/zeriotic" rel="noopener">Instagram</a></div>
+          <div><h4 class="mono">Elsewhere</h4><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a><a href="https://facebook.com/zeriotic" rel="noopener">Facebook</a><a href="https://instagram.com/zeriotic" rel="noopener">Instagram</a></div>
         </div>
         <div class="footer__bottom mono">
           <span>© 2026 Zeriotic Studio</span>

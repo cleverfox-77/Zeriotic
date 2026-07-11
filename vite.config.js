@@ -21,5 +21,7 @@ export default defineConfig({
     host: '127.0.0.1',
     port: 5180,
     strictPort: false,
+    // contact form → the nodemailer API (npm run api)
+    proxy: { '/api': 'http://127.0.0.1:8787' },
   },
 });

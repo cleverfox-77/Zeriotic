@@ -23,14 +23,16 @@ import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.j
  * touches buffers on section changes (a single memcpy per transition).
  */
 
+// Ember system — every state stays in the orange/amber family (the site's
+// single accent, after kvs.services), varied by temperature instead of hue.
 const PALETTES = {
-  nebula:  [0x9d7bff, 0x4fe3c1],
-  ribbon:  [0xb18cff, 0x7cc7ff],
-  knot:    [0x7c5cff, 0x4fe3c1],
-  lattice: [0x4fe3c1, 0x6ea8ff],
-  wave:    [0x6ea8ff, 0x9d7bff],
-  crystal: [0x8fa9ff, 0xff7ad9],
-  zglyph:  [0xb18cff, 0x4fe3c1],
+  nebula:  [0xff5500, 0xffb380],
+  ribbon:  [0xff7733, 0xffd9b3],
+  knot:    [0xff4400, 0xff9163],
+  lattice: [0xffaa55, 0xff5500],
+  wave:    [0xff8844, 0xfff1e0],
+  crystal: [0xffc099, 0xff5500],
+  zglyph:  [0xff5500, 0xffffff],
 };
 
 export default class World {
@@ -328,12 +330,12 @@ export default class World {
 
   // ----------------------------------------------------------- accent lights
   _addAccentLights() {
-    // just TWO lights — they only exist to pour the brand plasma into the chrome
-    const violet = new THREE.PointLight(0x9d7bff, 60, 60, 1.8);
-    violet.position.set(-8, 5, 7);
-    const mint = new THREE.PointLight(0x4fe3c1, 45, 60, 1.8);
-    mint.position.set(8, -4, 8);
-    this.scene.add(violet, mint);
+    // just TWO lights — they only exist to pour the brand ember into the chrome
+    const ember = new THREE.PointLight(0xff5500, 60, 60, 1.8);
+    ember.position.set(-8, 5, 7);
+    const warm = new THREE.PointLight(0xfff1e0, 45, 60, 1.8);
+    warm.position.set(8, -4, 8);
+    this.scene.add(ember, warm);
   }
 
   // ----------------------------------------------------------------- pointer
