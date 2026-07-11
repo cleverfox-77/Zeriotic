@@ -73,6 +73,10 @@ export default class World {
         iridescenceThicknessRange: [120, 480],
         clearcoat: 0.5,
         clearcoatRoughness: 0.2,
+        // transparent from birth — flipping `transparent` on a compiled material
+        // is ignored by the cached program state, which made fade-outs no-ops
+        transparent: true,
+        opacity: 1,
       });
       this.zMesh = new THREE.Mesh(geo, mat);
       this.zMesh.frustumCulled = true;
@@ -301,8 +305,13 @@ export default class World {
   setZVisible(on, duration = 1.0) {
     if (!this.zMesh) return;
     const mat = this.zMesh.material;
-    mat.transparent = true;
-    gsap.to(mat, { opacity: on ? 1 : 0, duration, ease: 'sine.inOut', onUpdate: () => this.exp.invalidate(2) });
+    if (on) this.zMesh.visible = true;
+    mat.depthWrite = on;   // a ghosted Z must not punch a depth hole in the field
+    gsap.to(mat, {
+      opacity: on ? 1 : 0, duration, ease: 'sine.inOut', overwrite: true,
+      onUpdate: () => this.exp.invalidate(2),
+      onComplete: () => { if (!on) this.zMesh.visible = false; this.exp.invalidate(2); },
+    });
   }
 
   // ------------------------------------------------------------------ shards

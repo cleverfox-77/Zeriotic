@@ -38,10 +38,10 @@ export default class Scroll {
 
     // Services sweep — one slow arc around the field, three beats
     this.capsPts = [
-      V(0.0,  2.6, 15.0),   // in from the manifesto pull-back
-      V(8.5,  0.6, 10.5),   // 01 web apps — low 3/4
-      V(-7.5, 2.2, 10.5),   // 02 commerce — opposite side
-      V(0.0, -2.2, 13.5),   // 03 SaaS — low frontal, the field spreads as a wave
+      V(0.0,  2.6, 15.5),   // in from the manifesto pull-back
+      V(8.5,  0.6, 12.0),   // 01 web apps — low 3/4
+      V(-8.5, 2.2, 13.0),   // 02 commerce — opposite side, far enough to frame the lattice
+      V(0.0, -2.2, 14.5),   // 03 SaaS — low frontal, the field spreads as a wave
     ];
     this.capsCurve = new THREE.CatmullRomCurve3(this.capsPts, false, 'catmullrom', 0.35);
     // look-at sits LEFT of the field so the forms render right-of-center,
@@ -216,15 +216,21 @@ export default class Scroll {
       onToggle: (s) => { this.heroActive = s.isActive; if (s.isActive) inv(); },
     });
 
+    // NOTE: onEnter only fires when the scroll CROSSES a trigger edge — after a
+    // mid-page reload or a #deep-link the page can initialise already inside a
+    // section, so every section also mirrors its enter-state in onRefresh.
+
     // MANIFESTO — pull back and rise; the field re-forms as the studio's ribbon
+    const manifestoState = () => {
+      this._setCam(this.manifestoPos, this.manifestoTgt, 2.0);
+      this.world.setState('ribbon', 2.0);
+      this.world.setZVisible(false, 1.4);
+      this.world.setDim(1);
+    };
     ScrollTrigger.create({
       trigger: '#manifesto', start: 'top 60%',
-      onEnter: () => {
-        this._setCam(this.manifestoPos, this.manifestoTgt, 2.0);
-        this.world.setState('ribbon', 2.0);
-        this.world.setZVisible(false, 1.4);
-        this.world.setDim(1);
-      },
+      onEnter: manifestoState,
+      onRefresh: (s) => { if (s.isActive) manifestoState(); },
       onLeaveBack: () => {
         this.world.setState('nebula', 1.8);
         this.world.setZVisible(true, 1.2);
@@ -232,11 +238,17 @@ export default class Scroll {
       },
     });
 
-    // SERVICES — scrub the sweep; the field re-forms per discipline
+    // SERVICES — scrub the sweep; the field re-forms per discipline.
+    // Slightly dimmed so the caption column always wins the contrast fight.
+    const servicesState = () => {
+      this.world.setDim(0.6, 1.0);
+      this.world.setZVisible(false, 0.6);
+    };
     ScrollTrigger.create({
       trigger: '#services', start: 'top top', end: 'bottom bottom', scrub: 1.6,
-      onEnter: () => this.world.setDim(1, 1.0),
-      onEnterBack: () => this.world.setDim(1, 1.0),
+      onEnter: servicesState,
+      onEnterBack: servicesState,
+      onRefresh: (s) => { if (s.isActive) servicesState(); },
       onUpdate: (self) => {
         const p = self.progress;
         const tmp = this.capsCurve.getPoint(p);
@@ -254,25 +266,30 @@ export default class Scroll {
     });
 
     // WORK — settle wide; crystal shimmer dimmed behind the case studies
+    const workState = () => {
+      this._setCam(this.workPos, new THREE.Vector3(0, 0, 0), 2.0);
+      this.world.setState('crystal', 2.0);
+      this.world.setZVisible(false, 0.6);
+      this.world.setDim(0.25);
+    };
     ScrollTrigger.create({
       trigger: '#work', start: 'top 60%',
-      onEnter: () => {
-        this._setCam(this.workPos, new THREE.Vector3(0, 0, 0), 2.0);
-        this.world.setState('crystal', 2.0);
-        this.world.setDim(0.25);
-      },
-      onLeaveBack: () => { this.world.setDim(1); },
+      onEnter: workState,
+      onRefresh: (s) => { if (s.isActive) workState(); },
+      onLeaveBack: () => { this.world.setDim(0.6); },
     });
 
     // CONTACT — the field converges back into the Z mark behind the card
+    const contactState = () => {
+      this._setCam(this.contactPos, new THREE.Vector3(0, 0.2, 0), 2.2);
+      this.world.setState('zglyph', 2.2);
+      this.world.setZVisible(true, 1.6);
+      this.world.setDim(1, 1.6);
+    };
     ScrollTrigger.create({
       trigger: '#contact', start: 'top 70%',
-      onEnter: () => {
-        this._setCam(this.contactPos, new THREE.Vector3(0, 0.2, 0), 2.2);
-        this.world.setState('zglyph', 2.2);
-        this.world.setZVisible(true, 1.6);
-        this.world.setDim(1, 1.6);
-      },
+      onEnter: contactState,
+      onRefresh: (s) => { if (s.isActive) contactState(); },
       onLeaveBack: () => {
         this.world.setZVisible(false, 1.0);
         this.world.setDim(0.25);

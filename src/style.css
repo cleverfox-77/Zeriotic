@@ -224,6 +224,14 @@ ul, ol { list-style: none; }
 
 /* ---------- SERVICES (pinned scrub) ---------- */
 .panel--caps { min-height: 100vh; }
+.panel--caps::before {
+  /* left-side scrim so captions stay readable over the particle forms */
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(100deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 44%, transparent 72%);
+  pointer-events: none;
+}
+.caps__track .caption { z-index: 1; }
 .caps__track { height: 340vh; position: relative; width: 100%; }
 .caps__track .caption {
   position: sticky; top: 0; height: 100vh;
