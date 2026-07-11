@@ -1,0 +1,29 @@
+# Netlify build + routing for the Zeriotic site.
+#
+# SMTP secrets are NOT here — set them as environment variables in the Netlify
+# dashboard (Site settings → Environment variables):
+#   SMTP_HOST   mail.privateemail.com
+#   SMTP_PORT   465
+#   SMTP_USER   hello@zeriotic.com
+#   SMTP_PASS   <your mailbox password>
+#   CONTACT_TO  hello@zeriotic.com
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# The contact form POSTs to /api/contact → the serverless mailer.
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+
+# Single-page fallback for any unknown path.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
