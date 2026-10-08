@@ -11,6 +11,15 @@ import nodemailer from 'nodemailer';
  */
 const SMTP_PORT = Number(process.env.SMTP_PORT || 465);
 
+function makeTransport() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'mail.privateemail.com',
+    port: SMTP_PORT,
+    secure: SMTP_PORT === 465,          // 465 = implicit TLS · 587 = STARTTLS
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+  });
+}
+
 // best-effort in-memory limiter (per warm instance) — the honeypot is the
 // real bot defence, since serverless instances don't share memory reliably
 const hits = new Map();
@@ -33,7 +42,7 @@ export const handler = async (event) => {
 
   let data;
   try { data = JSON.parse(event.body || '{}'); } catch { data = {}; }
-  const { name = '', email = '', message = '', company = '' } = data;
+  const { name = '', email = '', type = '', budget = '', message = '', company = '' } = data;
 
   // honeypot: real users never see the "company" field — bots fill it
   if (company) return json(200, { ok: true });
@@ -46,22 +55,17 @@ export const handler = async (event) => {
   }
 
   try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'mail.privateemail.com',
-      port: SMTP_PORT,
-      secure: SMTP_PORT === 465,          // 465 = implicit TLS · 587 = STARTTLS
-      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-    });
+    const transporter = makeTransport();
     await transporter.sendMail({
       from: `"Zeriotic Website" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_TO || process.env.SMTP_USER,
       replyTo: `"${name.replace(/["\\<>]/g, '')}" <${email}>`,
-      subject: `New enquiry — ${name}`.slice(0, 140),
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+      subject: `New enquiry — ${name}${type ? ` [${type}]` : ''}`.slice(0, 140),
+      text: `Name: ${name}\nEmail: ${email}\nProject Type: ${type || 'Not specified'}\nBudget Band: ${budget || 'Not specified'}\n\nMessage:\n${message}`,
     });
     return json(200, { ok: true });
   } catch (err) {
-    console.error('[contact] send failed:', err.message);
+    console.error('[contact] send failed:', err.code || err.name, '-', err.message);
     return json(502, { ok: false, error: 'Mail transport failed' });
   }
 };

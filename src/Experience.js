@@ -66,6 +66,31 @@ export default class Experience {
     this.resources.on('ready', () => this._buildScene());
     this.resources.load();
 
+    // ---- WebGL context loss resilience ----
+    this._contextLost = false;
+    canvas.addEventListener('webglcontextlost', (e) => {
+      e.preventDefault();
+      this._contextLost = true;
+      this._showContextOverlay(true);
+    });
+    canvas.addEventListener('webglcontextrestored', () => {
+      this._contextLost = false;
+      this._showContextOverlay(false);
+      // Re-apply renderer state — Three.js re-creates the internal GL state
+      this.renderer.resize();
+      this.post?.resize();
+      this.invalidate(5);
+    });
+
+    // ---- Accessibility: prefers-reduced-motion ----
+    this.reducedMotion = false;
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.reducedMotion = mq.matches;
+    mq.addEventListener('change', (e) => {
+      this.reducedMotion = e.matches;
+      this.invalidate(3);
+    });
+
     this.sizes.on('resize', () => this._resize());
 
     // single rAF loop
@@ -228,6 +253,7 @@ export default class Experience {
     this._lastNow = now;
 
     if (!this._ready) return;
+    if (this._contextLost) return;      // GL context dead — skip until restored
 
     // smooth scroll + controllers may request frames
     this.scroll.raf(now);
@@ -250,6 +276,20 @@ export default class Experience {
         if (this._interactive) this._drsTickRAF(frameMs);
       }
       if (this._renderFrames > 0) this._renderFrames--;
+    }
+  }
+
+  /** Show/hide a minimal overlay when the WebGL context is lost. */
+  _showContextOverlay(show) {
+    let el = document.getElementById('webgl-ctx-lost');
+    if (show && !el) {
+      el = document.createElement('div');
+      el.id = 'webgl-ctx-lost';
+      el.style.cssText = 'position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(0,0,0,.7);pointer-events:none;';
+      el.innerHTML = '<span style="font-family:var(--font-mono);font-size:.72rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase">Restoring 3D view…</span>';
+      document.body.appendChild(el);
+    } else if (!show && el) {
+      el.remove();
     }
   }
 

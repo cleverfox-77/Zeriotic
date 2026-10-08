@@ -190,8 +190,9 @@ export default class Scroll {
   }
 
   _setCam(pos, tgt, dur = 2.0) {
-    gsap.to(this.cam.rig.position, { x: pos.x, y: pos.y, z: pos.z, duration: dur, ease: 'power3.inOut', onUpdate: () => this.exp.invalidate(2) });
-    gsap.to(this.cam.rig.target, { x: tgt.x, y: tgt.y, z: tgt.z, duration: dur, ease: 'power3.inOut', onUpdate: () => this.exp.invalidate(2) });
+    const d = this.exp.reducedMotion ? 0.2 : dur;
+    gsap.to(this.cam.rig.position, { x: pos.x, y: pos.y, z: pos.z, duration: d, ease: 'power3.inOut', onUpdate: () => this.exp.invalidate(2) });
+    gsap.to(this.cam.rig.target, { x: tgt.x, y: tgt.y, z: tgt.z, duration: d, ease: 'power3.inOut', onUpdate: () => this.exp.invalidate(2) });
   }
 
   /** Register a section as having a LIVE 3D background while it's on screen. */
@@ -207,7 +208,7 @@ export default class Scroll {
     const inv = () => this.exp.invalidate(2);
 
     // live-background bookkeeping
-    ['#hero', '#manifesto', '#services', '#contact'].forEach((s) => this._liveSection(s));
+    ['#hero', '#manifesto', '#services', '#work', '#contact'].forEach((s) => this._liveSection(s));
 
     // HERO — slow orbit while in view
     ScrollTrigger.create({
@@ -258,6 +259,8 @@ export default class Scroll {
         if (beat !== this._beat) {
           this._beat = beat;
           this.world.setState(this._beatStates[beat]);
+          // Analytics: track which services beats are seen vs fled
+          window.__track?.(`services_beat`, { beat: beat + 1 });
         }
         this._capsCaptions(p);
         inv();
@@ -265,18 +268,84 @@ export default class Scroll {
       onLeaveBack: () => { this._beat = -1; },
     });
 
-    // WORK — settle wide; crystal shimmer dimmed behind the case studies
+    // WORK — settle wide; the field morphs PER CASE STUDY (each gets its own shape)
     const workState = () => {
       this._setCam(this.workPos, new THREE.Vector3(0, 0, 0), 2.0);
       this.world.setState('crystal', 2.0);
       this.world.setZVisible(false, 0.6);
-      this.world.setDim(0.25);
+      this.world.setDim(0.55);
     };
     ScrollTrigger.create({
       trigger: '#work', start: 'top 60%',
       onEnter: workState,
       onRefresh: (s) => { if (s.isActive) workState(); },
       onLeaveBack: () => { this.world.setDim(0.6); },
+    });
+
+    // Per-case morph targets & cinematic camera choreographies
+    const V = (x, y, z) => new THREE.Vector3(x, y, z);
+    const caseSpecs = [
+      {
+        sel: '#work .case:nth-of-type(1)',
+        name: 'variant3d',
+        state: 'stitchTorus',
+        camPos: V(0.0, 1.2, 15.5),
+        camTgt: V(0.0, 0.0, 0.0),
+        dim: 0.55,
+      },
+      {
+        sel: '#case-mira',
+        name: 'mira',
+        state: 'signalGrid',
+        camPos: V(-2.4, 1.6, 14.2),
+        camTgt: V(-0.3, 0.1, 0.0),
+        dim: 0.55,
+      },
+      {
+        sel: '#case-melem',
+        name: 'melem-tokyo',
+        state: 'tokyoLattice',
+        camPos: V(2.2, 1.1, 14.8),
+        camTgt: V(0.2, 0.0, 0.0),
+        dim: 0.55,
+      },
+      {
+        sel: '#case-octa',
+        name: 'octadezx',
+        state: 'neuralWeb',
+        camPos: V(-2.8, 2.2, 13.6),
+        camTgt: V(0.0, 0.2, 0.0),
+        dim: 0.65,
+      },
+      {
+        sel: '#case-accert',
+        name: 'accert-one',
+        state: 'accertFormula',
+        camPos: V(3.4, 1.4, 12.8),
+        camTgt: V(0.3, 0.0, 0.0),
+        dim: 0.70,
+      },
+    ];
+
+    caseSpecs.forEach((spec) => {
+      const el = document.querySelector(spec.sel);
+      if (!el) return;
+
+      const triggerCase = () => {
+        this.world.setState(spec.state, 1.8);
+        this.world.setDim(spec.dim, 1.2);
+        this._setCam(spec.camPos, spec.camTgt, 2.0);
+        inv();
+        window.__track?.('case_view', { case: spec.name });
+      };
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 60%',
+        end: 'bottom 40%',
+        onEnter: triggerCase,
+        onEnterBack: triggerCase,
+      });
     });
 
     // CONTACT — the field converges back into the Z mark behind the card
@@ -329,8 +398,8 @@ export default class Scroll {
     this.exp.setInteractiveQuality?.(live);
 
     if (this.heroActive) {
-      // slow auto-orbit + pointer parallax
-      this._heroAngle += delta * 0.05;
+      // slow auto-orbit + pointer parallax (disabled under reduced motion)
+      if (!this.exp.reducedMotion) this._heroAngle += delta * 0.05;
       const ndc = this.world.mouseNDC;
       const r = this.heroRadius;
       this.cam.rig.position.set(

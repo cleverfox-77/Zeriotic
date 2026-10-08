@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>How zeriotic.com Renders - A Technical Case Study | Zeriotic</title>
+  <meta name="description" content="Technical deep-dive into how the zeriotic.com website works: on-demand WebGL rendering, dynamic resolution scaling, and a 120K-particle field in a single draw call." />
+  <link rel="canonical" href="https://zeriotic.com/work/how-zeriotic-renders" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Zeriotic" />
+  <meta property="og:title" content="How zeriotic.com Renders - A Technical Case Study | Zeriotic" />
+  <meta property="og:description" content="Technical deep-dive into how the zeriotic.com website works: on-demand WebGL rendering, dynamic resolution scaling, and a 120K-particle field in a single draw call." />
+  <meta property="og:url" content="https://zeriotic.com/work/how-zeriotic-renders" />
+  <meta property="og:image" content="https://zeriotic.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": "https://zeriotic.com/work/how-zeriotic-renders#article",
+        "name": "How zeriotic.com Renders - A Technical Case Study",
+        "url": "https://zeriotic.com/work/how-zeriotic-renders",
+        "description": "Technical deep-dive into how the zeriotic.com website works: on-demand WebGL rendering, dynamic resolution scaling, and a 120K-particle field in a single draw call.",
+        "inLanguage": "en",
+        "image": "https://zeriotic.com/og-image.png",
+        "author": { "@id": "https://zeriotic.com/#organization" },
+        "publisher": { "@id": "https://zeriotic.com/#organization" },
+        "about": { "@id": "https://zeriotic.com/#organization" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://zeriotic.com/work/how-zeriotic-renders#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Zeriotic", "item": "https://zeriotic.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://zeriotic.com/#work" },
+          { "@type": "ListItem", "position": 3, "name": "How zeriotic.com renders" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/work/work.css">
+  <style>
+    body { background: var(--bg); color: var(--ink); }
+    .chrome { opacity: 1; position: absolute; background: transparent; padding: 30px var(--pad); }
+    .case-hero { padding: 25vh var(--pad) 10vh; max-width: 900px; margin: 0 auto; }
+    .case-hero h1 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; color: var(--ink-strong); line-height: 1.1; margin-bottom: 24px; text-transform: uppercase; letter-spacing: -0.03em; }
+    
+    .case-section { padding: 60px 0; border-bottom: 1px solid var(--hairline); }
+    .case-section h2 { font-size: 1.4rem; color: var(--ink-strong); margin-bottom: 24px; text-transform: uppercase; }
+    .case-section h3 { font-size: 1.1rem; color: var(--accent); margin-bottom: 12px; margin-top: 32px; text-transform: uppercase; }
+    .case-section p { font-size: 1rem; color: var(--ink); max-width: 780px; line-height: 1.6; margin-bottom: 16px; }
+    .case-section ul { list-style: square inside; color: var(--ink); margin-bottom: 24px; max-width: 780px; line-height: 1.6; }
+    .case-section li { margin-bottom: 8px; }
+    .case-section pre { background: var(--bg-soft); border: 1px solid var(--hairline); padding: 24px; overflow-x: auto; color: var(--ink-strong); font-size: 0.85rem; line-height: 1.5; border-radius: 4px; margin-top: 24px; }
+    .case-footer { padding: 80px 0; display: flex; justify-content: space-between; align-items: center; }
+  </style>
+  <script defer data-domain="zeriotic.com" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <header class="chrome">
+    <a class="brand" href="/">
+      <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="1.6" />
+        <rect x="11" y="10" width="18" height="18" rx="0.5" stroke="currentColor" stroke-width="1.2" />
+        <line x1="11" y1="28" x2="29" y2="10" stroke="currentColor" stroke-width="2.4" />
+      </svg>
+      ZERIOTIC
+    </a>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="eyebrow"><span>Technical Deep-dive</span></div>
+      <h1>How zeriotic.com Renders</h1>
+    </section>
+
+    <div class="studio__wrap">
+      <section class="case-section">
+        <div class="sec-head"><h2>Architecture</h2></div>
+        <ul>
+          <li>Vite + Vanilla JS (no framework overhead)</li>
+          <li>Three.js for the WebGL particle field + chrome sculpture</li>
+          <li>GSAP + ScrollTrigger for scroll-driven storytelling</li>
+          <li>Lenis for smooth scrolling</li>
+          <li>Netlify for hosting + serverless functions</li>
+        </ul>
+        
+        <pre>
+[ CDN / Edge ]  =>  [ Static HTML / CSS ]
+                         |
+                         +-- [ Vite JS Bundle ] 
+                               |
+                               +-- [ Main Thread ] --> Scroll & Layout (Lenis/GSAP)
+                               |
+                               +-- [ WebGL Thread ] --> Particle Field (Three.js)
+        </pre>
+      </section>
+
+      <section class="case-section">
+        <div class="sec-head"><h2>Key Engineering Decisions</h2></div>
+        
+        <h3>1. On-Demand Rendering</h3>
+        <p>The GPU only renders when something changes (scroll, tween, resize). Static sections release the GPU entirely. This means battery life on laptops and silent fans.</p>
+        
+        <h3>2. Dynamic Resolution Scaling</h3>
+        <p>A closed-loop scaler driven by real GPU timer queries (EXT_disjoint_timer_query_webgl2). It holds the highest resolution the GPU can sustain, stepping down only when frames exceed budget. No guessing from rAF deltas.</p>
+
+        <h3>3. SMAA &harr; FXAA Motion Swap</h3>
+        <p>During camera movement, expensive SMAA is swapped for cheap FXAA (motion masks the quality difference). When movement stops, SMAA renders one crisp frame.</p>
+        
+        <h3>4. Particle Field Architecture</h3>
+        <p>120K particles in a single draw call. Position morphing via vertex shader (no CPU buffer updates during animation). MeshSurfaceSampler distributes points on Blender sculptures.</p>
+        
+        <h3>5. Adaptive Quality Tiers</h3>
+        <p>GPU name detection, core count, device memory &rarr; three tiers (high/medium/low) controlling particle count, pixel ratio, and post-processing.</p>
+      </section>
+
+      <section class="case-section">
+        <div class="sec-head"><h2>Performance Numbers</h2></div>
+        <ul>
+          <li><strong>3 GLB models:</strong> 55 KB total</li>
+          <li><strong>120K particles:</strong> single draw call, vertex-shader animated</li>
+          <li><strong>Median TTFB:</strong> 12ms (Netlify CDN)</li>
+          <li><strong>First meaningful paint:</strong> under 2 seconds</li>
+          <li><strong>GPU state:</strong> idle when reading solid content sections</li>
+        </ul>
+      </section>
+
+      <section class="case-footer">
+        <a href="/" class="btn btn--ghost"><i>&larr; </i> Back to all work</a>
+        <a href="/work/variant3d" class="btn">Case 01: Variant3D <i>&rarr;</i></a>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="studio__wrap">
+      <div class="footer__bottom mono">
+        <span>© 2026 Zeriotic Studio</span>
+        <span>Dhaka, BD</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+

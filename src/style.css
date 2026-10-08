@@ -315,6 +315,10 @@ ul, ol { list-style: none; }
 .case__kv { display: grid; grid-template-columns: repeat(2, minmax(0, 220px)); gap: 12px 24px; }
 .case__kv div { display: grid; gap: 2px; border-top: 1px solid var(--hairline); padding-top: 10px; }
 .case__kv dd { font-size: 0.74rem; font-weight: 600; color: var(--ink-strong); }
+.case__metrics{display:grid;grid-template-columns:repeat(2,minmax(0,220px));gap:12px 24px;margin-top:20px}
+.case__metrics div{display:grid;gap:2px;border-top:1px solid var(--hairline);padding-top:10px}
+.case__metrics b{font-size:.74rem;font-weight:600}
+.case__link{margin-top:18px}
 
 /* Atropos tilt wrapper */
 .case__stage { display: grid; justify-items: center; perspective: 1200px; }
@@ -423,6 +427,117 @@ ul, ol { list-style: none; }
   font-size: 0.56rem; font-weight: 700;
 }
 
+/* accert-one telemetry mock (Accert One) */
+.accert-mock {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 85, 0, 0.08), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(197, 196, 194, 0.03) 0 2px, transparent 2px 4px),
+    #050508;
+  position: relative;
+}
+.accert-mock__track {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 0.58rem;
+  color: var(--muted);
+}
+.accert-mock__track b { color: var(--accent); }
+.accert-mock__cockpit {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+.accert-mock__gauge {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 85, 0, 0.04);
+  border: 1px solid var(--hairline);
+  border-radius: 4px;
+}
+.accert-mock__gear {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow: 0 0 16px rgba(255, 85, 0, 0.5);
+}
+.accert-mock__speed {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  line-height: 1.1;
+}
+.accert-mock__rpm {
+  display: flex;
+  gap: 2px;
+  height: 5px;
+  margin-top: 8px;
+}
+.accert-mock__rpm i {
+  flex: 1;
+  background: rgba(255, 85, 0, 0.2);
+  border-radius: 1px;
+}
+.accert-mock__rpm i.active {
+  background: var(--accent);
+  box-shadow: 0 0 4px var(--accent);
+}
+.accert-mock__rpm i.peak {
+  background: #ff2a2a;
+  box-shadow: 0 0 6px #ff2a2a;
+}
+.accert-mock__tires {
+  display: grid;
+  gap: 6px;
+  font-size: 0.56rem;
+}
+.accert-mock__tires div {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(197, 196, 194, 0.04);
+  padding: 4px 8px;
+  border-radius: 2px;
+  border: 1px solid var(--hairline);
+}
+.accert-mock__aero {
+  display: grid;
+  gap: 6px;
+  font-size: 0.56rem;
+}
+.accert-mock__aero div {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(197, 196, 194, 0.04);
+  padding: 4px 8px;
+  border-radius: 2px;
+  border: 1px solid var(--hairline);
+}
+.accert-mock__aero .drs-lit {
+  color: #00ffaa;
+  font-weight: 700;
+}
+.accert-mock__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--hairline);
+  padding-top: 10px;
+  font-size: 0.55rem;
+  color: var(--muted);
+}
+.accert-mock__footer span:last-child {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* ---------- TECH ---------- */
 .tech-grid {
   display: grid;
@@ -523,39 +638,12 @@ ul, ol { list-style: none; }
 .form { display: grid; gap: 18px; margin-bottom: 34px; }
 .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .field { position: relative; }
-.field input, .field textarea {
-  width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--hairline-strong);
-  color: var(--ink-strong);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  padding: 20px 2px 10px;
-  outline: none;
-  transition: border-color 0.35s;
-  border-radius: 0;
-  resize: vertical;
-}
-.field input:focus, .field textarea:focus { border-color: var(--accent); }
-.field label {
-  position: absolute;
-  left: 2px; top: 18px;
-  color: var(--muted);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  pointer-events: none;
-  transition: all 0.3s var(--ease-out);
-}
-.field input:focus + label,
-.field input:not(:placeholder-shown) + label,
-.field textarea:focus + label,
-.field textarea:not(:placeholder-shown) + label {
-  top: -2px;
-  font-size: 0.56rem;
-  color: var(--accent);
-}
+.field input,.field textarea,.field select{width:100%;background:transparent;border:none;border-bottom:1px solid var(--hairline-strong);color:var(--ink-strong);font-family:var(--font-mono);font-size:max(1rem, 16px);padding:20px 2px 10px;outline:none;transition:border-color .35s;border-radius:0;resize:vertical;-webkit-appearance:none;appearance:none}
+.field select{padding-right:24px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ff5500' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center;background-size:12px}
+.field select option{background:#0a0a0f;color:var(--ink-strong);font-family:var(--font-mono);font-size:14px;padding:8px}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
+.field label{position:absolute;left:2px;top:18px;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;pointer-events:none;transition:all .3s var(--ease-out)}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label,.field select:focus+label,.field select:not([value=""]):valid+label{top:-2px;font-size:.56rem;color:var(--accent)}
 .field--hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form .btn { justify-self: start; }
 .form__status { min-height: 1.2em; color: var(--accent); font-size: 0.6rem; }
@@ -610,3 +698,25 @@ ul, ol { list-style: none; }
 @media (prefers-reduced-motion: reduce) {
   .scroll-hint i, .knit-mock__swatch, .mira-mock__bars i, .mira-mock__cursor { animation: none; }
 }
+/* ==========================================================================
+   CAPABILITIES FALLBACK + CONTACT FAQ
+   Static, crawler-visible copies of content React renders at runtime.
+   Kept visually quiet so they read as part of the page, not an add-on.
+   ========================================================================== */
+.caps-fallback { max-width: 720px; margin: 0 auto; padding: 48px var(--pad); }
+.caps-fallback__title { font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.caps-fallback__sub { color: var(--ink); margin-bottom: 28px; }
+.caps-fallback__item { border-top: 1px solid var(--hairline); padding: 20px 0; }
+.caps-fallback__item h3 { font-size: 1rem; color: var(--ink-strong); font-weight: 600; margin-bottom: 8px; }
+.caps-fallback__item p { font-size: 0.92rem; color: var(--ink); line-height: 1.6; }
+
+.contact-faq { max-width: 720px; margin: 56px auto 0; text-align: left; }
+.contact-faq h3 { font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.faq-item { border-top: 1px solid var(--hairline); padding: 20px 0; }
+.faq-item h4 { font-size: 1rem; color: var(--ink-strong); font-weight: 600; margin-bottom: 8px; }
+.faq-item p { font-size: 0.92rem; color: var(--ink); line-height: 1.6; }
+
+.process-more { margin-top: 28px; font-size: 0.85rem; }
+.process-more a { color: var(--accent); text-decoration: none; }
+.process-more a:hover { text-decoration: underline; }
+

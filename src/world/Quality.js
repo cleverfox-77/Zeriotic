@@ -38,7 +38,7 @@ export function detectTier(renderer) {
     ssao: false,
     // Post is fill-rate bound; CSS-pixel rendering + SMAA reads as intentionally
     // cinematic on the dark scene and locks a steady 60fps.
-    maxPixelRatio: tier === 'low' ? 1 : 1.0,
+    maxPixelRatio: tier === 'low' ? 1 : tier === 'medium' ? 1.5 : 2,
     bloomDownscale: 2,                 // half-res bloom everywhere (bloom is blurry anyway)
   };
 }

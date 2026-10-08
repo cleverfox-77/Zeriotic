@@ -37,7 +37,7 @@ function limited(ip) {
 }
 
 app.post('/api/contact', async (req, res) => {
-  const { name = '', email = '', message = '', company = '' } = req.body || {};
+  const { name = '', email = '', type = '', budget = '', message = '', company = '' } = req.body || {};
 
   // honeypot: real users never see the "company" field — bots fill it
   if (company) return res.json({ ok: true });
@@ -52,8 +52,8 @@ app.post('/api/contact', async (req, res) => {
       from: `"Zeriotic Website" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_TO || process.env.SMTP_USER,
       replyTo: `"${name.replace(/["\\<>]/g, '')}" <${email}>`,
-      subject: `New enquiry — ${name}`.slice(0, 140),
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+      subject: `New enquiry — ${name}${type ? ` [${type}]` : ''}`.slice(0, 140),
+      text: `Name: ${name}\nEmail: ${email}\nProject Type: ${type || 'Not specified'}\nBudget Band: ${budget || 'Not specified'}\n\nMessage:\n${message}`,
     });
     res.json({ ok: true });
   } catch (err) {

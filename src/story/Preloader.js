@@ -23,6 +23,12 @@ export default class Preloader {
 
     this._drawMark();
 
+    // Hard timeout — if resources haven't loaded after 12s, force-dismiss the
+    // preloader so the site remains usable (poster fallback visible behind).
+    this._timeout = setTimeout(() => {
+      if (!this._done) { this.target = 1; }
+    }, 12000);
+
     this._raf = requestAnimationFrame(() => this._loop());
   }
 
@@ -66,6 +72,7 @@ export default class Preloader {
   }
 
   _finish() {
+    clearTimeout(this._timeout);
     this.pct.textContent = '100%';
     this.fill.style.width = '100%';
     anime.timeline({ easing: 'easeInOutQuart' })

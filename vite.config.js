@@ -1,17 +1,40 @@
 import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
-// Relative base so the build can be dropped on any static host / sub-path.
 export default defineConfig({
   base: './',
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  plugins: [
+    tailwindcss(),
+    react()
+  ],
   build: {
     target: 'esnext',
-    assetsInlineLimit: 0,           // never inline the .glb binaries
+    assetsInlineLimit: 0, // never inline the .glb binaries
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        privacy: path.resolve(__dirname, 'privacy.html'),
+        variant3d: path.resolve(__dirname, 'work/variant3d.html'),
+        mira: path.resolve(__dirname, 'work/mira.html'),
+        melemTokyo: path.resolve(__dirname, 'work/melem-tokyo.html'),
+        octadezx: path.resolve(__dirname, 'work/octadezx.html'),
+        accertOne: path.resolve(__dirname, 'work/accert-one.html'),
+        howZerioticRenders: path.resolve(__dirname, 'work/how-zeriotic-renders.html'),
+        compareAgencies: path.resolve(__dirname, 'compare/zeriotic-vs-agencies.html'),
+      },
       output: {
         // Split the big libs into their own long-cache chunks.
         manualChunks: {
           three: ['three'],
           gsap: ['gsap'],
+          react: ['react', 'react-dom']
         },
       },
     },

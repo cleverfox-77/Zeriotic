@@ -8,6 +8,7 @@
   <!-- ===== PRIMARY SEO ===== -->
   <title>Zeriotic — Premium Web Development Studio</title>
   <meta name="description" content="Zeriotic is a premium web development studio building high-performance web apps, e-commerce platforms and SaaS products — engineered with the precision of a product team and the polish of a design house." />
+  <meta name="keywords" content="Zeriotic, WebGL, Three.js, GSAP, Atropos, Anime.js, Babylon.js, WebGL2, agentic AI, OctaDezx, Accert One, mobile racing simulation, deterministic C#, interactive 3D, premium web development" />
   <link rel="canonical" href="https://zeriotic.com/" />
   <meta name="robots" content="index,follow" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -29,18 +30,119 @@
   <meta name="twitter:image" content="https://zeriotic.com/og-image.png" />
 
   <!-- ===== STRUCTURED DATA ===== -->
+  <!-- Entity graph: every @id is stable and resolvable on this page. Case-study
+       pages reference #organization via their own JSON-LD. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Zeriotic",
-    "description": "Premium web development studio building high-performance web applications, e-commerce platforms and SaaS products.",
-    "url": "https://zeriotic.com/",
-    "image": "https://zeriotic.com/og-image.png",
-    "areaServed": "Worldwide",
-    "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
-    "serviceType": "Web application, e-commerce & SaaS development",
-    "email": "hello@zeriotic.com"
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://zeriotic.com/#organization",
+        "name": "Zeriotic",
+        "description": "Premium web development studio building high-performance web applications, e-commerce platforms and SaaS products.",
+        "url": "https://zeriotic.com/",
+        "image": "https://zeriotic.com/og-image.png",
+        "email": "hello@zeriotic.com",
+        "foundingDate": "2022",
+        "slogan": "Software crafted to outlast trends.",
+        "areaServed": "Worldwide",
+        "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
+        "numberOfEmployees": { "@type": "QuantitativeValue", "value": 16 },
+        "founder": [
+          { "@type": "Person", "name": "Al Mueid Hoque", "jobTitle": "Co-founder" },
+          { "@type": "Person", "name": "Mahdi Hasan", "jobTitle": "Co-founder" }
+        ],
+        "sameAs": [
+          "https://facebook.com/zeriotic",
+          "https://instagram.com/zeriotic",
+          "https://github.com/zeriotic",
+          "https://linkedin.com/company/zeriotic"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Zeriotic services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full-stack web applications", "description": "Modern frameworks, edge rendering, clean architectures. Apps that stay fast at scale, from internal tools to consumer products." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce platforms", "description": "Custom storefronts with seamless checkout, inventory orchestration and analytics that guide decisions." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SaaS products", "description": "Subscription platforms with auth, billing, roles and robust APIs that third parties build on." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI integration", "description": "RAG pipelines, embeddings and agent features integrated into existing products." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Interactive 3D and WebGL", "description": "Real-time 3D product experiences rendered live in the browser." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Autonomous agent platforms", "description": "Enterprise agentic AI systems with real-time phone calls, computer vision and Model Context Protocol (MCP) server integration." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Real-time physics and simulation", "description": "Deterministic 60 FPS mobile and cross-platform simulation and gaming engines engineered in Unity and C#." } }
+          ]
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://zeriotic.com/#octadezx",
+        "name": "OctaDezx",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web, Cloud, SIP",
+        "description": "Agentic AI platform providing autonomous customer operations, real phone voice calls with conversational barge-in, photo recognition, and native MCP protocol integration.",
+        "url": "https://octadezx.com",
+        "author": { "@id": "https://zeriotic.com/#organization" }
+      },
+      {
+        "@type": "VideoGame",
+        "@id": "https://zeriotic.com/#accert-one",
+        "name": "Accert One",
+        "applicationCategory": "Game",
+        "operatingSystem": "Android, iOS, Cross-Platform",
+        "gamePlatform": ["Android", "iOS"],
+        "genre": ["Racing Simulation", "Motorsport"],
+        "description": "Next-generation mobile motorsport simulation featuring 60 FPS deterministic physics, multi-link suspension kinematics, laser-surveyed circuits, dynamic weather, and the OctaDezx DX12 hypercar.",
+        "author": { "@id": "https://zeriotic.com/#organization" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://zeriotic.com/#website",
+        "url": "https://zeriotic.com/",
+        "name": "Zeriotic",
+        "publisher": { "@id": "https://zeriotic.com/#organization" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://zeriotic.com/#webpage",
+        "url": "https://zeriotic.com/",
+        "name": "Zeriotic — Premium Web Development Studio",
+        "isPartOf": { "@id": "https://zeriotic.com/#website" },
+        "about": { "@id": "https://zeriotic.com/#organization" },
+        "inLanguage": "en"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://zeriotic.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Zeriotic build?",
+            "acceptedAnswer": { "@type": "Answer", "text": "High-performance web applications, e-commerce platforms and SaaS products, plus AI integration and interactive 3D/WebGL product experiences." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does a Zeriotic project cost?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Projects are scoped during discovery. Typical budget bands are $10k to $25k, $25k to $50k, $50k to $100k and $100k+." }
+          },
+          {
+            "@type": "Question",
+            "name": "How does the engagement process work?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Four phases: discover and define (1-2 weeks), design the system (2-4 weeks), engineer and ship (4-10 weeks), then iterate in the open. You click through a staging environment from day one." }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is Zeriotic based and who does it work with?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Zeriotic is headquartered in Dhaka, Bangladesh and serves clients worldwide. It is an independent team of sixteen, founded in 2022." }
+          },
+          {
+            "@type": "Question",
+            "name": "When can Zeriotic start a new project?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Zeriotic takes on a handful of engagements each quarter. Email hello@zeriotic.com and you will get a response within 24 hours." }
+          }
+        ]
+      }
+    ]
   }
   </script>
 
@@ -51,6 +153,7 @@
 
   <!-- Preload the hero sculpture so decoding starts ASAP -->
   <link rel="preload" as="fetch" href="./models/zeriotic-z.glb" crossorigin />
+  <script defer data-domain="zeriotic.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
   <!-- ===================================================================== -->
@@ -123,7 +226,7 @@
     <!-- HERO -->
     <section class="panel panel--hero" id="hero" data-screen-label="Hero">
       <div class="hero__inner">
-        <div class="eyebrow reveal"><span>Premium Web Development · Available Q2 / Q3 2026</span></div>
+        <div class="eyebrow reveal"><span>Premium Web Development · <span data-availability>Available Q3 2026 / Q4 2026</span></span></div>
         <h1 class="hero__title">
           <span class="line"><span class="word">Software</span> <span class="word">crafted</span></span>
           <span class="line"><span class="word">to</span> <span class="word">outlast</span></span>
@@ -182,10 +285,10 @@
     <section class="studio-sec studio-sec--stats" id="stats" data-screen-label="Stats">
       <div class="studio__wrap">
         <div class="stats-band">
-          <div class="stat"><div class="stat__k"><span class="count" data-to="47">0</span></div><p>Products shipped</p></div>
-          <div class="stat"><div class="stat__k"><span class="count" data-to="98">0</span><span>%</span></div><p>Client retention</p></div>
-          <div class="stat"><div class="stat__k"><span class="count" data-to="12">0</span><span>ms</span></div><p>Median TTFB</p></div>
-          <div class="stat"><div class="stat__k"><span class="count" data-to="4">0</span><span>.9</span></div><p>Client rating</p></div>
+          <div class="stat"><div class="stat__k"><span class="count" data-to="47">47</span></div><p>Products shipped</p></div>
+          <div class="stat"><div class="stat__k"><span class="count" data-to="98">98</span><span>%</span></div><p>Client retention</p></div>
+          <div class="stat"><div class="stat__k"><span class="count" data-to="12">12</span><span>ms</span></div><p>Median TTFB</p></div>
+          <div class="stat"><div class="stat__k"><span class="count" data-to="4">4</span><span>.9</span></div><p>Client rating</p></div>
         </div>
       </div>
     </section>
@@ -204,13 +307,17 @@
           <div class="case__copy">
             <div class="case__tag mono"><span>Immersive Product Experience</span><b>Variant3D</b></div>
             <h3>Knitwear, rendered <span class="accent">thread by thread.</span></h3>
-            <p>A real-time 3D showcase for an on-demand knitting platform — garments presented as living geometry the visitor can orbit and explore in the browser, no video, no stills.</p>
+            <p>A real-time 3D showcase for an on-demand knitting platform — garments presented as living geometry the visitor can orbit and explore in the browser.</p>
             <dl class="case__kv">
-              <div><dt class="mono">Domain</dt><dd>3D Fashion Tech</dd></div>
-              <div><dt class="mono">Stack</dt><dd>WebGL · Three.js</dd></div>
-              <div><dt class="mono">Focus</dt><dd>Product storytelling</dd></div>
-              <div><dt class="mono">Region</dt><dd>United States</dd></div>
+              <div><dt>Domain</dt><dd>3D Fashion Tech</dd></div>
+              <div><dt>Stack</dt><dd>WebGL &bull; Three.js</dd></div>
+              <div><dt>Region</dt><dd>United States</dd></div>
             </dl>
+            <div class="case__metrics mono">
+              <div><span>Engagement</span><b class="accent">3.2x time on page</b></div>
+              <div><span>Impact</span><b class="accent">+68% demo requests</b></div>
+            </div>
+            <a href="/work/variant3d" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
           </div>
           <div class="case__stage">
             <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
@@ -230,17 +337,21 @@
         </article>
 
         <!-- CASE 02 · Mira INC -->
-        <article class="case case--flip reveal">
+        <article class="case case--flip reveal" id="case-mira">
           <div class="case__copy">
             <div class="case__tag mono"><span>Real-time Web Experience</span><b>Mira INC</b></div>
             <h3>A product site that <span class="accent">computes itself.</span></h3>
             <p>An interactive experience for an AI-driven product company — scroll-composed scenes and generative visuals rendered live, so the site demonstrates the product's intelligence instead of describing it.</p>
             <dl class="case__kv">
-              <div><dt class="mono">Domain</dt><dd>AI / Product</dd></div>
-              <div><dt class="mono">Stack</dt><dd>WebGL · GSAP</dd></div>
-              <div><dt class="mono">Focus</dt><dd>Brand experience</dd></div>
-              <div><dt class="mono">Region</dt><dd>Global</dd></div>
+              <div><dt>Domain</dt><dd>AI / Product</dd></div>
+              <div><dt>Stack</dt><dd>WebGL &bull; GSAP</dd></div>
+              <div><dt>Region</dt><dd>Global</dd></div>
             </dl>
+            <div class="case__metrics mono">
+              <div><span>Engagement</span><b class="accent">2.3x time on page</b></div>
+              <div><span>Impact</span><b class="accent">+41% demo conversions</b></div>
+            </div>
+            <a href="/work/mira" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
           </div>
           <div class="case__stage">
             <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
@@ -264,17 +375,21 @@
         </article>
 
         <!-- CASE 03 · Melem Tokyo -->
-        <article class="case reveal">
+        <article class="case reveal" id="case-melem">
           <div class="case__copy">
             <div class="case__tag mono"><span>Editorial Commerce</span><b>Melem Tokyo</b></div>
             <h3>Tokyo precision, <span class="accent">shipped worldwide.</span></h3>
             <p>A storefront for a Tokyo lifestyle brand where editorial art direction meets frictionless checkout — quiet layouts, exacting typography, and a purchase flow that never breaks the mood.</p>
             <dl class="case__kv">
-              <div><dt class="mono">Domain</dt><dd>D2C Retail</dd></div>
-              <div><dt class="mono">Stack</dt><dd>Headless commerce</dd></div>
-              <div><dt class="mono">Focus</dt><dd>Brand &amp; conversion</dd></div>
-              <div><dt class="mono">Region</dt><dd>Japan</dd></div>
+              <div><dt>Domain</dt><dd>D2C Retail</dd></div>
+              <div><dt>Stack</dt><dd>Headless commerce</dd></div>
+              <div><dt>Region</dt><dd>Japan</dd></div>
             </dl>
+            <div class="case__metrics mono">
+              <div><span>Conversion</span><b class="accent">+52% add-to-cart rate</b></div>
+              <div><span>Performance</span><b class="accent">1.2s LCP mobile</b></div>
+            </div>
+            <a href="/work/melem-tokyo" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
           </div>
           <div class="case__stage">
             <div class="atropos case-tilt case-tilt--phone"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
@@ -291,26 +406,93 @@
         </article>
 
         <!-- CASE 04 · OctaDezx -->
-        <article class="case case--flip reveal">
+        <article class="case case--flip reveal" id="case-octa">
           <div class="case__copy">
-            <div class="case__tag mono"><span>AI Sales Assistant</span><b>OctaDezx</b></div>
-            <h3>The 24/7 <span class="accent">sales brain.</span></h3>
-            <p>An AI-powered sales assistant that handles customer inquiries and takes orders around the clock. It ingests policies, catalogs and knowledge bases to deliver personalized responses in multiple languages — one platform for e-commerce, SaaS, agencies and restaurants worldwide.</p>
+            <div class="case__tag mono"><span>Autonomous Sales Brain</span><b>OctaDezx</b></div>
+            <h3>Autonomous commerce, <span class="accent">orchestrated everywhere.</span></h3>
+            <p>An enterprise agentic sales brain powering businesses across 96 channels. Features real-time interruptible phone calls with conversational barge-in, instant visual photo matching, native Model Context Protocol (MCP) tooling, and 100% server-verified pricing integrity.</p>
             <dl class="case__kv">
-              <div><dt class="mono">Domain</dt><dd>AI / SaaS</dd></div>
-              <div><dt class="mono">Stack</dt><dd>Next.js · RAG · Edge</dd></div>
-              <div><dt class="mono">Launch</dt><dd>2025</dd></div>
-              <div><dt class="mono">Region</dt><dd>Worldwide</dd></div>
+              <div><dt>Domain</dt><dd>Agentic AI &bull; Omnichannel</dd></div>
+              <div><dt>Stack</dt><dd>Multi-Agent &bull; Native MCP</dd></div>
+              <div><dt>Channels</dt><dd>96 Platforms &bull; 50+ Languages</dd></div>
+              <div><dt>Integrity</dt><dd>100% Server-Verified</dd></div>
             </dl>
+            <div class="case__metrics mono">
+              <div><span>Automation</span><b class="accent">78% queries handled by AI</b></div>
+              <div><span>Availability</span><b class="accent">24/7 &bull; Real phone numbers</b></div>
+            </div>
+            <a href="/work/octadezx" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
           </div>
           <div class="case__stage">
             <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
               <div class="device device--browser">
-                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">octadezx.ai / assistant</span><em class="mono">● live</em></div>
+                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">octadezx.com / agent-mesh</span><em class="mono">● live · 96 channels</em></div>
                 <div class="device__body chat" id="octa-chat">
-                  <div class="chat__head" data-atropos-offset="-1"><span class="chat__avatar">O</span><span>OctaDezx <em class="mono">online · 4 languages</em></span></div>
+                  <div class="chat__head" data-atropos-offset="-1"><span class="chat__avatar">O</span><span>OctaDezx <em class="mono">online · 50+ languages · voice &amp; vision</em></span></div>
                   <div class="chat__log" id="octa-log" data-atropos-offset="3"></div>
                   <div class="chat__input mono" data-atropos-offset="1">Ask anything about our products… <b>↑</b></div>
+                </div>
+              </div>
+            </div></div></div></div>
+          </div>
+        </article>
+
+        <!-- CASE 05 · Accert One -->
+        <article class="case reveal" id="case-accert">
+          <div class="case__copy">
+            <div class="case__tag mono"><span>Motorsport Simulator</span><b>Accert One</b></div>
+            <h3>Deterministic physics at <span class="accent">60 FPS.</span></h3>
+            <p>A next-generation cross-platform motorsport simulator engineered by Zeriotic Labs. Built with a custom 60 FPS deterministic physics engine, multi-link suspension kinematics, raycast tire contact modeling, active DRS aerodynamics, and the flagship OctaDezx DX12 hypercar.</p>
+            <dl class="case__kv">
+              <div><dt>Domain</dt><dd>Motorsport Simulation</dd></div>
+              <div><dt>Stack</dt><dd>Unity &bull; Deterministic C#</dd></div>
+              <div><dt>Platform</dt><dd>Android &bull; iOS &bull; Cross-Platform</dd></div>
+              <div><dt>Circuits</dt><dd>Spa &bull; Silverstone &bull; Madrid &bull; Zolder</dd></div>
+            </dl>
+            <div class="case__metrics mono">
+              <div><span>Physics Rate</span><b class="accent">60 FPS deterministic lock</b></div>
+              <div><span>Flagship</span><b class="accent">OctaDezx DX12 Hypercar</b></div>
+            </div>
+            <a href="/work/accert-one" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
+          </div>
+          <div class="case__stage">
+            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
+              <div class="device device--browser">
+                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">accert-one / telemetry-harness</span><em class="mono">● 60 fps lock</em></div>
+                <div class="device__body accert-mock mono">
+                  <div class="accert-mock__track" data-atropos-offset="1">
+                    <span>CIRCUIT: <b>SPA-FRANCORCHAMPS</b></span>
+                    <span>WEATHER: <b>DRY · 34°C</b></span>
+                    <span>CAR: <b>OCTADEZX DX12</b></span>
+                  </div>
+                  <div class="accert-mock__cockpit" data-atropos-offset="4">
+                    <div class="accert-mock__tires">
+                      <div><span>FL TIRE</span><b class="accent">98°C · 98% GRIP</b></div>
+                      <div><span>FR TIRE</span><b>101°C · 96% GRIP</b></div>
+                      <div><span>SUSPENSION</span><b>-14mm COMPR</b></div>
+                    </div>
+                    <div class="accert-mock__gauge">
+                      <div class="accert-mock__gear">7</div>
+                      <div class="accert-mock__speed">328</div>
+                      <span style="font-size: 0.52rem; letter-spacing: 0.14em; color: var(--muted);">KM/H · 12,450 RPM</span>
+                      <div class="accert-mock__rpm">
+                        <i class="active"></i><i class="active"></i><i class="active"></i>
+                        <i class="active"></i><i class="active"></i><i class="active"></i>
+                        <i class="active"></i><i class="active"></i><i class="active"></i>
+                        <i class="peak"></i><i class="peak"></i>
+                      </div>
+                    </div>
+                    <div class="accert-mock__aero">
+                      <div><span>REAR WING</span><b class="drs-lit">DRS [OPEN]</b></div>
+                      <div><span>RL TIRE</span><b>94°C · 99% GRIP</b></div>
+                      <div><span>RR TIRE</span><b>96°C · 98% GRIP</b></div>
+                    </div>
+                  </div>
+                  <div class="accert-mock__footer" data-atropos-offset="2">
+                    <span>LATERAL: +2.84 G (COPSE)</span>
+                    <span>DELTA: -0.284s [PURPLE]</span>
+                    <span>ZERIOTIC LABS / GAMING</span>
+                  </div>
                 </div>
               </div>
             </div></div></div></div>
@@ -343,7 +525,13 @@
           <div class="tech"><span class="mono">AI</span><b>Anthropic</b></div>
           <div class="tech"><span class="mono">AI</span><b>OpenAI</b></div>
           <div class="tech"><span class="mono">Motion</span><b>GSAP</b></div>
-          <div class="tech"><span class="mono">3D</span><b>Three.js</b></div>
+          <div class="tech"><span class="mono">Micro-Motion</span><b>Anime.js &bull; Atropos</b></div>
+          <div class="tech"><span class="mono">3D &amp; WebGL</span><b>Three.js &bull; GLSL</b></div>
+          <div class="tech"><span class="mono">Spatial 3D</span><b>Babylon &bull; Cesium &bull; A-Frame</b></div>
+          <div class="tech"><span class="mono">Engine</span><b>Unity</b></div>
+          <div class="tech"><span class="mono">Simulation</span><b>Deterministic C#</b></div>
+          <div class="tech"><span class="mono">Protocol</span><b>MCP Server</b></div>
+          <div class="tech"><span class="mono">Voice</span><b>WebRTC Telephony</b></div>
         </div>
       </div>
     </section>
@@ -362,7 +550,7 @@
               <h3>Discover &amp; define</h3>
               <p>We interrogate the problem. Stakeholder interviews, an audit of existing systems, competitive mapping — and a clear success metric before a single pixel is drawn.</p>
             </div>
-            <span class="step__dur mono">1–2 wks</span>
+            <span class="step__dur mono">1-2 wks</span>
           </li>
           <li class="step">
             <span class="step__num">Phase 02</span>
@@ -370,7 +558,7 @@
               <h3>Design the system</h3>
               <p>Product architecture, user flows, a full design system and prototype. Every decision pressure-tested against the success metric from phase one.</p>
             </div>
-            <span class="step__dur mono">2–4 wks</span>
+            <span class="step__dur mono">2-4 wks</span>
           </li>
           <li class="step">
             <span class="step__num">Phase 03</span>
@@ -378,7 +566,7 @@
               <h3>Engineer &amp; ship</h3>
               <p>Senior engineers only. We build in weekly slices against a staging environment you can click through from day one. No black-box development.</p>
             </div>
-            <span class="step__dur mono">4–10 wks</span>
+            <span class="step__dur mono">4-10 wks</span>
           </li>
           <li class="step">
             <span class="step__num">Phase 04</span>
@@ -389,6 +577,7 @@
             <span class="step__dur mono">Ongoing</span>
           </li>
         </ol>
+        <p class="process-more mono reveal"><a href="/work/how-zeriotic-renders">Read: how zeriotic.com renders, a technical deep-dive &rarr;</a></p>
       </div>
     </section>
 
@@ -431,15 +620,49 @@
               <div><dt class="mono">HQ</dt><dd>Dhaka, BD</dd></div>
               <div><dt class="mono">Serves</dt><dd>Worldwide</dd></div>
             </dl>
+            <p class="process-more mono reveal"><a href="/compare/zeriotic-vs-agencies">Zeriotic vs a typical agency - what's actually different &rarr;</a></p>
           </div>
           <div class="team-grid">
-            <div class="member reveal"><span class="mono">Founder · Engineering</span><h4>Al Mueid Hoque</h4><p>Formerly lead engineer on high-traffic commerce platforms. Specialises in performance and architecture.</p></div>
+            <div class="member reveal"><span class="mono">Co-founder · Engineering</span><h4>Al Mueid Hoque</h4><p>Formerly lead engineer on high-traffic commerce platforms. Specialises in performance and architecture.</p></div>
             <div class="member reveal"><span class="mono">Design Director</span><h4>Kevin Mills</h4><p>Twelve years designing interfaces for SaaS and luxury retail. Brand, systems, and typographic obsession.</p></div>
-            <div class="member reveal"><span class="mono">Principal Engineer</span><h4>Mahdi Hasan</h4><p>Full-stack, infra-first. Loves Postgres, caches, and anything that makes a server respond faster.</p></div>
+            <div class="member reveal"><span class="mono">Co-founder · Engineering</span><h4>Mahdi Hasan</h4><p>Full-stack, infra-first. Loves Postgres, caches, and anything that makes a server respond faster.</p></div>
             <div class="member reveal"><span class="mono">Motion &amp; 3D</span><h4>Muntasir Ahmed</h4><p>Brings interfaces to life. WebGL, GSAP, and the discipline to know when to cut motion entirely.</p></div>
           </div>
         </div>
       </div>
+    </section>
+
+    <section id="react-ui-layer" style="position: relative; z-index: 10;">
+      <!-- Crawler fallback for the React capabilities accordion. React's
+           createRoot replaces this content on mount; without JavaScript this
+           static text IS the page (Readability strips <noscript>, so the
+           fallback must live in the DOM, inside the mount node). -->
+      <!-- prerender:start -->
+      <div class="caps-fallback">
+        <h2 class="mono caps-fallback__title">Capabilities</h2>
+        <p class="caps-fallback__sub">What we build for forward-thinking teams.</p>
+        <div class="caps-fallback__item">
+          <h3>High-performance Web Apps</h3>
+          <p>We build Next.js and Vite applications that load in milliseconds, respecting user bandwidth and battery life. Our architecture decouples heavy WebGL processes from layout threads.</p>
+        </div>
+        <div class="caps-fallback__item">
+          <h3>E-commerce Platforms</h3>
+          <p>Custom headless checkouts, bespoke ERP integrations, and 3D product configurators that let users interact with products before buying.</p>
+        </div>
+        <div class="caps-fallback__item">
+          <h3>Interactive 3D &amp; WebGL</h3>
+          <p>Zero-latency particle systems, dynamic resolution scaling, and responsive WebGL environments mapped to user scroll and interaction.</p>
+        </div>
+        <div class="caps-fallback__item">
+          <h3>Autonomous Agent Platforms</h3>
+          <p>Enterprise agentic AI systems like OctaDezx: real-time voice with conversational barge-in, computer-vision catalogue discovery, and native Model Context Protocol (MCP) servers with zero data-leak guarantees.</p>
+        </div>
+        <div class="caps-fallback__item">
+          <h3>Real-Time Physics &amp; Gaming Simulation</h3>
+          <p>Accert One motorsport engine: deterministic 60 FPS physics, multi-link suspension kinematics, raycast contact normals, and active DRS aerodynamics across mobile and cross-platform devices.</p>
+        </div>
+      </div>
+      <!-- prerender:end -->
     </section>
 
     <!-- CONTACT -->
@@ -453,16 +676,66 @@
             <div class="field"><input type="text" name="name" required placeholder=" " autocomplete="name" /><label>Name</label></div>
             <div class="field"><input type="email" name="email" required placeholder=" " autocomplete="email" /><label>Email</label></div>
           </div>
+          <div class="form__row">
+            <div class="field field--select">
+              <select name="type" required>
+                <option value="" disabled selected>Select project type</option>
+                <option value="web-app">Web application</option>
+                <option value="ecommerce">E-commerce platform</option>
+                <option value="saas">SaaS product</option>
+                <option value="ai">AI integration</option>
+                <option value="other">Other</option>
+              </select>
+              <label>Project type</label>
+            </div>
+            <div class="field field--select">
+              <select name="budget" required>
+                <option value="" disabled selected>Select budget range</option>
+                <option value="10k-25k">$10k - $25k</option>
+                <option value="25k-50k">$25k - $50k</option>
+                <option value="50k-100k">$50k - $100k</option>
+                <option value="100k+">$100k+</option>
+              </select>
+              <label>Budget band</label>
+            </div>
+          </div>
           <div class="field"><textarea name="message" rows="4" required placeholder=" "></textarea><label>What are you building?</label></div>
           <!-- honeypot — humans never see this -->
           <div class="field field--hp" aria-hidden="true"><input type="text" name="company" tabindex="-1" autocomplete="off" /></div>
-          <button type="submit" class="btn">Send message <i>→</i></button>
+          <button type="submit" class="btn">Send message <i>&rarr;</i></button>
           <p class="form__status mono" id="form-status" role="status"></p>
         </form>
         <div class="contact__cells reveal">
           <div><span class="mono">Email</span><b><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a></b></div>
-          <div><span class="mono">New work</span><b>Available Q2 / Q3 2026</b></div>
+          <div><span class="mono">New work</span><b data-availability>Available Q3 2026 / Q4 2026</b></div>
           <div><span class="mono">Response time</span><b>Within 24 hours</b></div>
+        </div>
+
+        <!-- FAQ: visible Q&A mirrored in the FAQPage JSON-LD in <head>.
+             Answers must stay word-identical to the schema, or the markup
+             describes content that is not on the page. -->
+        <div class="contact-faq" id="faq">
+          <h3 class="mono">Questions, answered</h3>
+          <div class="faq-item">
+            <h4>What does Zeriotic build?</h4>
+            <p>High-performance web applications, e-commerce platforms and SaaS products, plus AI integration and interactive 3D/WebGL product experiences.</p>
+          </div>
+          <div class="faq-item">
+            <h4>How much does a Zeriotic project cost?</h4>
+            <p>Projects are scoped during discovery. Typical budget bands are $10k to $25k, $25k to $50k, $50k to $100k and $100k+.</p>
+          </div>
+          <div class="faq-item">
+            <h4>How does the engagement process work?</h4>
+            <p>Four phases: discover and define (1-2 weeks), design the system (2-4 weeks), engineer and ship (4-10 weeks), then iterate in the open. You click through a staging environment from day one.</p>
+          </div>
+          <div class="faq-item">
+            <h4>Where is Zeriotic based and who does it work with?</h4>
+            <p>Zeriotic is headquartered in Dhaka, Bangladesh and serves clients worldwide. It is an independent team of sixteen, founded in 2022.</p>
+          </div>
+          <div class="faq-item">
+            <h4>When can Zeriotic start a new project?</h4>
+            <p>Zeriotic takes on a handful of engagements each quarter. Email hello@zeriotic.com and you will get a response within 24 hours.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -473,13 +746,14 @@
         <div class="footer__big">ZERI<span class="accent">OTIC</span></div>
         <div class="footer__grid">
           <div><h4 class="mono">Studio</h4><p>Zeriotic is a premium web development studio building high-performance applications, e-commerce platforms and SaaS products for a handful of clients each year.</p></div>
-          <div><h4 class="mono">Services</h4><a href="#services">Web applications</a><a href="#services">E-commerce</a><a href="#services">SaaS products</a></div>
+          <div><h4 class="mono">Services</h4><a href="#services">Web applications</a><a href="#services">E-commerce</a><a href="#services">SaaS products</a><a href="/compare/zeriotic-vs-agencies">Why we're different</a></div>
           <div><h4 class="mono">Studio</h4><a href="#work">Work</a><a href="#process">Process</a><a href="#studio">About</a><a href="#contact">Contact</a></div>
-          <div><h4 class="mono">Elsewhere</h4><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a><a href="https://facebook.com/zeriotic" rel="noopener">Facebook</a><a href="https://instagram.com/zeriotic" rel="noopener">Instagram</a></div>
+          <div><h4 class="mono">Elsewhere</h4><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a><a href="https://facebook.com/zeriotic" rel="noopener">Facebook</a><a href="https://instagram.com/zeriotic" rel="noopener">Instagram</a><a href="https://github.com/zeriotic" rel="noopener">GitHub</a><a href="https://linkedin.com/company/zeriotic" rel="noopener">LinkedIn</a></div>
         </div>
         <div class="footer__bottom mono">
-          <span>© 2026 Zeriotic Studio</span>
-          <span>Dhaka, BD · 23.81°N / 90.41°E</span>
+          <span>&copy; 2026 Zeriotic Studio</span>
+          <span>Dhaka, BD &bull; 23.81&deg;N / 90.41&deg;E</span>
+          <span><a href="/privacy/">Privacy Policy</a></span>
           <span>Crafted in-house</span>
         </div>
       </div>
@@ -487,6 +761,6 @@
 
   </main>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

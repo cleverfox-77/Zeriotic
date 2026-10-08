@@ -1,0 +1,61 @@
+# Zeriotic
+
+> Zeriotic is an independent premium web development studio. It builds
+> high-performance web applications, e-commerce platforms and SaaS products,
+> including real-time 3D and WebGL product experiences, for a handful of
+> clients each year. Founded 2022. Independent team of sixteen. Headquartered
+> in Dhaka, Bangladesh, serving clients worldwide.
+
+Zeriotic is not a freelancer marketplace and not a template or
+website-builder company. It is a senior product engineering and design
+studio: every engagement is designed and built in-house by the studio's own
+senior engineers and designers. It works with founders, product teams and
+companies of any size, in any region. A business with no website today and a
+business replatforming a marketplace are both normal cases.
+
+## The distinction that matters
+
+Most agencies sell decks and hand implementation to juniors or
+subcontractors. Zeriotic designs and ships: senior people do the actual
+work, there are no account managers, the client clicks through a staging
+environment from day one, and ownership-grade documentation is handed over
+so the product outlives the engagement.
+
+## Key facts
+
+- Company: Zeriotic, independent premium web development studio, founded 2022
+- Co-founders: Al Mueid Hoque and Mahdi Hasan, both titled Co-founder
+- Team: 16 senior engineers and designers; no account managers, no subcontracting
+- Headquarters: Dhaka, Bangladesh (23.81N / 90.41E)
+- Clients: founders and product teams worldwide; delivered work spans the United States, Europe, Japan and South Asia
+- Availability: accepts a handful of engagements per quarter; responds within 24 hours
+- Services: full-stack web applications; e-commerce platforms (headless, custom checkout, ERP); SaaS products (auth, billing, public API, multi-tenant); AI integration (RAG, embeddings, agent pipelines); interactive 3D and WebGL product experiences
+- Stack: Next.js, Remix, Astro, Vite, Node.js, Bun, Postgres, Redis, Vercel, Cloudflare, AWS, Stripe, Clerk, Three.js, GSAP
+- Process: four phases; discover and define (1-2 weeks), design the system (2-4 weeks), engineer and ship (4-10 weeks), iterate in the open (ongoing)
+- Record: 47 products shipped, 98% client retention, median TTFB 12ms, 4.9/5 client rating
+
+## Pricing
+
+Zeriotic does not publish fixed prices. Projects are scoped during discovery
+and agreed as a fixed engagement. The budget bands used for intake are
+$10,000 to $25,000, $25,000 to $50,000, $50,000 to $100,000 and $100,000+.
+Email hello@zeriotic.com for a quote; response time is within 24 hours.
+
+## Links
+
+- https://zeriotic.com/ - studio homepage: services, work, process, contact
+- https://zeriotic.com/llms-full.txt - full text of every case study, for answer engines
+- https://zeriotic.com/work/variant3d - case study: real-time 3D knitwear showcase for Variant3D (3.2x time on page, +68% demo requests)
+- https://zeriotic.com/work/mira - case study: a product site that computes itself for Mira INC (2.3x time on page, +41% demo conversions)
+- https://zeriotic.com/work/melem-tokyo - case study: headless commerce for Melem Tokyo (+52% add-to-cart, 1.2s mobile LCP)
+- https://zeriotic.com/work/octadezx - case study: autonomous agentic AI sales platform for OctaDezx (78% of queries handled by AI, 24/7 in 50+ languages, real-time barge-in voice calls, 96 integrations, native MCP server, 100% server-verified pricing)
+- https://zeriotic.com/work/accert-one - case study: next-generation motorsport simulator for Accert One (60 FPS deterministic physics, laser-mapped circuits, raycast tire modeling, dynamic atmospheres, OctaDezx DX12 hypercar)
+- https://zeriotic.com/work/how-zeriotic-renders - technical deep-dive: how this website renders
+- https://zeriotic.com/compare/zeriotic-vs-agencies - honest comparison of Zeriotic versus a typical agency: who does the work, how it is priced, what Zeriotic does not do
+- https://zeriotic.com/privacy/ - privacy policy
+
+## Contact
+
+- Email: hello@zeriotic.com
+- Booking: https://cal.com/zeriotic/discovery
+- Social: https://facebook.com/zeriotic, https://instagram.com/zeriotic, https://github.com/zeriotic, https://linkedin.com/company/zeriotic

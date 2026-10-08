@@ -15,6 +15,18 @@
 
 [functions]
   node_bundler = "esbuild"
+  # nodemailer ships internal files that esbuild can mangle when inlined —
+  # keep it in node_modules so it loads as-is at runtime.
+  external_node_modules = ["nodemailer"]
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
 
 # The contact form POSTs to /api/contact → the serverless mailer.
 [[redirects]]
@@ -22,8 +34,10 @@
   to = "/.netlify/functions/contact"
   status = 200
 
-# Single-page fallback for any unknown path.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# NOTE: there is deliberately NO catch-all "/* → /index.html 200" fallback.
+# This site has no client-side routes (the homepage is a single page with
+# #anchor navigation), so an unknown path must return a real 404 — Netlify
+# serves 404.html with status 404 automatically. A catch-all here turned
+# every typo'd URL into a byte-identical copy of the homepage (HTTP 200,
+# homepage title, homepage canonical): an infinite duplicate-content field
+# for search engines and one fake page for every answer engine.

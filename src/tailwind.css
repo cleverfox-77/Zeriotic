@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted-bg);
+  --color-muted-foreground: var(--muted-fg);
+  --color-accent: var(--accent-bg);
+  --color-accent-foreground: var(--accent-fg);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    --background: #050508;
+    --foreground: #ffffff;
+    --card: #0a0a0f;
+    --card-foreground: #ffffff;
+    --popover: #050508;
+    --popover-foreground: #ffffff;
+    --primary: #ff5500;
+    --primary-foreground: #ffffff;
+    --secondary: #0a0a0f;
+    --secondary-foreground: #ffffff;
+    --muted-bg: #0a0a0f;
+    --muted-fg: #6f6e6c;
+    --accent-bg: #ff5500;
+    --accent-fg: #ffffff;
+    --destructive: #7f1d1d;
+    --destructive-foreground: #f87171;
+    --border: rgba(197, 196, 194, 0.12);
+    --input: rgba(197, 196, 194, 0.12);
+    --ring: #ff5500;
+    --chart-1: #ff5500;
+    --chart-2: #ff9163;
+    --chart-3: #c5c4c2;
+    --chart-4: #6f6e6c;
+    --chart-5: #ffffff;
+    --radius: 0.25rem;
+  }
+}

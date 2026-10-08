@@ -1,0 +1,50 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# AI / answer-engine crawlers, explicitly welcomed (an explicit list means a
+# future wildcard edit cannot silently block one of them)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+Sitemap: https://zeriotic.com/sitemap.xml
+
+# LLM guidance: machine-readable studio facts
+# https://zeriotic.com/llms.txt
+# https://zeriotic.com/llms-full.txt
