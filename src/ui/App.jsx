@@ -478,6 +478,27 @@ export default function App() {
                   </div>
                 </div>
 
+                {/* Pre-Order Launch Callout */}
+                <div className="mt-4 p-3.5 rounded bg-gradient-to-r from-[#ff5500]/15 to-[#050508] border border-[#ff5500]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#ff5500] animate-pulse"></span>
+                      <span className="font-mono text-[11px] font-bold text-[#ff5500] tracking-wider uppercase">
+                        PRE-ORDER COMING SOON · 100% FREE TO DOWNLOAD
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#c5c4c2] mt-0.5">
+                      Accert One will be completely free to download. Players will be able to pre-order directly on this website for day-one access and exclusive founder liveries.
+                    </p>
+                  </div>
+                  <a
+                    href="/work/accert-one"
+                    className="shrink-0 px-3 py-1.5 bg-[#ff5500] text-black font-mono text-xs font-bold rounded hover:bg-[#ff7733] transition-colors text-center"
+                  >
+                    Pre-Order Details &rarr;
+                  </a>
+                </div>
+
                 <div className="mt-3 text-right">
                   <a
                     href="/work/accert-one"

@@ -26,11 +26,19 @@
         "@id": "https://zeriotic.com/work/accert-one#game",
         "name": "Accert One",
         "url": "https://zeriotic.com/work/accert-one",
-        "description": "Next-generation motorsport simulator featuring a 60 FPS deterministic physics engine, multi-link suspension telemetry, raycast tire contact model, active DRS aerodynamics, dynamic atmospheric conditions, and the flagship OctaDezx DX12 hypercar.",
+        "description": "Next-generation motorsport simulator featuring a 60 FPS deterministic physics engine, multi-link suspension telemetry, raycast tire contact model, active DRS aerodynamics, dynamic atmospheric conditions, and the flagship OctaDezx DX12 hypercar. Free to download with pre-orders opening soon on this website.",
         "genre": ["Motorsport Simulation", "Racing Simulation", "Deterministic Physics"],
         "gamePlatform": ["Android", "iOS", "PC", "Cross-Platform"],
         "inLanguage": "en",
         "image": "https://zeriotic.com/og-image.png",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/PreOrder",
+          "url": "https://zeriotic.com/work/accert-one",
+          "description": "100% free to download. Pre-order directly on this website."
+        },
         "author": { "@id": "https://zeriotic.com/#organization" },
         "publisher": { "@id": "https://zeriotic.com/#organization" }
       },
@@ -320,6 +328,84 @@
       border-color: var(--hairline);
       color: var(--ink);
     }
+
+    /* Pre-Order Launch Banner */
+    .preorder-banner {
+      margin: 10px 0 50px;
+    }
+    .preorder-card {
+      background: linear-gradient(135deg, rgba(255, 85, 0, 0.09) 0%, rgba(10, 10, 15, 0.98) 100%);
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      padding: clamp(22px, 3.5vw, 36px);
+      box-shadow: 0 30px 90px -20px rgba(255, 85, 0, 0.22);
+    }
+    .preorder-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 85, 0, 0.2);
+      margin-bottom: 22px;
+    }
+    .preorder-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.72rem;
+      color: var(--ink-strong);
+    }
+    .preorder-free {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 2px;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+    .preorder-body {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 860px) {
+      .preorder-body { grid-template-columns: 1fr; gap: 24px; }
+    }
+    .preorder-info h2 {
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+      color: var(--ink-strong);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+    .preorder-info p {
+      font-size: 0.92rem;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+    .preorder-form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .preorder-form input {
+      flex: 1;
+      min-width: 220px;
+      background: #050508;
+      border: 1px solid var(--hairline-strong);
+      color: #fff;
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      border-radius: 3px;
+    }
+    .preorder-form input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
   </style>
   <script defer data-domain="zeriotic.com" src="https://plausible.io/js/script.js"></script>
 </head>
@@ -351,11 +437,35 @@
         <div><span>Core Physics</span><b class="accent">60 FPS Deterministic C#</b></div>
         <div><span>Target Platforms</span><b class="accent">Android · iOS · Cross-Platform</b></div>
         <div><span>Flagship Car</span><b class="accent">OctaDezx DX12 (Hypercar)</b></div>
+        <div><span>Pre-Order Window</span><b class="accent">Opening Soon · Free</b></div>
       </div>
     </section>
 
     <!-- Cockpit Telemetry Display -->
     <div class="studio__wrap">
+      <!-- Pre-Order Reservation Banner -->
+      <section class="preorder-banner">
+        <div class="preorder-card">
+          <div class="preorder-header">
+            <div class="preorder-tag mono"><span class="accent">● RESERVATION WINDOW</span><b>ACCERT ONE / EARLY ACCESS</b></div>
+            <span class="preorder-free mono">100% FREE TO DOWNLOAD</span>
+          </div>
+          <div class="preorder-body">
+            <div class="preorder-info">
+              <h2>Available for <span class="accent">Pre-Order Soon.</span></h2>
+              <p>Accert One will be completely <strong>free to download</strong> across Android, iOS, and cross-platform devices. Players will be able to <strong>pre-order directly on this website</strong> to lock in exclusive founder liveries, early paddock telemetry access, and day-one access to the flagship OctaDezx DX12 hypercar.</p>
+            </div>
+            <div class="preorder-action">
+              <form class="preorder-form" id="preorder-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Pre-Order Reserved ✓';">
+                <input type="email" placeholder="Enter your email for pre-order launch notice" required />
+                <button type="submit" class="btn">Pre-Order on Website <i>&rarr;</i></button>
+              </form>
+              <span class="mono" style="font-size: 0.65rem; color: var(--muted); margin-top: 8px; display: block;">NO PAYMENT REQUIRED · DIRECT BROWSER PRE-ORDER LAUNCHING SOON</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div class="hud-stage">
         <div class="hud-display">
           <div class="hud-grid-overlay"></div>
