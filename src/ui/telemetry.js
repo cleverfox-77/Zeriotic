@@ -43,6 +43,7 @@ class TelemetrySystem {
 
     this.initAccert();
     this.initOcta();
+    this.initSecurity();
   }
 
   // =========================================================================
@@ -320,6 +321,68 @@ class TelemetrySystem {
 
   _stopOctaTelemetry(container) {
     // Observers handle garbage collection through instance management
+  }
+
+  // =========================================================================
+  //  CYBERSECURITY & DEFENSE TELEMETRY
+  // =========================================================================
+  initSecurity(containerSelector = '#case-security, .hud-security') {
+    const containers = document.querySelectorAll(containerSelector);
+    if (!containers.length) return;
+
+    containers.forEach((container) => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this._startSecurityTelemetry(container);
+          } else {
+            this._stopSecurityTelemetry(container);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(container);
+    });
+  }
+
+  _startSecurityTelemetry(container) {
+    if (this.reducedMotion) return;
+
+    container.dataset.securityActive = 'true';
+
+    // Animate stream indicators
+    const streamPills = container.querySelectorAll('.security-mock__stream i');
+    if (streamPills.length) {
+      const streamAnim = anime({
+        targets: streamPills,
+        opacity: [0.2, 1],
+        scaleY: [0.6, 1.2],
+        delay: anime.stagger(120),
+        duration: 800,
+        direction: 'alternate',
+        loop: true,
+        easing: 'easeInOutSine',
+      });
+      this._anims.push(streamAnim);
+    }
+
+    // Pulse cyber guard status
+    const guardLit = container.querySelector('.guard-lit, .sec-pill--shield');
+    if (guardLit) {
+      const guardAnim = anime({
+        targets: guardLit,
+        color: ['#00f0ff', '#ffffff', '#00f0ff'],
+        duration: 1600,
+        direction: 'alternate',
+        loop: true,
+        easing: 'easeInOutQuad',
+      });
+      this._anims.push(guardAnim);
+    }
+  }
+
+  _stopSecurityTelemetry(container) {
+    container.dataset.securityActive = 'false';
   }
 
   pauseAll() {

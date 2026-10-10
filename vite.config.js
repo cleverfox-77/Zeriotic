@@ -26,6 +26,7 @@ export default defineConfig({
         melemTokyo: path.resolve(__dirname, 'work/melem-tokyo.html'),
         octadezx: path.resolve(__dirname, 'work/octadezx.html'),
         accertOne: path.resolve(__dirname, 'work/accert-one.html'),
+        cybersecurityAudit: path.resolve(__dirname, 'work/cybersecurity-audit.html'),
         howZerioticRenders: path.resolve(__dirname, 'work/how-zeriotic-renders.html'),
         compareAgencies: path.resolve(__dirname, 'compare/zeriotic-vs-agencies.html'),
       },

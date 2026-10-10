@@ -59,6 +59,13 @@ export const PAGES = [
     schema: ["VideoGame", "CreativeWork", "BreadcrumbList"],
   },
   {
+    out: "work/cybersecurity-audit.html",
+    canonical: `${ORIGIN}/work/cybersecurity-audit`,
+    title: "Cybersecurity & AI Agent Audit - Defensive Security Testing | Zeriotic",
+    minChars: 600,
+    schema: ["TechArticle", "CreativeWork", "BreadcrumbList"],
+  },
+  {
     out: "work/how-zeriotic-renders.html",
     canonical: `${ORIGIN}/work/how-zeriotic-renders`,
     title: "How zeriotic.com Renders - A Technical Case Study | Zeriotic",

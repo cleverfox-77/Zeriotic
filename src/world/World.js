@@ -40,6 +40,7 @@ const PALETTES = {
   neuralWeb:      [0xff5500, 0xffe6cc],   // OctaDezx: multi-layered synaptic glow
   accertFormula:  [0xff3300, 0xffb84d],   // Accert One: aerodynamic velocity ember & copper
   accertVelocity: [0xff4400, 0xffaa00],   // Accert One: slipstream thermal glow
+  cyberShield:    [0x00f0ff, 0xff5500],   // Cybersecurity & AI Defense: cybernetic cyan & plasma ember
 };
 
 export default class World {
@@ -129,6 +130,7 @@ export default class World {
       neuralWeb:      this._targetNeuralWeb(N),
       accertFormula:  this._targetAccertFormula(N),
       accertVelocity: this._targetAccertFormula(N),
+      cyberShield:    this._targetCyberShield(N),
     };
 
     const geo = new THREE.BufferGeometry();
@@ -698,6 +700,142 @@ export default class World {
           const ly = 1.08 + Math.sin(t * 6.0) * 0.18 + t * 0.25;
           put(i, lx, ly, lz);
         }
+      }
+    }
+
+    return a;
+  }
+
+  // ---- Cybersecurity & AI Agent Defense: Procedural 3D Aegis Shield & Vault Core ----
+  _targetCyberShield(N) {
+    const a = new Float32Array(N * 3);
+    const put = (idx, x, y, z) => {
+      a[idx * 3]     = x;
+      a[idx * 3 + 1] = y;
+      a[idx * 3 + 2] = z;
+    };
+
+    // Hexagon vertices generator
+    const getHexVertex = (r, k) => {
+      const angle = (k / 6) * Math.PI * 2;
+      return [Math.cos(angle) * r, Math.sin(angle) * r];
+    };
+
+    for (let i = 0; i < N; i++) {
+      const p = Math.random();
+
+      if (p < 0.38) {
+        // 1. Convex Curved Cryptographic Aegis Shield Surface & Laser Perimeter
+        // Height spans from y = -3.4 (bottom apex) to y = +3.0 (top crest)
+        const y = -3.4 + Math.random() * 6.4;
+        let maxWidth;
+        if (y >= 0) {
+          // Upper crest: broad with subtle parabolic roll-off
+          const ty = y / 3.0;
+          maxWidth = 3.2 * (1.0 - 0.22 * ty * ty);
+        } else {
+          // Lower taper: sharp elegant gothic aegis curvature to apex
+          const ty = (y + 3.4) / 3.4;
+          maxWidth = 3.2 * Math.pow(Math.max(0, ty), 0.78);
+        }
+
+        const isBorder = Math.random() < 0.32;
+        let x;
+        if (isBorder) {
+          // Sharp glowing perimeter contour
+          const side = Math.random() < 0.5 ? -1 : 1;
+          x = side * (maxWidth + (Math.random() - 0.5) * 0.12);
+        } else {
+          // Distributed across interior convex shield facet
+          x = (Math.random() * 2 - 1) * maxWidth;
+        }
+
+        // Parabolic forward convexity: z bows outward toward viewer
+        const z = 1.8 - 0.16 * (x * x) - 0.10 * (y * y) + (Math.random() - 0.5) * 0.08;
+        put(i, x, y, z);
+
+      } else if (p < 0.64) {
+        // 2. Central Hexagonal Cryptographic Vault Core & Key Lattice
+        const tier = Math.random();
+        let rHex = 0.9;
+        if (tier < 0.35) rHex = 0.9;
+        else if (tier < 0.70) rHex = 1.8;
+        else rHex = 2.6;
+
+        if (Math.random() < 0.75) {
+          // Along hexagonal wireframe perimeter edges
+          const edge = Math.floor(Math.random() * 6);
+          const [x0, y0] = getHexVertex(rHex, edge);
+          const [x1, y1] = getHexVertex(rHex, (edge + 1) % 6);
+          const t = Math.random();
+          const lx = x0 + (x1 - x0) * t + (Math.random() - 0.5) * 0.06;
+          const ly = y0 + (y1 - y0) * t + (Math.random() - 0.5) * 0.06;
+          const lz = 1.35 + (3.0 - rHex) * 0.18 + (Math.random() - 0.5) * 0.06;
+          put(i, lx, ly, lz);
+        } else if (Math.random() < 0.70) {
+          // Radial cryptographic cipher spokes radiating to center
+          const vert = Math.floor(Math.random() * 6);
+          const [x0, y0] = getHexVertex(rHex, vert);
+          const t = Math.random();
+          const lx = x0 * t + (Math.random() - 0.5) * 0.05;
+          const ly = y0 * t + (Math.random() - 0.5) * 0.05;
+          const lz = 1.5 - t * 0.2 + (Math.random() - 0.5) * 0.05;
+          put(i, lx, ly, lz);
+        } else {
+          // High-density cipher seed core (inner crypto enclave)
+          const phi = Math.random() * Math.PI * 2;
+          const costh = Math.random() * 2 - 1;
+          const sinth = Math.sqrt(Math.max(0, 1 - costh * costh));
+          const pr = 0.42 * Math.pow(Math.random(), 0.6);
+          put(i,
+            pr * sinth * Math.cos(phi),
+            pr * costh,
+            1.65 + pr * sinth * Math.sin(phi)
+          );
+        }
+
+      } else if (p < 0.86) {
+        // 3. Dual Gyroscopic Orbital Firewall Rings (Interception Perimeters)
+        const ringType = Math.random();
+        const theta = Math.random() * Math.PI * 2;
+
+        if (ringType < 0.52) {
+          // Ring 1: Primary Firewall Orbit (Radius 4.8, tilted 26 deg)
+          const r = 4.8 + (Math.random() - 0.5) * 0.18;
+          const lx = Math.cos(theta) * r;
+          const lz = Math.sin(theta) * r;
+          const tilt = 0.45; // ~26 deg
+          const ly = -lz * Math.sin(tilt) + Math.sin(theta * 10) * 0.18;
+          const lzRot = lz * Math.cos(tilt);
+          put(i, lx, ly, lzRot);
+        } else {
+          // Ring 2: Polar Defense Orbit (Radius 5.4, tilted -55 deg & Y rotated)
+          const r = 5.4 + (Math.random() - 0.5) * 0.22;
+          const lx = Math.cos(theta) * r;
+          const ly = Math.sin(theta) * r;
+          const rotZ = -0.92;
+          const rotY = 0.65;
+          const x1 = lx * Math.cos(rotZ) - ly * Math.sin(rotZ);
+          const y1 = lx * Math.sin(rotZ) + ly * Math.cos(rotZ);
+          const xFinal = x1 * Math.cos(rotY);
+          const zFinal = -x1 * Math.sin(rotY) + Math.cos(theta * 14) * 0.15;
+          put(i, xFinal, y1, zFinal);
+        }
+
+      } else {
+        // 4. Kinetic Threat Deflection Sprays & Interceptor Spark Trails
+        // Vectors splashing off the aegis shield and dissipating safely into the void
+        const side = Math.random() < 0.5 ? -1 : 1;
+        const splashT = Math.random();
+        const startY = -2.8 + Math.random() * 5.6;
+        const startX = side * (2.8 + Math.random() * 0.8);
+        const startZ = 1.4;
+
+        // Radiate outward and backward away from shield front
+        const lx = startX + side * splashT * 2.4 + (Math.random() - 0.5) * 0.25;
+        const ly = startY + (Math.random() - 0.5) * splashT * 1.8;
+        const lz = startZ - splashT * 3.6 + (Math.random() - 0.5) * 0.35;
+        put(i, lx, ly, lz);
       }
     }
 

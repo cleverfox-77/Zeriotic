@@ -208,7 +208,7 @@ export default class Scroll {
     const inv = () => this.exp.invalidate(2);
 
     // live-background bookkeeping
-    ['#hero', '#manifesto', '#services', '#work', '#contact'].forEach((s) => this._liveSection(s));
+    ['#hero', '#manifesto', '#services', '#work', '#security', '#contact'].forEach((s) => this._liveSection(s));
 
     // HERO — slow orbit while in view
     ScrollTrigger.create({
@@ -324,6 +324,14 @@ export default class Scroll {
         camPos: V(3.4, 1.4, 12.8),
         camTgt: V(0.3, 0.0, 0.0),
         dim: 0.70,
+      },
+      {
+        sel: '#case-security',
+        name: 'cybersecurity-audit',
+        state: 'cyberShield',
+        camPos: V(0.0, 1.8, 13.8),
+        camTgt: V(0.0, 0.2, 0.0),
+        dim: 0.65,
       },
     ];
 
