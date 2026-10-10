@@ -208,7 +208,7 @@ export default class Scroll {
     const inv = () => this.exp.invalidate(2);
 
     // live-background bookkeeping
-    ['#hero', '#manifesto', '#services', '#work', '#security', '#contact'].forEach((s) => this._liveSection(s));
+    ['#hero', '#manifesto', '#services', '#work', '#security', '#client-work', '#contact'].forEach((s) => this._liveSection(s));
 
     // HERO — slow orbit while in view
     ScrollTrigger.create({
@@ -286,30 +286,6 @@ export default class Scroll {
     const V = (x, y, z) => new THREE.Vector3(x, y, z);
     const caseSpecs = [
       {
-        sel: '#work .case:nth-of-type(1)',
-        name: 'variant3d',
-        state: 'stitchTorus',
-        camPos: V(0.0, 1.2, 15.5),
-        camTgt: V(0.0, 0.0, 0.0),
-        dim: 0.55,
-      },
-      {
-        sel: '#case-mira',
-        name: 'mira',
-        state: 'signalGrid',
-        camPos: V(-2.4, 1.6, 14.2),
-        camTgt: V(-0.3, 0.1, 0.0),
-        dim: 0.55,
-      },
-      {
-        sel: '#case-melem',
-        name: 'melem-tokyo',
-        state: 'tokyoLattice',
-        camPos: V(2.2, 1.1, 14.8),
-        camTgt: V(0.2, 0.0, 0.0),
-        dim: 0.55,
-      },
-      {
         sel: '#case-octa',
         name: 'octadezx',
         state: 'neuralWeb',
@@ -332,6 +308,14 @@ export default class Scroll {
         camPos: V(0.0, 1.8, 13.8),
         camTgt: V(0.0, 0.2, 0.0),
         dim: 0.65,
+      },
+      {
+        sel: '#client-work',
+        name: 'client-showcase',
+        state: 'crystal',
+        camPos: V(0.0, 1.2, 15.5),
+        camTgt: V(0.0, 0.0, 0.0),
+        dim: 0.55,
       },
     ];
 

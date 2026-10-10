@@ -69,7 +69,8 @@
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI integration", "description": "RAG pipelines, embeddings and agent features integrated into existing products." } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Interactive 3D and WebGL", "description": "Real-time 3D product experiences rendered live in the browser." } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Autonomous agent platforms", "description": "Enterprise agentic AI systems with real-time phone calls, computer vision and Model Context Protocol (MCP) server integration." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Real-time physics and simulation", "description": "Deterministic 60 FPS mobile and cross-platform simulation and gaming engines engineered in Unity and C#." } }
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Real-time physics and simulation", "description": "Deterministic 60 FPS mobile and cross-platform simulation and gaming engines engineered in Unity and C#." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Defensive cybersecurity & AI hardening", "description": "Enterprise vulnerability auditing, SQLi dump prevention, API backend scrape defense, brute force & password dictionary auditing with John the Ripper, and anti-AI agent prompt injection mitigation." } }
           ]
         }
       },
@@ -78,8 +79,8 @@
         "@id": "https://zeriotic.com/#octadezx",
         "name": "OctaDezx",
         "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web, Cloud, SIP",
-        "description": "Agentic AI platform providing autonomous customer operations, real phone voice calls with conversational barge-in, photo recognition, and native MCP protocol integration.",
+        "operatingSystem": "Web, Cloud, SIP, Omnichannel",
+        "description": "Autonomous agentic AI sales and operations platform for every business category (healthcare clinics, automotive dealerships, B2B SaaS, real estate, hospitality, retail, trades), providing 24/7 sales operations, real phone voice calls with conversational barge-in, photo recognition, and native MCP protocol integration across 96 channels.",
         "url": "https://octadezx.com",
         "author": { "@id": "https://zeriotic.com/#organization" }
       },
@@ -88,10 +89,10 @@
         "@id": "https://zeriotic.com/#accert-one",
         "name": "Accert One",
         "applicationCategory": "Game",
-        "operatingSystem": "Android, iOS, Cross-Platform",
-        "gamePlatform": ["Android", "iOS"],
-        "genre": ["Racing Simulation", "Motorsport"],
-        "description": "Next-generation mobile motorsport simulation featuring 60 FPS deterministic physics, multi-link suspension kinematics, laser-surveyed circuits, dynamic weather, and the OctaDezx DX12 hypercar. Free to download with pre-orders opening soon on this website.",
+        "operatingSystem": "iOS, Android, Windows PC",
+        "gamePlatform": ["Phone", "iOS", "Android", "PC", "SIM Rig", "Controller"],
+        "genre": ["Formula 1 Racing Game", "Motorsport Simulation"],
+        "description": "Dedicated upcoming Formula 1 motorsport game releasing soon across Phone (iOS & Android with touch and gyroscope tilt), PC (144Hz+ display and telemetry export), SIM Rigs (direct-drive force feedback wheels and load-cell pedals), and Controllers (gamepads with impulse trigger haptics). Features 12 laser-surveyed Grand Prix circuits, competitive 20-car grid, dynamic weather, and the OctaDezx DX12 hypercar. 100% free to download with website pre-orders open.",
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -101,6 +102,15 @@
           "description": "100% free to download. Pre-order directly on this website."
         },
         "author": { "@id": "https://zeriotic.com/#organization" }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://zeriotic.com/#security",
+        "name": "Defensive Cybersecurity & AI Hardening Audits",
+        "serviceType": "Cybersecurity & Vulnerability Assessment",
+        "description": "Enterprise penetration testing and defensive vulnerability mitigation: SQLi database dump prevention, backend API scrape protection, password dictionary and brute force auditing using John the Ripper and Hashcat, and prompt injection defenses for autonomous AI agent architectures.",
+        "provider": { "@id": "https://zeriotic.com/#organization" },
+        "url": "https://zeriotic.com/work/cybersecurity-audit"
       },
       {
         "@type": "WebSite",
@@ -212,11 +222,11 @@
       ZERIOTIC
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="#work">Work</a>
+      <a href="#octadezx">OctaDezx</a>
+      <a href="#accert-one">Accert One</a>
       <a href="#security">Security</a>
+      <a href="#client-work">Client Work</a>
       <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#studio">Studio</a>
       <a href="#contact" class="nav__cta">Start a project</a>
     </nav>
   </header>
@@ -237,23 +247,29 @@
       <div class="hero__inner">
         <div class="eyebrow reveal"><span>Premium Web Development · <span data-availability>Available Q3 2026 / Q4 2026</span></span></div>
         <h1 class="hero__title">
-          <span class="line"><span class="word">Software</span> <span class="word">crafted</span></span>
-          <span class="line"><span class="word">to</span> <span class="word">outlast</span></span>
-          <span class="line"><span class="word accent">trends.</span></span>
+          <span class="line"><span class="word">Autonomous</span> <span class="word">AI,</span></span>
+          <span class="line"><span class="word">Motorsport</span> <span class="word">&amp;</span></span>
+          <span class="line"><span class="word accent">Cyber Defense.</span></span>
         </h1>
-        <p class="hero__sub reveal">A studio building high-performance web apps, commerce platforms and
-          SaaS products — engineered with the precision of a product team and the polish of a design house.</p>
+        <p class="hero__sub reveal">We architect autonomous AI sales engines for every business category, engineer dedicated 60 FPS deterministic Formula 1 racing games, and conduct zero-trust defensive cybersecurity audits.</p>
         <div class="hero__acts reveal">
-          <a href="#work" class="btn">Selected work <i>→</i></a>
-          <a href="#security" class="btn btn--ghost">Defensive security</a>
-          <a href="#services" class="btn btn--ghost">What we do</a>
+          <a href="#octadezx" class="btn">Explore OctaDezx <i>&rarr;</i></a>
+          <a href="#accert-one" class="btn btn--ghost">Accert One (F1 Game)</a>
+          <a href="#security" class="btn btn--ghost">Defensive Security</a>
+          <a href="#client-work" class="btn btn--ghost">Client Work</a>
+        </div>
+        <div class="hero__hud reveal mono">
+          <span class="hud-pill"><i class="hud-dot hud-dot--pulse"></i> WEBGL 60FPS MOTOR</span>
+          <span class="hud-pill"><i class="hud-dot"></i> OCTADEZX AI READY</span>
+          <span class="hud-pill"><i class="hud-dot"></i> ACCERT ONE PRE-ORDER OPEN</span>
+          <span class="hud-pill"><i class="hud-dot hud-dot--secure"></i> ZERO-TRUST AEGIS ACTIVE</span>
         </div>
         <ul class="hero__meta reveal">
-          <li>Web applications</li>
-          <li>E-commerce</li>
-          <li>SaaS products</li>
-          <li>AI integration</li>
-          <li>Defensive security</li>
+          <li>Autonomous AI (OctaDezx)</li>
+          <li>F1 Motorsport (Accert One)</li>
+          <li>Defensive Cybersecurity</li>
+          <li>E-Commerce &amp; Web Apps</li>
+          <li>Interactive 3D / WebGL</li>
         </ul>
       </div>
     </section>
@@ -304,126 +320,34 @@
       </div>
     </section>
 
-    <!-- WORK -->
+    <!-- FLAGSHIPS WORK -->
     <section class="studio-sec studio-sec--work" id="work" data-screen-label="Work">
       <div class="studio__wrap">
         <div class="sec-head">
-          <div class="eyebrow reveal"><span>(01) · Featured work</span></div>
-          <h2 class="reveal">Built to drive outcomes</h2>
-          <p class="reveal">A selection of recent engagements, each built to move a real business metric.</p>
+          <div class="eyebrow reveal"><span>(01) · Studio Flagships</span></div>
+          <h2 class="reveal">Autonomous AI, motorsport &amp; cyber defense</h2>
+          <p class="reveal">Our primary proprietary platforms: an autonomous AI sales brain for every industry, upcoming dedicated Formula 1 racing game, and zero-trust defensive cybersecurity audits.</p>
         </div>
 
-        <!-- CASE 01 · Variant3D -->
-        <article class="case reveal">
+        <!-- FLAGSHIP 01 · OctaDezx (Autonomous AI for Every Business Category) -->
+        <div id="octadezx" class="anchor-target"></div>
+        <article class="case reveal" id="case-octa">
           <div class="case__copy">
-            <div class="case__tag mono"><span>Immersive Product Experience</span><b>Variant3D</b></div>
-            <h3>Knitwear, rendered <span class="accent">thread by thread.</span></h3>
-            <p>A real-time 3D showcase for an on-demand knitting platform — garments presented as living geometry the visitor can orbit and explore in the browser.</p>
-            <dl class="case__kv">
-              <div><dt>Domain</dt><dd>3D Fashion Tech</dd></div>
-              <div><dt>Stack</dt><dd>WebGL &bull; Three.js</dd></div>
-              <div><dt>Region</dt><dd>United States</dd></div>
-            </dl>
-            <div class="case__metrics mono">
-              <div><span>Engagement</span><b class="accent">3.2x time on page</b></div>
-              <div><span>Impact</span><b class="accent">+68% demo requests</b></div>
-            </div>
-            <a href="/work/variant3d" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
-          </div>
-          <div class="case__stage">
-            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
-              <div class="device device--browser">
-                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">variant3d / loom</span><em class="mono">● realtime</em></div>
-                <div class="device__body knit-mock">
-                  <div class="knit-mock__stage" data-atropos-offset="4">
-                    <div class="knit-mock__swatch"></div>
-                  </div>
-                  <div class="knit-mock__meta mono" data-atropos-offset="2">
-                    <span>LOOM · 3D KNITWEAR ENGINE</span><span>STITCH 04 / JERSEY</span><b>60 FPS</b>
-                  </div>
-                </div>
-              </div>
-            </div></div></div></div>
-          </div>
-        </article>
+            <div class="case__tag mono"><span>Flagship 01 · Autonomous AI for Every Business</span><b>OctaDezx</b></div>
+            <h3>The 24/7 autonomous <span class="accent">sales brain.</span></h3>
+            <p>OctaDezx is an autonomous multi-agent intelligence platform engineered for <strong>every business category</strong> — healthcare clinics, automotive dealerships, B2B SaaS, real estate, hospitality, retail, and trades. Deploys across 96 channels (WhatsApp, Telegram, Apple Messages, Web, Voice, CRM) in 50+ languages with full-duplex conversational voice, computer vision, and 100% server-verified pricing and inventory guardrails.</p>
 
-        <!-- CASE 02 · Mira INC -->
-        <article class="case case--flip reveal" id="case-mira">
-          <div class="case__copy">
-            <div class="case__tag mono"><span>Real-time Web Experience</span><b>Mira INC</b></div>
-            <h3>A product site that <span class="accent">computes itself.</span></h3>
-            <p>An interactive experience for an AI-driven product company — scroll-composed scenes and generative visuals rendered live, so the site demonstrates the product's intelligence instead of describing it.</p>
-            <dl class="case__kv">
-              <div><dt>Domain</dt><dd>AI / Product</dd></div>
-              <div><dt>Stack</dt><dd>WebGL &bull; GSAP</dd></div>
-              <div><dt>Region</dt><dd>Global</dd></div>
-            </dl>
-            <div class="case__metrics mono">
-              <div><span>Engagement</span><b class="accent">2.3x time on page</b></div>
-              <div><span>Impact</span><b class="accent">+41% demo conversions</b></div>
+            <div class="industry-strip mono">
+              <span class="industry-pill">Healthcare &amp; Clinics</span>
+              <span class="industry-pill">Auto Dealerships</span>
+              <span class="industry-pill">B2B SaaS</span>
+              <span class="industry-pill">Real Estate</span>
+              <span class="industry-pill">Hospitality</span>
+              <span class="industry-pill">Retail &amp; Trades</span>
             </div>
-            <a href="/work/mira" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
-          </div>
-          <div class="case__stage">
-            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
-              <div class="device device--browser">
-                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">mira / console</span></div>
-                <div class="device__body mira-mock mono">
-                  <div class="mira-mock__lines" data-atropos-offset="2">
-                    <span>&gt; mira.session.init()</span>
-                    <span class="dim">model loaded · 128ms</span>
-                    <span>&gt; compose(scene_04)</span>
-                    <span class="dim">generating…</span>
-                  </div>
-                  <div class="mira-mock__bars" data-atropos-offset="5">
-                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-                  </div>
-                  <span class="mira-mock__cursor" data-atropos-offset="3"></span>
-                </div>
-              </div>
-            </div></div></div></div>
-          </div>
-        </article>
 
-        <!-- CASE 03 · Melem Tokyo -->
-        <article class="case reveal" id="case-melem">
-          <div class="case__copy">
-            <div class="case__tag mono"><span>Editorial Commerce</span><b>Melem Tokyo</b></div>
-            <h3>Tokyo precision, <span class="accent">shipped worldwide.</span></h3>
-            <p>A storefront for a Tokyo lifestyle brand where editorial art direction meets frictionless checkout — quiet layouts, exacting typography, and a purchase flow that never breaks the mood.</p>
             <dl class="case__kv">
-              <div><dt>Domain</dt><dd>D2C Retail</dd></div>
-              <div><dt>Stack</dt><dd>Headless commerce</dd></div>
-              <div><dt>Region</dt><dd>Japan</dd></div>
-            </dl>
-            <div class="case__metrics mono">
-              <div><span>Conversion</span><b class="accent">+52% add-to-cart rate</b></div>
-              <div><span>Performance</span><b class="accent">1.2s LCP mobile</b></div>
-            </div>
-            <a href="/work/melem-tokyo" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
-          </div>
-          <div class="case__stage">
-            <div class="atropos case-tilt case-tilt--phone"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
-              <div class="device device--phone">
-                <div class="device__screen">
-                  <span class="phone__brand" data-atropos-offset="-2">MELEM TOKYO</span>
-                  <div class="phone__hero" data-atropos-offset="4"><span>ISSUE 07<br/>木漏れ日 — Komorebi</span></div>
-                  <div class="phone__meta mono" data-atropos-offset="2"><span>Cotton twill</span><b>¥ 18,400</b></div>
-                  <div class="phone__cta mono" data-atropos-offset="3">カートに追加 — Add to cart</div>
-                </div>
-              </div>
-            </div></div></div></div>
-          </div>
-        </article>
-
-        <!-- CASE 04 · OctaDezx -->
-        <article class="case case--flip reveal" id="case-octa">
-          <div class="case__copy">
-            <div class="case__tag mono"><span>Autonomous Sales Brain</span><b>OctaDezx</b></div>
-            <h3>Autonomous commerce, <span class="accent">orchestrated everywhere.</span></h3>
-            <p>An enterprise agentic sales brain powering businesses across 96 channels. Features real-time interruptible phone calls with conversational barge-in, instant visual photo matching, native Model Context Protocol (MCP) tooling, and 100% server-verified pricing integrity.</p>
-            <dl class="case__kv">
-              <div><dt>Domain</dt><dd>Agentic AI &bull; Omnichannel</dd></div>
+              <div><dt>Domain</dt><dd>Agentic AI for Every Industry</dd></div>
               <div><dt>Stack</dt><dd>Multi-Agent &bull; Native MCP</dd></div>
               <div><dt>Channels</dt><dd>96 Platforms &bull; 50+ Languages</dd></div>
               <div><dt>Integrity</dt><dd>100% Server-Verified</dd></div>
@@ -432,7 +356,10 @@
               <div><span>Automation</span><b class="accent">78% queries handled by AI</b></div>
               <div><span>Availability</span><b class="accent">24/7 &bull; Real phone numbers</b></div>
             </div>
-            <a href="/work/octadezx" class="btn btn--ghost case__link">View project <i>&rarr;</i></a>
+            <div class="case__actions">
+              <a href="/work/octadezx" class="btn case__link">Explore OctaDezx <i>&rarr;</i></a>
+              <a href="https://octadezx.com" target="_blank" rel="noopener" class="btn btn--ghost case__link">Visit octadezx.com <i>↗</i></a>
+            </div>
           </div>
           <div class="case__stage">
             <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
@@ -441,40 +368,59 @@
                 <div class="device__body chat" id="octa-chat">
                   <div class="chat__head" data-atropos-offset="-1"><span class="chat__avatar">O</span><span>OctaDezx <em class="mono">online · 50+ languages · voice &amp; vision</em></span></div>
                   <div class="chat__log" id="octa-log" data-atropos-offset="3"></div>
-                  <div class="chat__input mono" data-atropos-offset="1">Ask anything about our products… <b>↑</b></div>
+                  <div class="chat__input mono" data-atropos-offset="1">Ask anything about any business or product… <b>↑</b></div>
                 </div>
               </div>
             </div></div></div></div>
           </div>
         </article>
 
-        <!-- CASE 05 · Accert One -->
-        <article class="case reveal" id="case-accert">
+        <!-- FLAGSHIP 02 · Accert One (Upcoming Dedicated F1 Racing Game) -->
+        <div id="accert-one" class="anchor-target"></div>
+        <article class="case case--flip reveal" id="case-accert">
           <div class="case__copy">
-            <div class="case__tag mono"><span>Motorsport Simulator &bull; Free to Download</span><b>Accert One</b></div>
-            <h3>Deterministic physics at <span class="accent">60 FPS.</span></h3>
-            <p>A next-generation cross-platform motorsport simulator engineered by Zeriotic Labs. Completely <strong>free to download</strong>, with <strong>pre-orders launching soon directly on this website</strong>. Built with a custom 60 FPS deterministic physics engine, multi-link suspension kinematics, raycast tire contact modeling, active DRS aerodynamics, and the flagship OctaDezx DX12 hypercar.</p>
+            <div class="case__tag mono"><span>Flagship 02 · Dedicated Formula 1 Racing Game</span><b>Accert One</b></div>
+            <div class="preorder-badge mono"><span class="accent">● RELEASING SOON</span> · 100% FREE TO DOWNLOAD · PRE-ORDER OPEN</div>
+            <h3>Accert One — Dedicated <span class="accent">F1 Racing Game.</span></h3>
+            <p>Accert One is our upcoming dedicated Formula 1 racing game — engineered with deterministic 60 FPS physics from our ApexFormula engine. <strong>100% free to download</strong>, with <strong>pre-orders available directly on this website</strong> to lock in day-one paddock access and the flagship OctaDezx DX12 formula hypercar. Features 12 laser-surveyed Grand Prix circuits, competitive 20-car grid, dynamic weather, and multi-platform hardware parity across Phone, PC, SIM Rigs, and Controllers.</p>
+
+            <div class="platform-strip mono">
+              <div class="platform-pill"><span>📱 Phone</span><small>iOS &amp; Android Touch / Gyro Tilt</small></div>
+              <div class="platform-pill"><span>💻 PC</span><small>144Hz+ &amp; MoTeC/CSV Telemetry</small></div>
+              <div class="platform-pill"><span>🏎️ SIM Rig</span><small>Direct-Drive FFB &amp; Load Cells</small></div>
+              <div class="platform-pill"><span>🎮 Controller</span><small>Gamepad Impulse Trigger Haptics</small></div>
+            </div>
+
             <dl class="case__kv">
-              <div><dt>Domain</dt><dd>Motorsport Simulation</dd></div>
-              <div><dt>Stack</dt><dd>Unity &bull; Deterministic C#</dd></div>
-              <div><dt>Pre-Order</dt><dd class="accent">Coming Soon on Site</dd></div>
-              <div><dt>Access</dt><dd class="accent">100% Free to Download</dd></div>
+              <div><dt>Title &amp; Genre</dt><dd>Accert One (F1 Motorsport Game)</dd></div>
+              <div><dt>Physics Engine</dt><dd>60 FPS Deterministic (ApexFormula)</dd></div>
+              <div><dt>Hardware</dt><dd class="accent">Phone · PC · SIM Rig · Controller</dd></div>
+              <div><dt>Grid &amp; Tracks</dt><dd class="accent">20 Cars · 12 Laser-Surveyed GP Tracks</dd></div>
             </dl>
             <div class="case__metrics mono">
-              <div><span>Pre-Order</span><b class="accent">Available Soon on Website</b></div>
-              <div><span>Access</span><b class="accent">100% Free to Download</b></div>
+              <div><span>Pre-Order Window</span><b class="accent">Open on Website Now</b></div>
+              <div><span>Access &amp; Price</span><b class="accent">100% Free to Download</b></div>
             </div>
-            <a href="/work/accert-one" class="btn btn--ghost case__link">Pre-order &amp; explore <i>&rarr;</i></a>
+
+            <div class="case-preorder-inline">
+              <form class="preorder-mini-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Pre-Order Reserved ✓';">
+                <input type="email" placeholder="Enter your email to pre-order on site" required />
+                <button type="submit" class="btn btn--sm">Pre-Order Free <i>&rarr;</i></button>
+              </form>
+              <span class="mono preorder-mini-hint">Direct browser pre-order · Free to download · Day-one paddock access</span>
+            </div>
+
+            <a href="/work/accert-one" class="btn btn--ghost case__link">View Full F1 Specs &amp; Circuits <i>&rarr;</i></a>
           </div>
           <div class="case__stage">
             <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
               <div class="device device--browser">
-                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">accert-one / telemetry-harness</span><em class="mono">● 60 fps lock</em></div>
+                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">accert-one / apexformula-harness</span><em class="mono">● 60 fps lock</em></div>
                 <div class="device__body accert-mock mono">
                   <div class="accert-mock__track" data-atropos-offset="1">
                     <span>CIRCUIT: <b>SPA-FRANCORCHAMPS</b></span>
                     <span>WEATHER: <b>DRY · 34°C</b></span>
-                    <span>CAR: <b>OCTADEZX DX12</b></span>
+                    <span>CAR: <b>OCTADEZX DX12 (F1)</b></span>
                   </div>
                   <div class="accert-mock__cockpit" data-atropos-offset="4">
                     <div class="accert-mock__tires">
@@ -510,12 +456,21 @@
           </div>
         </article>
 
-        <!-- CASE 06 · Defensive Security & AI Agent Auditing -->
-        <article class="case case--flip reveal" id="case-security">
+        <!-- FLAGSHIP 03 · Defensive Cybersecurity & AI Hardening -->
+        <div id="security" class="anchor-target"></div>
+        <article class="case reveal" id="case-security">
           <div class="case__copy">
-            <div class="case__tag mono"><span>Defensive Security &bull; AI Agent Audit</span><b>Security Labs</b></div>
+            <div class="case__tag mono"><span>Flagship 03 · Defensive Security &bull; AI Agent Audit</span><b>Security Labs</b></div>
             <h3>Bulletproof defense for <span class="accent">modern web &amp; AI.</span></h3>
-            <p>Enterprise vulnerability auditing and ethical penetration testing. We help companies prevent database SQLi dumps, shield backend APIs from automated scraping, harden authentication against brute force and password dictionary attacks with John the Ripper hash auditing, and engineer strict guardrails against autonomous AI agent prompt injection.</p>
+            <p>Enterprise vulnerability auditing and ethical penetration testing. We help organizations prevent database SQLi dumps, shield backend APIs from automated scraper swarms, audit authentication resilience against brute force and password dictionary attacks using John the Ripper and Hashcat hash cracking tools, and engineer strict guardrails against autonomous AI agent prompt injection.</p>
+
+            <div class="threat-matrix-strip mono">
+              <span class="threat-pill">SQLi Injection &amp; DB Dump Prevention</span>
+              <span class="threat-pill">Backend Scrape Mitigation</span>
+              <span class="threat-pill">John the Ripper Hash Auditing</span>
+              <span class="threat-pill">Anti-AI Agent Prompt Defense</span>
+            </div>
+
             <dl class="case__kv">
               <div><dt>Domain</dt><dd>Defensive Cybersecurity</dd></div>
               <div><dt>Stack</dt><dd>OWASP &bull; Argon2id &bull; MCP Guard</dd></div>
@@ -526,7 +481,7 @@
               <div><span>Vulnerability Prevention</span><b class="accent">100% High-Risk Mitigated</b></div>
               <div><span>AI Agent Integrity</span><b class="accent">Zero Jailbreak Exfiltration</b></div>
             </div>
-            <a href="/work/cybersecurity-audit" class="btn btn--ghost case__link">View security audit <i>&rarr;</i></a>
+            <a href="/work/cybersecurity-audit" class="btn btn--ghost case__link">View Security Audit &amp; Matrix <i>&rarr;</i></a>
           </div>
           <div class="case__stage">
             <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
@@ -571,14 +526,82 @@
             </div></div></div></div>
           </div>
         </article>
+
       </div>
     </section>
 
-    <!-- SECURITY & DEFENSIVE AUDITING -->
-    <section class="studio-sec studio-sec--security" id="security" data-screen-label="Security">
+    <!-- SUBSECTION: E-COMMERCE & CLIENT EXPERIENCES -->
+    <section class="studio-sec studio-sec--clients" id="client-work" data-screen-label="Clients">
       <div class="studio__wrap">
         <div class="sec-head">
-          <div class="eyebrow reveal"><span>(02) · Defensive Security &amp; AI Hardening</span></div>
+          <div class="eyebrow reveal"><span>(02) · E-Commerce &amp; Digital Experiences</span></div>
+          <h2 class="reveal">Focused client engagements</h2>
+          <p class="reveal">High-conversion digital storefronts, real-time 3D product visualizers, and brand experiences crafted for global scale.</p>
+        </div>
+
+        <div class="client-showcase-grid reveal">
+          <!-- CARD 01: Variant3D -->
+          <div class="client-card">
+            <div class="client-card__header mono">
+              <span class="client-card__badge">3D Fashion Tech</span>
+              <span class="client-card__tag">Variant3D</span>
+            </div>
+            <h3 class="client-card__title">Knitwear, rendered <span class="accent">thread by thread.</span></h3>
+            <p class="client-card__desc">A real-time 3D showcase for an on-demand knitting platform — garments presented as living geometry the visitor can orbit and inspect in the browser.</p>
+            <div class="client-card__metrics mono">
+              <div><span>Engagement</span><b class="accent">3.2x time on page</b></div>
+              <div><span>Conversion</span><b class="accent">+68% demo requests</b></div>
+            </div>
+            <div class="client-card__tags mono">
+              <span>WebGL</span><span>Three.js</span><span>Loom Engine</span>
+            </div>
+            <a href="/work/variant3d" class="btn btn--ghost btn--sm">View case study <i>&rarr;</i></a>
+          </div>
+
+          <!-- CARD 02: Mira INC -->
+          <div class="client-card">
+            <div class="client-card__header mono">
+              <span class="client-card__badge">Real-Time Web</span>
+              <span class="client-card__tag">Mira INC</span>
+            </div>
+            <h3 class="client-card__title">A product site that <span class="accent">computes itself.</span></h3>
+            <p class="client-card__desc">An interactive experience for an AI-driven product company — scroll-composed scenes and generative visuals rendered live to demonstrate product intelligence.</p>
+            <div class="client-card__metrics mono">
+              <div><span>Session</span><b class="accent">4.1 min avg duration</b></div>
+              <div><span>Performance</span><b class="accent">99.4% 60fps lock</b></div>
+            </div>
+            <div class="client-card__tags mono">
+              <span>WebGL</span><span>GSAP</span><span>Generative UI</span>
+            </div>
+            <a href="/work/mira" class="btn btn--ghost btn--sm">View case study <i>&rarr;</i></a>
+          </div>
+
+          <!-- CARD 03: Melem Tokyo -->
+          <div class="client-card">
+            <div class="client-card__header mono">
+              <span class="client-card__badge">Omnichannel Apparel</span>
+              <span class="client-card__tag">Melem Tokyo</span>
+            </div>
+            <h3 class="client-card__title">Tokyo precision, <span class="accent">shipped worldwide.</span></h3>
+            <p class="client-card__desc">A headless e-commerce flagship for a high-end streetwear label — edge rendering, currency routing, and inventory orchestration for global flash drops.</p>
+            <div class="client-card__metrics mono">
+              <div><span>Checkout</span><b class="accent">-42% cart abandon</b></div>
+              <div><span>Availability</span><b class="accent">99.98% drop uptime</b></div>
+            </div>
+            <div class="client-card__tags mono">
+              <span>Next.js</span><span>Edge CDN</span><span>Custom ERP</span>
+            </div>
+            <a href="/work/melem-tokyo" class="btn btn--ghost btn--sm">View case study <i>&rarr;</i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ZERO-TRUST DEFENSIVE ARCHITECTURE MATRIX -->
+    <section class="studio-sec studio-sec--security" id="security-matrix" data-screen-label="Security Matrix">
+      <div class="studio__wrap">
+        <div class="sec-head">
+          <div class="eyebrow reveal"><span>(03) · Zero-Trust Defensive Architecture</span></div>
           <h2 class="reveal">Built to withstand adversary scrutiny</h2>
           <p class="reveal">We conduct rigorous vulnerability penetration tests and architect zero-trust defenses to protect databases, APIs, credential stores, and autonomous AI agents.</p>
         </div>
@@ -635,7 +658,7 @@
     <section class="studio-sec studio-sec--tech" id="tech" data-screen-label="Tech">
       <div class="studio__wrap">
         <div class="sec-head">
-          <div class="eyebrow reveal"><span>(03) · Tech stack</span></div>
+          <div class="eyebrow reveal"><span>(04) · Tech stack</span></div>
           <h2 class="reveal">Chosen for longevity</h2>
           <p class="reveal">Every tool picked for performance, longevity and developer experience.</p>
         </div>
@@ -676,7 +699,7 @@
     <section class="studio-sec studio-sec--process" id="process" data-screen-label="Process">
       <div class="studio__wrap">
         <div class="sec-head">
-          <div class="eyebrow reveal"><span>(04) · How we work</span></div>
+          <div class="eyebrow reveal"><span>(05) · How we work</span></div>
           <h2 class="reveal">Four phases. No ceremony, no surprises.</h2>
         </div>
         <ol class="steps">
@@ -721,7 +744,7 @@
     <section class="studio-sec studio-sec--voices" id="voices" data-screen-label="Voices">
       <div class="studio__wrap">
         <div class="sec-head">
-          <div class="eyebrow reveal"><span>(05) · Client voices</span></div>
+          <div class="eyebrow reveal"><span>(06) · Client voices</span></div>
           <h2 class="reveal">Taken at their word</h2>
         </div>
         <div class="voices">
@@ -746,7 +769,7 @@
       <div class="studio__wrap">
         <div class="studio-layout">
           <div class="studio-copy">
-            <div class="eyebrow reveal"><span>(06) · The studio — since 2022</span></div>
+            <div class="eyebrow reveal"><span>(07) · The studio — since 2022</span></div>
             <h2 class="reveal">A small, senior team. <span class="accent">By design.</span></h2>
             <p class="reveal">Zeriotic is an independent studio of sixteen. We take on a handful of engagements each year — enough to stay sharp, few enough that senior people do the actual work. No account managers, no subcontractor shuffle, no juniors learning on your budget.</p>
             <p class="reveal">We work with founders who want a partner that treats their product like our own, and teams who want the polish of a design house with the rigour of a product engineering group.</p>
@@ -889,8 +912,8 @@
         <div class="footer__big">ZERI<span class="accent">OTIC</span></div>
         <div class="footer__grid">
           <div><h4 class="mono">Studio</h4><p>Zeriotic is a premium web development studio building high-performance applications, e-commerce platforms and SaaS products for a handful of clients each year.</p></div>
-          <div><h4 class="mono">Services</h4><a href="#services">Web applications</a><a href="#services">E-commerce</a><a href="#services">SaaS products</a><a href="/work/cybersecurity-audit">Security audits</a><a href="/compare/zeriotic-vs-agencies">Why we're different</a></div>
-          <div><h4 class="mono">Studio</h4><a href="#work">Work</a><a href="#process">Process</a><a href="#studio">About</a><a href="#contact">Contact</a></div>
+          <div><h4 class="mono">Services</h4><a href="#octadezx">OctaDezx (AI)</a><a href="#accert-one">Accert One (F1)</a><a href="/work/cybersecurity-audit">Security audits</a><a href="#client-work">Client work</a><a href="/compare/zeriotic-vs-agencies">Why we're different</a></div>
+          <div><h4 class="mono">Studio</h4><a href="#work">Flagships</a><a href="#client-work">Client work</a><a href="#process">Process</a><a href="#studio">About</a><a href="#contact">Contact</a></div>
           <div><h4 class="mono">Elsewhere</h4><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a><a href="https://facebook.com/zeriotic" rel="noopener">Facebook</a><a href="https://instagram.com/zeriotic" rel="noopener">Instagram</a><a href="https://github.com/zeriotic" rel="noopener">GitHub</a><a href="https://linkedin.com/company/zeriotic" rel="noopener">LinkedIn</a></div>
         </div>
         <div class="footer__bottom mono">

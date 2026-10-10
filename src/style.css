@@ -210,6 +210,7 @@ ul, ol { list-style: none; }
 .btn:hover i { transform: translateX(4px); }
 .btn--ghost { background: transparent; color: var(--ink); border-color: var(--hairline-strong); }
 .btn--ghost:hover { background: transparent; border-color: var(--accent); color: var(--accent); }
+.btn--sm { padding: 9px 16px; font-size: 0.64rem; letter-spacing: 0.08em; }
 
 /* ---------- MANIFESTO ---------- */
 .panel--manifesto { min-height: 120vh; }
@@ -728,6 +729,261 @@ ul, ol { list-style: none; }
   padding: 2px 7px;
   border-radius: 2px;
   border: 1px solid var(--hairline);
+}
+
+/* ---------- ANCHOR TARGETS ---------- */
+.anchor-target {
+  position: relative;
+  top: -80px;
+  height: 0;
+  visibility: hidden;
+}
+
+/* ---------- HERO TELEMETRY HUD ---------- */
+.hero__hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border-radius: 2px;
+  background: rgba(197, 196, 194, 0.04);
+  border: 1px solid var(--hairline);
+  color: var(--ink-strong);
+}
+.hud-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.hud-dot--pulse {
+  box-shadow: 0 0 8px var(--accent);
+  animation: hudPulse 2s infinite ease-in-out;
+}
+.hud-dot--secure {
+  background: #00f0ff;
+  box-shadow: 0 0 8px #00f0ff;
+}
+@keyframes hudPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ---------- FLAGSHIP BADGES & STRIPS ---------- */
+.case__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+.industry-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 22px;
+}
+.industry-pill {
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: rgba(255, 85, 0, 0.06);
+  border: 1px solid rgba(255, 85, 0, 0.3);
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.platform-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 18px 0 22px;
+}
+.platform-pill {
+  background: rgba(197, 196, 194, 0.04);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 2px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.platform-pill span {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+}
+.platform-pill small {
+  font-size: 0.52rem;
+  color: var(--muted);
+  line-height: 1.25;
+}
+.threat-matrix-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 22px;
+}
+.threat-pill {
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: #00f0ff;
+  text-transform: uppercase;
+}
+.preorder-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  padding: 5px 12px;
+  border-radius: 2px;
+  background: rgba(255, 85, 0, 0.12);
+  border: 1px solid var(--accent);
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+.case-preorder-inline {
+  margin: 20px 0 16px;
+  padding: 16px;
+  background: rgba(255, 85, 0, 0.04);
+  border: 1px solid rgba(255, 85, 0, 0.25);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.preorder-mini-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.preorder-mini-form input {
+  flex: 1;
+  min-width: 200px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--hairline-strong);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.68rem;
+  padding: 8px 12px;
+  border-radius: 2px;
+}
+.preorder-mini-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.preorder-mini-hint {
+  font-size: 0.55rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* ---------- E-COMMERCE & CLIENT WORK SHOWCASE ---------- */
+.studio-sec--clients {
+  border-top: 1px solid var(--hairline);
+  padding: clamp(60px, 8vw, 120px) 0;
+}
+.client-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.client-card {
+  background: #06060a;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 4px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.4s var(--ease-out), border-color 0.4s, box-shadow 0.4s;
+}
+.client-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 85, 0, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+}
+.client-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.client-card__badge {
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+.client-card__tag {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+}
+.client-card__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink-strong);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.client-card__desc {
+  font-size: 0.76rem;
+  color: var(--ink);
+  line-height: 1.6;
+}
+.client-card__metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 14px;
+  margin-top: auto;
+}
+.client-card__metrics div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.client-card__metrics span {
+  font-size: 0.54rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.client-card__metrics b {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.client-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.client-card__tags span {
+  font-size: 0.54rem;
+  padding: 2px 6px;
+  background: rgba(197, 196, 194, 0.06);
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+  color: var(--muted);
+}
+.client-card .btn {
+  margin-top: 8px;
+  align-self: flex-start;
 }
 
 /* ---------- TECH ---------- */
