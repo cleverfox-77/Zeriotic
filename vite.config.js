@@ -29,6 +29,7 @@ export default defineConfig({
         cybersecurityAudit: path.resolve(__dirname, 'work/cybersecurity-audit.html'),
         howZerioticRenders: path.resolve(__dirname, 'work/how-zeriotic-renders.html'),
         compareAgencies: path.resolve(__dirname, 'compare/zeriotic-vs-agencies.html'),
+        phpVulnBlog: path.resolve(__dirname, 'blog/php-vulnerability-login-without-password.html'),
       },
       output: {
         // Split the big libs into their own long-cache chunks.

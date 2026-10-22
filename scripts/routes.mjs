@@ -80,6 +80,13 @@ export const PAGES = [
     schema: ["WebPage", "BreadcrumbList", "FAQPage"],
   },
   {
+    out: "blog/php-vulnerability-login-without-password.html",
+    canonical: `${ORIGIN}/blog/php-vulnerability-login-without-password`,
+    title: "PHP Authentication Bypass: How Hackers Login Without Passwords | Zeriotic",
+    minChars: 1200,
+    schema: ["BlogPosting", "TechArticle", "BreadcrumbList"],
+  },
+  {
     out: "privacy/index.html",
     altFile: "privacy.html",
     canonical: `${ORIGIN}/privacy/`,
