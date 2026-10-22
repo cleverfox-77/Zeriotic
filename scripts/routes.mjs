@@ -87,6 +87,13 @@ export const PAGES = [
     schema: ["BlogPosting", "TechArticle", "BreadcrumbList"],
   },
   {
+    out: "blog/how-uncensored-ai-agents-increase-hacking.html",
+    canonical: `${ORIGIN}/blog/how-uncensored-ai-agents-increase-hacking`,
+    title: "How Uncensored AI Agents Are Accelerating Cyberattacks | Zeriotic",
+    minChars: 1200,
+    schema: ["BlogPosting", "TechArticle", "BreadcrumbList"],
+  },
+  {
     out: "privacy/index.html",
     altFile: "privacy.html",
     canonical: `${ORIGIN}/privacy/`,

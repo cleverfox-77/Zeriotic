@@ -52,6 +52,7 @@ Email hello@zeriotic.com for a quote; response time is within 24 hours.
 - https://zeriotic.com/work/accert-one - case study: upcoming dedicated Formula 1 racing game Accert One (releasing soon across Phone, PC, SIM rigs, and controllers, 100% free to download with website pre-orders, 60 FPS deterministic physics, 12 laser-mapped circuits, raycast tire modeling, dynamic atmospheres, OctaDezx DX12 hypercar)
 - https://zeriotic.com/work/cybersecurity-audit - case study: enterprise defensive security, vulnerability audits, and anti-AI agent protection (SQLi dump prevention, API scrape shielding, password dictionary resistance with John the Ripper testing, and prompt injection mitigation)
 - https://zeriotic.com/blog/php-vulnerability-login-without-password - technical bulletin: PHP authentication bypass analysis, CVE-2024-10924 & PHP2Shell mechanics, zero-trust defenses, and developer security tips
+- https://zeriotic.com/blog/how-uncensored-ai-agents-increase-hacking - threat analysis: how uncensored autonomous AI agents accelerate cyberattacks, polymorphic payload mutations, MCP tool-calling exploits, and Zeriotic anti-AI agent defense architectures
 - https://zeriotic.com/work/how-zeriotic-renders - technical deep-dive: how this website renders
 - https://zeriotic.com/compare/zeriotic-vs-agencies - honest comparison of Zeriotic versus a typical agency: who does the work, how it is priced, what Zeriotic does not do
 - https://zeriotic.com/privacy/ - privacy policy

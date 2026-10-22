@@ -30,6 +30,7 @@ export default defineConfig({
         howZerioticRenders: path.resolve(__dirname, 'work/how-zeriotic-renders.html'),
         compareAgencies: path.resolve(__dirname, 'compare/zeriotic-vs-agencies.html'),
         phpVulnBlog: path.resolve(__dirname, 'blog/php-vulnerability-login-without-password.html'),
+        uncensoredAiBlog: path.resolve(__dirname, 'blog/how-uncensored-ai-agents-increase-hacking.html'),
       },
       output: {
         // Split the big libs into their own long-cache chunks.
