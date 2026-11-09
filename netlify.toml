@@ -1,6 +1,6 @@
 # Netlify build + routing for the Zeriotic site.
 #
-# SMTP secrets are NOT here — set them as environment variables in the Netlify
+# SMTP secrets are NOT here - set them as environment variables in the Netlify
 # dashboard (Site settings → Environment variables):
 #   SMTP_HOST   mail.privateemail.com
 #   SMTP_PORT   465
@@ -15,7 +15,7 @@
 
 [functions]
   node_bundler = "esbuild"
-  # nodemailer ships internal files that esbuild can mangle when inlined —
+  # nodemailer ships internal files that esbuild can mangle when inlined -
   # keep it in node_modules so it loads as-is at runtime.
   external_node_modules = ["nodemailer"]
 
@@ -34,10 +34,34 @@
   to = "/.netlify/functions/contact"
   status = 200
 
+# Retired page: old links and crawlers go to the homepage.
+[[redirects]]
+  from = "/work/how-zeriotic-renders"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/work/how-zeriotic-renders.html"
+  to = "/"
+  status = 301
+  force = true
+
 # NOTE: there is deliberately NO catch-all "/* → /index.html 200" fallback.
 # This site has no client-side routes (the homepage is a single page with
-# #anchor navigation), so an unknown path must return a real 404 — Netlify
+# #anchor navigation), so an unknown path must return a real 404 - Netlify
 # serves 404.html with status 404 automatically. A catch-all here turned
 # every typo'd URL into a byte-identical copy of the homepage (HTTP 200,
 # homepage title, homepage canonical): an infinite duplicate-content field
 # for search engines and one fake page for every answer engine.
+
+# Hashed files never change, so returning visitors skip the round trip entirely.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

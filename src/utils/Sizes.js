@@ -2,7 +2,7 @@ import EventEmitter from './EventEmitter.js';
 
 /**
  * Tracks viewport size + device pixel ratio.
- * PERFORMANCE: pixelRatio is hard-capped — rendering at the native ratio of
+ * PERFORMANCE: pixelRatio is hard-capped - rendering at the native ratio of
  * a 3x phone would trash the fill rate for almost no perceptible gain.
  */
 export default class Sizes extends EventEmitter {

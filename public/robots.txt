@@ -43,6 +43,27 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
 Sitemap: https://zeriotic.com/sitemap.xml
 
 # LLM guidance: machine-readable studio facts

@@ -1,9 +1,7 @@
 /**
- * Quality.js — cheap GPU tiering.
- * We never benchmark synchronously (that would block the preloader). Instead we
- * read coarse signals — renderer string, memory, mobile UA — to pick a tier
- * that decides the particle budget and which post passes run. The render loop
- * can still DOWNGRADE at runtime if it sees sustained long frames.
+ * Quality.js - picks how much the visitor's graphics chip is asked to do.
+ * Built-in laptop graphics are named here on purpose: they often report a
+ * friendly name, and treating them like a dedicated card is what makes a page crawl.
  */
 export function detectTier(renderer) {
   const ua = navigator.userAgent;
@@ -11,34 +9,34 @@ export function detectTier(renderer) {
   const cores = navigator.hardwareConcurrency || 4;
   const mem = navigator.deviceMemory || 4;
 
-  // Try to read the unmasked GPU name (best-effort; often blocked).
   let gpu = '';
   try {
     const gl = renderer.getContext();
     const ext = gl.getExtension('WEBGL_debug_renderer_info');
     if (ext) gpu = (gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) || '').toLowerCase();
-  } catch { /* ignore */ }
+  } catch { /* the name is not always available */ }
 
-  const weakGpu = /(intel|swiftshader|mali|adreno 5|apple a[0-9]\b)/.test(gpu);
+  const software = /swiftshader|llvmpipe|microsoft basic/.test(gpu);
+  const builtIn = /intel|radeon\(tm\) graphics|radeon graphics|vega \d|radeon \d{3}m|mali|adreno|powervr|apple a\d/.test(gpu);
 
   let tier = 'high';
-  if (isMobile || cores <= 4 || mem <= 4 || weakGpu) tier = 'medium';
-  if (isMobile && (cores <= 4 || mem <= 3)) tier = 'low';
+  if (isMobile || cores <= 4 || mem <= 4 || builtIn) tier = 'medium';
+  if (software || (isMobile && (cores <= 4 || mem <= 3))) tier = 'low';
+
+  const pick = (high, medium, low) => (tier === 'high' ? high : tier === 'medium' ? medium : low);
 
   return {
     tier,
     isMobile,
-    // The particle field is the main GPU cost — vertex-bound, so it scales
-    // almost linearly with count. These budgets hold 60fps on their tiers.
-    particles: tier === 'high' ? 120000 : tier === 'medium' ? 60000 : 30000,
-    // feature toggles consumed by PostFX
-    bloom: true,                       // the plasma glow IS the look — always on
-    dof: false,
-    grain: true,
-    ssao: false,
-    // Post is fill-rate bound; CSS-pixel rendering + SMAA reads as intentionally
-    // cinematic on the dark scene and locks a steady 60fps.
-    maxPixelRatio: tier === 'low' ? 1 : tier === 'medium' ? 1.5 : 2,
-    bloomDownscale: 2,                 // half-res bloom everywhere (bloom is blurry anyway)
+    reflection: pick(0.45, 0.28, 0),
+    shadowSize: pick(2048, 1024, 0),
+    shadowLive: tier === 'high',
+    motes: pick(700, 320, 120),
+    bubbles: pick(90, 56, 30),
+    rain: pick(320, 130, 0),
+    bloom: tier !== 'low',
+    grain: tier !== 'low',
+    msaa: pick(4, 0, 0),
+    maxPixelRatio: pick(1.5, 1, 1),
   };
 }

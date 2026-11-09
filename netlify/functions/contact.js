@@ -1,11 +1,11 @@
 import nodemailer from 'nodemailer';
 
 /**
- * Zeriotic contact endpoint — Netlify serverless function.
+ * Zeriotic contact endpoint - Netlify serverless function.
  *
  * Production path: the frontend POSTs to /api/contact, which netlify.toml
  * rewrites to this function. SMTP credentials come from Netlify environment
- * variables (Site settings → Environment variables) — never committed.
+ * variables (Site settings → Environment variables) - never committed.
  *
  * (Local dev still uses server/index.js via `npm run api` + the Vite proxy.)
  */
@@ -20,7 +20,7 @@ function makeTransport() {
   });
 }
 
-// best-effort in-memory limiter (per warm instance) — the honeypot is the
+// best-effort in-memory limiter (per warm instance) - the honeypot is the
 // real bot defence, since serverless instances don't share memory reliably
 const hits = new Map();
 function limited(ip) {
@@ -44,11 +44,29 @@ export const handler = async (event) => {
   try { data = JSON.parse(event.body || '{}'); } catch { data = {}; }
   const { name = '', email = '', type = '', budget = '', message = '', company = '' } = data;
 
-  // honeypot: real users never see the "company" field — bots fill it
+  // honeypot: real users never see the "company" field - bots fill it
   if (company) return json(200, { ok: true });
 
   const ip = event.headers['x-nf-client-connection-ip'] || event.headers['client-ip'] || 'unknown';
   if (limited(ip)) return json(429, { ok: false, error: 'Too many requests' });
+
+  // Accert One pre-order: an email address and nothing else.
+  if (data.source === 'accert-one-preorder') {
+    if (!/.+@.+\..+/.test(email) || email.length > 200) return json(400, { ok: false, error: 'Invalid email' });
+    try {
+      await makeTransport().sendMail({
+        from: `"Zeriotic Website" <${process.env.SMTP_USER}>`,
+        to: process.env.PREORDER_TO || process.env.CONTACT_TO || process.env.SMTP_USER,
+        replyTo: email,
+        subject: 'Accert One pre-order',
+        text: `Pre-order email: ${email}`,
+      });
+      return json(200, { ok: true });
+    } catch (err) {
+      console.error('[preorder] send failed:', err.code || err.name, '-', err.message);
+      return json(502, { ok: false, error: 'Mail transport failed' });
+    }
+  }
 
   if (!name.trim() || !/.+@.+\..+/.test(email) || !message.trim()) {
     return json(400, { ok: false, error: 'Missing or invalid fields' });
@@ -60,7 +78,7 @@ export const handler = async (event) => {
       from: `"Zeriotic Website" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_TO || process.env.SMTP_USER,
       replyTo: `"${name.replace(/["\\<>]/g, '')}" <${email}>`,
-      subject: `New enquiry — ${name}${type ? ` [${type}]` : ''}`.slice(0, 140),
+      subject: `New enquiry - ${name}${type ? ` [${type}]` : ''}`.slice(0, 140),
       text: `Name: ${name}\nEmail: ${email}\nProject Type: ${type || 'Not specified'}\nBudget Band: ${budget || 'Not specified'}\n\nMessage:\n${message}`,
     });
     return json(200, { ok: true });

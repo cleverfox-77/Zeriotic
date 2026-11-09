@@ -43,7 +43,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="font" crossorigin href="https://unseen.co/wp-content/themes/unseen/resources/assets/fonts/NeueMontreal-Regular.woff2" /><link rel="preload" as="font" crossorigin href="https://unseen.co/wp-content/themes/unseen/resources/assets/fonts/SaolDisplay-Light.woff2" /><link rel="preload" as="font" crossorigin href="https://unseen.co/wp-content/themes/unseen/resources/assets/fonts/SaolDisplay-LightItalic.woff2" /><style>@font-face{font-family:'Neue Montreal';src:url(https://unseen.co/wp-content/themes/unseen/resources/assets/fonts/NeueMontreal-Regular.woff2) format("woff2")}@font-face{font-family:'Saol Display';font-style:normal;src:url(https://unseen.co/wp-content/themes/unseen/resources/assets/fonts/SaolDisplay-Light.woff2) format("woff2")}@font-face{font-family:'Saol Display';font-style:italic;src:url(https://unseen.co/wp-content/themes/unseen/resources/assets/fonts/SaolDisplay-LightItalic.woff2) format("woff2")}</style><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/work/work.css">
   <style>
     body { background: var(--bg); color: var(--ink); }
@@ -74,7 +74,7 @@
     </a>
   </header>
 
-  <main>
+  <main data-router-wrapper><div data-router-view="work">
     <section class="case-hero">
       <div class="eyebrow"><span>Technical Deep-dive</span></div>
       <h1>How zeriotic.com Renders</h1>
@@ -137,7 +137,7 @@
         <a href="/work/variant3d" class="btn">Case 01: Variant3D <i>&rarr;</i></a>
       </section>
     </div>
-  </main>
+  </div></main>
 
   <footer class="footer">
     <div class="studio__wrap">

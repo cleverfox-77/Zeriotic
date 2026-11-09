@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 
 /**
- * Camera.js — a single PerspectiveCamera plus a small "rig" abstraction.
+ * Camera.js - a single PerspectiveCamera plus a small "rig" abstraction.
  *
  * The scroll story writes into `rig.position` and `rig.target` (plain Vector3s);
  * every frame we lerp the real camera toward the rig so that even step changes
@@ -13,8 +13,9 @@ export default class Camera {
     this.exp = experience;
     const { sizes, scene } = experience;
 
-    this.instance = new THREE.PerspectiveCamera(38, sizes.aspect, 0.1, 200);
+    this.instance = new THREE.PerspectiveCamera(sizes.aspect < 1 ? 58 : 38, sizes.aspect, 0.1, 1000);
     this.instance.position.set(0, 0.8, 13);
+    this.instance.layers.enable(1);   // layer 1 is drawn here but left out of the reflection
     scene.add(this.instance);
 
     // Rig = where we WANT the camera to be. Damped toward each frame.
@@ -23,18 +24,20 @@ export default class Camera {
       target: new THREE.Vector3(0, 0.2, 0),
     };
     this._currentTarget = this.rig.target.clone();
-    this._baseDamping = 0.055; // 0 = frozen, 1 = instant
+    this._baseDamping = 8.5; // response per second
     this.damping = this._baseDamping;
   }
 
   /** Returns true while still settling, so the loop knows to keep rendering. */
-  update() {
+  update(delta = 0.016) {
     const cam = this.instance;
     const before = cam.position.distanceToSquared(this.rig.position)
                  + this._currentTarget.distanceToSquared(this.rig.target);
 
-    cam.position.lerp(this.rig.position, this.damping);
-    this._currentTarget.lerp(this.rig.target, this.damping);
+    // Time-based, so the camera feels the same at any frame rate.
+    const k = 1 - Math.exp(-this.damping * delta);
+    cam.position.lerp(this.rig.position, k);
+    this._currentTarget.lerp(this.rig.target, k);
     cam.lookAt(this._currentTarget);
 
     return before > 1e-6;     // still moving?
@@ -57,6 +60,7 @@ export default class Camera {
 
   resize() {
     this.instance.aspect = this.exp.sizes.aspect;
+    this.instance.fov = this.exp.sizes.aspect < 1 ? 58 : 38;
     this.instance.updateProjectionMatrix();
   }
 }

@@ -13,7 +13,7 @@
  *
  * Reads the URL list from the GENERATED dist/sitemap.xml, so it always checks
  * exactly what was published. For each URL it asserts a 200, a
- * self-referential canonical, and real crawler-visible text — which together
+ * self-referential canonical, and real crawler-visible text - which together
  * are the whole claim: this page is readable without running JavaScript.
  *
  * Exit 1 separates "unreachable" from "wrong content". A dropped connection is
@@ -23,11 +23,14 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ORIGIN, PAGES } from "./routes.mjs";
 
 // ── configure ───────────────────────────────────────────────────────────────
-const ORIGIN = "https://zeriotic.com"; // the canonical origin in your sitemap
 const DIST_DIR = "dist";               // build output folder
-const MIN_FALLBACK_CHARS = 500;        // floor for crawler-visible text
+const MIN_FALLBACK_CHARS = 350;        // floor for any url not listed in routes.mjs
+// Per-route floors and the OctaDezx fact are the same ones verify-seo enforces.
+const FLOORS = new Map(PAGES.map((p) => [p.canonical, p.minChars]));
+const FACT_PAGES = new Set([`${ORIGIN}/`, `${ORIGIN}/work/octadezx`]);
 // This site has no per-route prerender markers; measuring the whole <body> is
 // the weaker but correct mode here (it still catches an empty shell).
 const MARKERS = null;
@@ -137,12 +140,18 @@ async function main() {
     // on top of an empty shell.
     const block = fallbackBlock(html);
     const chars = block ? textOf(block).length : 0;
+    const canonicalUrl = url.replace(origin, ORIGIN);
+    const floor = FLOORS.get(canonicalUrl) ?? MIN_FALLBACK_CHARS;
 
     const why = [];
     if (!res.ok) why.push(`HTTP ${res.status}`);
     if (!selfCanonical) why.push(`canonical=${canonical || "none"}`);
     if (!block) why.push("no crawler-visible body");
-    else if (chars < MIN_FALLBACK_CHARS) why.push(`only ${chars} chars of crawler content`);
+    else if (chars < floor) why.push(`only ${chars} chars of crawler content (floor ${floor})`);
+    if (FACT_PAGES.has(canonicalUrl)) {
+      if (!html.includes("86.8%")) why.push("lost the 86.8% OctaDezx benchmark figure");
+      if (html.includes("78%")) why.push("still states the retired 78% figure");
+    }
 
     if (why.length) bad.push({ label, status: res.status, why: why.join(", ") });
     const flag = why.length ? "FAIL" : attempts > 1 ? "ok/r" : "ok  ";
@@ -165,7 +174,7 @@ async function main() {
   if (bad.length || unreachable.length) process.exit(1);
 
   console.log(
-    `[verify-live] every url serves its own content, self-referential canonical, min ${MIN_FALLBACK_CHARS} chars without JavaScript.`,
+    "[verify-live] every url serves its own content, self-referential canonical, at or above its route floor without JavaScript.",
   );
 }
 

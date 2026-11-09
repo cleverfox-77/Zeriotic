@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
  *   dev:  `npm run api`   (Vite proxies /api → :8787)
  *   prod: `npm run start` (serves dist/ AND /api on one port)
  *
- * SMTP credentials live in .env (gitignored) — see .env.example.
+ * SMTP credentials live in .env (gitignored) - see .env.example.
  */
 const app = express();
 app.use(express.json({ limit: '32kb' }));
@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// naive per-IP limiter — enough to stop a dumb loop hammering the mailbox
+// naive per-IP limiter - enough to stop a dumb loop hammering the mailbox
 const hits = new Map();
 function limited(ip) {
   const now = Date.now();
@@ -39,10 +39,28 @@ function limited(ip) {
 app.post('/api/contact', async (req, res) => {
   const { name = '', email = '', type = '', budget = '', message = '', company = '' } = req.body || {};
 
-  // honeypot: real users never see the "company" field — bots fill it
+  // honeypot: real users never see the "company" field - bots fill it
   if (company) return res.json({ ok: true });
 
   if (limited(req.ip)) return res.status(429).json({ ok: false, error: 'Too many requests' });
+  // Accert One pre-order: an email address and nothing else.
+  if (req.body?.source === 'accert-one-preorder') {
+    if (!/.+@.+\..+/.test(email) || email.length > 200) return res.status(400).json({ ok: false, error: 'Invalid email' });
+    try {
+      await transporter.sendMail({
+        from: `"Zeriotic Website" <${process.env.SMTP_USER}>`,
+        to: process.env.PREORDER_TO || process.env.CONTACT_TO || process.env.SMTP_USER,
+        replyTo: email,
+        subject: 'Accert One pre-order',
+        text: `Pre-order email: ${email}`,
+      });
+      return res.json({ ok: true });
+    } catch (err) {
+      console.error('[preorder] send failed:', err.code || err.name, '-', err.message);
+      return res.status(502).json({ ok: false, error: 'Mail transport failed' });
+    }
+  }
+
   if (!name.trim() || !/.+@.+\..+/.test(email) || !message.trim()) {
     return res.status(400).json({ ok: false, error: 'Missing or invalid fields' });
   }
@@ -52,7 +70,7 @@ app.post('/api/contact', async (req, res) => {
       from: `"Zeriotic Website" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_TO || process.env.SMTP_USER,
       replyTo: `"${name.replace(/["\\<>]/g, '')}" <${email}>`,
-      subject: `New enquiry — ${name}${type ? ` [${type}]` : ''}`.slice(0, 140),
+      subject: `New enquiry - ${name}${type ? ` [${type}]` : ''}`.slice(0, 140),
       text: `Name: ${name}\nEmail: ${email}\nProject Type: ${type || 'Not specified'}\nBudget Band: ${budget || 'Not specified'}\n\nMessage:\n${message}`,
     });
     res.json({ ok: true });

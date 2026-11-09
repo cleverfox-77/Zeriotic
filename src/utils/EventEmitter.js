@@ -1,4 +1,4 @@
-/** Minimal event emitter — just enough for Sizes/Resources. */
+/** Minimal event emitter - just enough for Sizes/Resources. */
 export default class EventEmitter {
   constructor() { this._events = {}; }
   on(name, cb) { (this._events[name] ||= []).push(cb); return this; }

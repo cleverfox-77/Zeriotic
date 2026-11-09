@@ -8,7 +8,7 @@
  *      date, so the static HTML can never go stale (it did before).
  *   2. Generates dist/sitemap.xml from scripts/routes.mjs.
  *   3. Generates dist/llms-full.txt: the llms.txt corpus with the full text of
- *      every case study inlined — the file answer engines quote.
+ *      every case study inlined - the file answer engines quote.
  *   4. Runs the verify-seo gate so a bad build fails instead of deploying.
  */
 import { promises as fs } from "node:fs";
@@ -21,7 +21,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const DIST = path.join(ROOT, "dist");
 
-/** Strip scripts, styles, tags and extra whitespace — how a text extractor reads a page. */
+/** Strip scripts, styles, tags and extra whitespace - how a text extractor reads a page. */
 const textOf = (html) =>
   html
     .replace(/<script[\s\S]*?<\/script>/g, " ")
@@ -45,10 +45,15 @@ async function regenerateAvailability() {
 
 async function generateSitemap() {
   const today = new Date().toISOString().slice(0, 10);
-  const urls = SITEMAP_PAGES.map(
-    (p) => `  <url><loc>${p.canonical}</loc><lastmod>${today}</lastmod></url>`,
-  ).join("\n");
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  const images = {
+    [`${ORIGIN}/`]: [`${ORIGIN}/og-image.png`],
+    [`${ORIGIN}/work/accert-one`]: ["accert-grid", "accert-rear", "accert-straight"].map((n) => `${ORIGIN}/media/accert/${n}.webp`),
+  };
+  const urls = SITEMAP_PAGES.map((p) => {
+    const pics = (images[p.canonical] || []).map((i) => `<image:image><image:loc>${i}</image:loc></image:image>`).join("");
+    return `  <url><loc>${p.canonical}</loc><lastmod>${today}</lastmod>${pics}</url>`;
+  }).join("\n");
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls}\n</urlset>\n`;
   await fs.writeFile(path.join(DIST, "sitemap.xml"), xml);
   console.log(`[geo] regenerated sitemap.xml (${SITEMAP_PAGES.length} urls)`);
 }
@@ -62,7 +67,7 @@ async function generateLlmsFull() {
     return;
   }
   let corpus = "";
-  for (const p of PAGES.filter((x) => x.out.startsWith("work/") || x.out.startsWith("compare/") || x.out.startsWith("blog/"))) {
+  for (const p of PAGES.filter((x) => x.out === "index.html" || x.out.startsWith("work/") || x.out.startsWith("compare/") || x.out.startsWith("blog/") || x.out.endsWith("-bangladesh.html"))) {
     const html = await fs.readFile(path.join(DIST, p.out), "utf8");
     const name = p.title.replace(" | Zeriotic", "");
     corpus += `\n### ${name}\n\n${textOf(html)}\n`;

@@ -2,405 +2,256 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import SplitType from 'split-type';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * Scroll.js — the scrollytelling director.
+ * Scroll.js - walks the camera through the building as the page scrolls.
  *
- * Owns:
- *   · Lenis smooth scroll (driven from the single Experience rAF loop)
- *   · the GSAP ScrollTrigger timeline
- *   · a Catmull-Rom camera sweep through the Services beats
- *   · particle-field state changes (World.setState) per scroll beat
- *   · text reveals (SplitType), stat count-ups, the hero intro
- *
- * RENDER POLICY: the particle field must BREATHE, so any section with a live
- * 3D background (hero / manifesto / services / contact) keeps the renderer in
- * continuous mode. The solid studio sections release it — there the GPU only
- * wakes for scroll and reveals.
+ * Every entry in STOPS ties a place on the page to a camera position, a look
+ * target and the mood of the light. Between two stops everything is blended,
+ * so the page and the world can never drift out of step.
  */
+
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+
+const STOPS = [
+  { el: '#hero',            pos: V(0, 3.0, 40),          tgt: V(0, 2.5, -14),     mood: 'morning' },
+  { el: '#manifesto',       pos: V(1.4, 3.6, 2),         tgt: V(0.5, 8.6, -14),   mood: 'morning' },
+  { el: '#through-gate',    pos: V(3.8, 6.6, -19),       tgt: V(1, 6.2, -52),     mood: 'daylight' },
+  { el: '#octadezx',        pos: V(-12, 4.6, -56),       tgt: V(-7.4, 6.6, -80),  mood: 'daylight' },
+  { el: '#octa-results',    pos: V(-3.6, 4.2, -60),      tgt: V(0, 7.4, -80),     mood: 'daylight' },
+  { el: '#octa-why',        pos: V(12.5, 5.4, -62),      tgt: V(5.6, 6.4, -80),   mood: 'daylight' },
+  { el: '#octa-exit',       pos: V(0, 5, -103),          tgt: V(0, 2.4, -140),    mood: 'dusk' },
+  { el: '#accert-one',      pos: V(1.9, 1.3, -126.5),    tgt: V(-3.6, 1.7, -145), tall: V(-2.9, 0.4, -134), mood: 'dusk' },
+  { el: '#accert-story',    pos: V(-9.4, 0.9, -135.6),   tgt: V(-2.7, 0.9, -131.4), mood: 'dusk' },
+  { el: '#accert-preorder', pos: V(2.2, 1.15, -125),     tgt: V(1.4, 2.0, -141),  mood: 'dusk' },
+  { el: '#accert-exit',     pos: V(-1, 2.4, -178),       tgt: V(0, 7, -262),      mood: 'vault' },
+  { el: '#security',        pos: V(-9.5, 5.4, -229),     tgt: V(-3.5, 10.4, -262), mood: 'vault' },
+  { el: '#sec-capabilities', pos: V(0, 7, -232),         tgt: V(0, 11.8, -262),   mood: 'vault' },
+  { el: '#sec-how',         pos: V(10, 6.4, -236),       tgt: V(3.6, 10.6, -262), mood: 'vault' },
+  { el: '#sec-exit',        pos: V(0, 7.8, -251),        tgt: V(0, 8.6, -300),    mood: 'gallery' },
+  { el: '#work',            pos: V(0, 5.6, -292),        tgt: V(0, 6.6, -345),    mood: 'gallery' },
+  { el: '#paper',           pos: V(0, 3.4, -340),        tgt: V(0, 8, -384),      mood: 'golden' },
+  { el: '#contact',         pos: V(0, 2.8, -352),        tgt: V(0, 8.8, -384),    mood: 'golden' },
+];
+
+const smooth = (x) => x * x * (3 - 2 * x);
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const index = (id) => STOPS.findIndex((s) => s.el === id);
+
 export default class Scroll {
   constructor(experience) {
     this.exp = experience;
     this.cam = experience.camera;
     this.world = experience.world;
 
-    const V = (x, y, z) => new THREE.Vector3(x, y, z);
+    this.posCurve = new THREE.CatmullRomCurve3(STOPS.map((s) => s.pos), false, 'centripetal');
+    // On a tall phone screen a few stops aim straight at their subject.
+    const tall = experience.sizes.aspect < 1;
+    this.tgtCurve = new THREE.CatmullRomCurve3(STOPS.map((s) => (tall && s.tall) || s.tgt), false, 'centripetal');
+    this._pos = new THREE.Vector3();
+    this._tgt = new THREE.Vector3();
+    this._look = { x: 0, y: 0, tx: 0, ty: 0 };
+    this._paper = false;
 
-    // ---- framings ----
-    this.heroRadius = 12.5;
-    this.heroTgt = V(0, 0.2, 0);
+    this.I = {
+      gate: index('#hero'), story: index('#accert-story'), order: index('#accert-preorder'),
+      secA: index('#security'), secB: index('#sec-exit'),
+    };
 
-    this.manifestoPos = V(-3.5, 3.4, 15.5);
-    this.manifestoTgt = V(0, 0.4, 0);
-
-    // Services sweep — one slow arc around the field, three beats
-    this.capsPts = [
-      V(0.0,  2.6, 15.5),   // in from the manifesto pull-back
-      V(8.5,  0.6, 12.0),   // 01 web apps — low 3/4
-      V(-8.5, 2.2, 13.0),   // 02 commerce — opposite side, far enough to frame the lattice
-      V(0.0, -2.2, 14.5),   // 03 SaaS — low frontal, the field spreads as a wave
-    ];
-    this.capsCurve = new THREE.CatmullRomCurve3(this.capsPts, false, 'catmullrom', 0.35);
-    // look-at sits LEFT of the field so the forms render right-of-center,
-    // clear of the caption column
-    this.capsTgt = V(-2.6, 0.2, 0);
-    this._beatStates = ['knot', 'lattice', 'wave'];
-    this._beat = -1;
-
-    this.workPos = V(0, 1.0, 17.5);
-    this.contactPos = V(0, 0.3, 12.8);
-
-    // live-background flags — any true → continuous rendering (field breathes)
-    this._live = {};
-    this.heroActive = false;
-    this._heroAngle = 0.35;
-
-    // place camera at the hero orbit immediately
-    const hp = V(Math.sin(this._heroAngle) * this.heroRadius, 0.8, Math.cos(this._heroAngle) * this.heroRadius);
-    this.cam.rig.position.copy(hp);
-    this.cam.rig.target.copy(this.heroTgt);
-    this.cam.instance.position.copy(hp);
+    this.cam.instance.position.copy(STOPS[0].pos);
+    this.cam.rig.position.copy(STOPS[0].pos);
+    this.cam.rig.target.copy(STOPS[0].tgt);
+    this.cam._currentTarget?.copy(STOPS[0].tgt);
 
     this._initLenis();
     this._initReveals();
-    this._initTimeline();
+    this._initThemes();
+    this._initDrag();
+    this._measure();
+    ScrollTrigger.addEventListener('refresh', () => this._measure());
+    this._apply(this.lenis.scroll || window.scrollY || 0, true);
 
-    // reveal persistent chrome
     gsap.to(['.chrome', '.scroll-hint'], { opacity: 1, duration: 1.2, delay: 0.2, stagger: 0.08 });
   }
 
   _initLenis() {
-    this.lenis = new Lenis({ autoRaf: false, lerp: 0.065, duration: 1.4, wheelMultiplier: 1.0, smoothWheel: true });
-    this.lenis.on('scroll', () => { ScrollTrigger.update(); this.exp.invalidate(2); });
-    // the SCROLL hint has done its job after the first real scroll
+    this.lenis = new Lenis({ autoRaf: false, lerp: 0.115, wheelMultiplier: 1.0, smoothWheel: !this.exp.reducedMotion });
+    window.__lenis = this.lenis;
+    this.lenis.on('scroll', () => { ScrollTrigger.update(); this._scrollbar(); });
     this._hintGone = false;
     this.lenis.on('scroll', (e) => {
-      // overwrite:true also kills the DELAYED intro reveal tween, which would
-      // otherwise start later and win the opacity back to 1
-      if (!this._hintGone && e.scroll > 120) {
-        this._hintGone = true;
-        gsap.to('.scroll-hint', { opacity: 0, duration: 0.6, overwrite: true });
-      } else if (this._hintGone && e.scroll <= 120) {
-        this._hintGone = false;
-        gsap.to('.scroll-hint', { opacity: 1, duration: 0.6, overwrite: true });
+      const gone = e.scroll > 120;
+      if (gone !== this._hintGone) {
+        this._hintGone = gone;
+        gsap.to('.scroll-hint', { opacity: gone ? 0 : 1, duration: 0.5, overwrite: true });
       }
     });
-    // anchor links route through Lenis
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener('click', (e) => {
         const id = a.getAttribute('href');
-        if (id.length > 1) { e.preventDefault(); this.lenis.scrollTo(id, { offset: 0, duration: 1.4 }); }
+        if (id.length > 1 && document.querySelector(id)) {
+          e.preventDefault();
+          this.lenis.scrollTo(id, { offset: 0, duration: 1.8 });
+        }
       });
     });
   }
 
-  // called by Experience each rAF
   raf(now) { this.lenis.raf(now); }
 
-  // called by Experience once the preloader has dissolved
+  _scrollbar() {
+    const handle = document.querySelector('.asscrollbar__handle');
+    if (!handle) return;
+    const limit = this.lenis.limit || 1;
+    const trackH = window.innerHeight * 0.18;
+    handle.style.height = `${trackH}px`;
+    handle.style.transform = `translateY(${(this.lenis.scroll / limit) * (window.innerHeight - trackH)}px)`;
+  }
+
   playIntro() { this._introTween?.play(); }
 
   _initReveals() {
-    // Hero title — character-level masked stagger with blur dissolve.
-    // Gradient words (.accent) are NOT char-split: background-clip:text doesn't
-    // survive being broken into child spans, so they animate as whole words.
-    gsap.utils.toArray('.hero__title .word:not(.accent)').forEach((word) => {
-      const split = new SplitType(word, { types: 'chars' });
-      split.chars?.forEach((c) => { c.style.display = 'inline-block'; });
+    const lines = document.querySelectorAll('.hero__title .line > span');
+    this._introTween = gsap.from(lines, {
+      yPercent: 115, duration: 1.3, ease: 'expo.out', stagger: 0.12, paused: true,
     });
-    this._introTween = gsap.from(
-      document.querySelectorAll('.hero__title .char, .hero__title .word.accent'), {
-        yPercent: 120, rotateX: -45, opacity: 0, filter: 'blur(4px)',
-        duration: 1.0, ease: 'expo.out', stagger: 0.03, paused: true,
-      });
-
-    // Section headings — word-by-word reveal. Headings that carry a gradient
-    // .accent span are NOT split (background-clip:text doesn't survive being
-    // broken into child spans) — they reveal as one block instead.
-    gsap.utils.toArray('.sec-head h2, .caption h2, .studio-copy h2, .contact__card h2').forEach((el) => {
-      if (el.querySelector('.accent')) {
-        // if it also carries .reveal, the generic reveal below owns it —
-        // creating a second from-tween here would trap it at opacity 0
-        if (!el.classList.contains('reveal')) {
-          gsap.from(el, {
-            scrollTrigger: { trigger: el, start: 'top 80%' },
-            y: 34, opacity: 0, duration: 1.1, ease: 'expo.out',
-            onStart: () => this.exp.invalidate(2),
-          });
-        }
-        return;
-      }
-      const split = new SplitType(el, { types: 'words, lines' });
-      if (split.words) {
-        gsap.from(split.words, {
-          scrollTrigger: { trigger: el, start: 'top 80%' },
-          yPercent: 100, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.06,
-          onStart: () => this.exp.invalidate(2),
-        });
-      }
+    gsap.from('.hero__foot > *', {
+      y: 18, opacity: 0, duration: 1.2, ease: 'power3.out', stagger: 0.1, delay: 0.1,
+      paused: false, scrollTrigger: { trigger: '#hero', start: 'top bottom' },
     });
 
-    // Eyebrow labels — letter-by-letter
-    gsap.utils.toArray('.eyebrow span').forEach((el) => {
-      const split = new SplitType(el, { types: 'chars' });
-      if (split.chars) {
-        gsap.from(split.chars, {
-          scrollTrigger: { trigger: el, start: 'top 85%' },
-          opacity: 0, x: -4, duration: 0.8, ease: 'power2.out', stagger: 0.02,
-          onStart: () => this.exp.invalidate(2),
-        });
-      }
-    });
-
-    // Generic reveals — clipPath mask + lift
-    gsap.utils.toArray('.reveal').forEach((el) => {
-      if (el.closest('.sec-head') && el.tagName === 'H2') return;
-      if (el.closest('.eyebrow')) return;
+    gsap.utils.toArray('.reveal, .split').forEach((el) => {
       gsap.from(el, {
-        scrollTrigger: { trigger: el, start: 'top 88%' },
-        y: 26, opacity: 0,
-        duration: 1.2, ease: 'power3.out',
-        onStart: () => this.exp.invalidate(2),
+        scrollTrigger: { trigger: el, start: 'top 90%' },
+        y: 28, opacity: 0, duration: 1.1, ease: 'power3.out',
       });
     });
 
-    // Line-split paragraphs — with blur
-    gsap.utils.toArray('.reveal-line').forEach((el) => {
-      const split = new SplitType(el, { types: 'lines' });
-      gsap.from(split.lines, {
-        scrollTrigger: { trigger: el, start: 'top 80%' },
-        yPercent: 110, opacity: 0, filter: 'blur(3px)',
-        duration: 1.1, ease: 'expo.out', stagger: 0.12,
-      });
-    });
-
-    // Stat count-ups
     gsap.utils.toArray('.count').forEach((el) => {
-      const to = parseInt(el.dataset.to, 10) || 0;
+      const to = parseFloat(el.dataset.to) || 0;
+      const dec = (el.dataset.to.split('.')[1] || '').length;
       const obj = { v: 0 };
       gsap.to(obj, {
-        v: to, duration: 1.8, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 85%' },
-        onUpdate: () => { el.textContent = Math.round(obj.v); },
+        v: to, duration: 1.7, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+        onUpdate: () => { el.textContent = obj.v.toFixed(dec); },
       });
     });
   }
 
-  _setCam(pos, tgt, dur = 2.0) {
-    const d = this.exp.reducedMotion ? 0.2 : dur;
-    gsap.to(this.cam.rig.position, { x: pos.x, y: pos.y, z: pos.z, duration: d, ease: 'power3.inOut', onUpdate: () => this.exp.invalidate(2) });
-    gsap.to(this.cam.rig.target, { x: tgt.x, y: tgt.y, z: tgt.z, duration: d, ease: 'power3.inOut', onUpdate: () => this.exp.invalidate(2) });
-  }
-
-  /** Register a section as having a LIVE 3D background while it's on screen. */
-  _liveSection(sel) {
-    ScrollTrigger.create({
-      trigger: sel, start: 'top bottom', end: 'bottom top',
-      onRefresh: (s) => { this._live[sel] = s.isActive; },
-      onToggle: (s) => { this._live[sel] = s.isActive; if (s.isActive) this.exp.invalidate(2); },
-    });
-  }
-
-  _initTimeline() {
-    const inv = () => this.exp.invalidate(2);
-
-    // live-background bookkeeping
-    ['#hero', '#manifesto', '#services', '#work', '#security', '#client-work', '#contact'].forEach((s) => this._liveSection(s));
-
-    // HERO — slow orbit while in view
-    ScrollTrigger.create({
-      trigger: '#hero', start: 'top top', end: 'bottom top',
-      onRefresh: (s) => { this.heroActive = s.isActive; if (s.isActive) inv(); },
-      onToggle: (s) => { this.heroActive = s.isActive; if (s.isActive) inv(); },
-    });
-
-    // NOTE: onEnter only fires when the scroll CROSSES a trigger edge — after a
-    // mid-page reload or a #deep-link the page can initialise already inside a
-    // section, so every section also mirrors its enter-state in onRefresh.
-
-    // MANIFESTO — pull back and rise; the field re-forms as the studio's ribbon
-    const manifestoState = () => {
-      this._setCam(this.manifestoPos, this.manifestoTgt, 2.0);
-      this.world.setState('ribbon', 2.0);
-      this.world.setZVisible(false, 1.4);
-      this.world.setDim(1);
-    };
-    ScrollTrigger.create({
-      trigger: '#manifesto', start: 'top 60%',
-      onEnter: manifestoState,
-      onRefresh: (s) => { if (s.isActive) manifestoState(); },
-      onLeaveBack: () => {
-        this.world.setState('nebula', 1.8);
-        this.world.setZVisible(true, 1.2);
-        this.world.setDim(1);
-      },
-    });
-
-    // SERVICES — scrub the sweep; the field re-forms per discipline.
-    // Slightly dimmed so the caption column always wins the contrast fight.
-    const servicesState = () => {
-      this.world.setDim(0.6, 1.0);
-      this.world.setZVisible(false, 0.6);
-    };
-    ScrollTrigger.create({
-      trigger: '#services', start: 'top top', end: 'bottom bottom', scrub: 1.6,
-      onEnter: servicesState,
-      onEnterBack: servicesState,
-      onRefresh: (s) => { if (s.isActive) servicesState(); },
-      onUpdate: (self) => {
-        const p = self.progress;
-        const tmp = this.capsCurve.getPoint(p);
-        this.cam.rig.position.copy(tmp);
-        this.cam.rig.target.copy(this.capsTgt);
-        const beat = Math.min(2, Math.floor(p * 3));
-        if (beat !== this._beat) {
-          this._beat = beat;
-          this.world.setState(this._beatStates[beat]);
-          // Analytics: track which services beats are seen vs fled
-          window.__track?.(`services_beat`, { beat: beat + 1 });
-        }
-        this._capsCaptions(p);
-        inv();
-      },
-      onLeaveBack: () => { this._beat = -1; },
-    });
-
-    // WORK — settle wide; the field morphs PER CASE STUDY (each gets its own shape)
-    const workState = () => {
-      this._setCam(this.workPos, new THREE.Vector3(0, 0, 0), 2.0);
-      this.world.setState('crystal', 2.0);
-      this.world.setZVisible(false, 0.6);
-      this.world.setDim(0.55);
-    };
-    ScrollTrigger.create({
-      trigger: '#work', start: 'top 60%',
-      onEnter: workState,
-      onRefresh: (s) => { if (s.isActive) workState(); },
-      onLeaveBack: () => { this.world.setDim(0.6); },
-    });
-
-    // Per-case morph targets & cinematic camera choreographies
-    const V = (x, y, z) => new THREE.Vector3(x, y, z);
-    const caseSpecs = [
-      {
-        sel: '#case-octa',
-        name: 'octadezx',
-        state: 'neuralWeb',
-        camPos: V(-2.8, 2.2, 13.6),
-        camTgt: V(0.0, 0.2, 0.0),
-        dim: 0.65,
-      },
-      {
-        sel: '#case-accert',
-        name: 'accert-one',
-        state: 'accertFormula',
-        camPos: V(3.4, 1.4, 12.8),
-        camTgt: V(0.3, 0.0, 0.0),
-        dim: 0.70,
-      },
-      {
-        sel: '#case-security',
-        name: 'cybersecurity-audit',
-        state: 'cyberShield',
-        camPos: V(0.0, 1.8, 13.8),
-        camTgt: V(0.0, 0.2, 0.0),
-        dim: 0.65,
-      },
-      {
-        sel: '#client-work',
-        name: 'client-showcase',
-        state: 'crystal',
-        camPos: V(0.0, 1.2, 15.5),
-        camTgt: V(0.0, 0.0, 0.0),
-        dim: 0.55,
-      },
-    ];
-
-    caseSpecs.forEach((spec) => {
-      const el = document.querySelector(spec.sel);
-      if (!el) return;
-
-      const triggerCase = () => {
-        this.world.setState(spec.state, 1.8);
-        this.world.setDim(spec.dim, 1.2);
-        this._setCam(spec.camPos, spec.camTgt, 2.0);
-        inv();
-        window.__track?.('case_view', { case: spec.name });
-      };
-
+  /** Ink flips with the light: dark text in bright rooms, pale text in dark ones. */
+  _initThemes() {
+    gsap.utils.toArray('[data-ink]').forEach((sec) => {
+      const apply = (s) => { if (s.isActive) document.body.dataset.ink = sec.dataset.ink; };
       ScrollTrigger.create({
-        trigger: el,
-        start: 'top 60%',
-        end: 'bottom 40%',
-        onEnter: triggerCase,
-        onEnterBack: triggerCase,
+        trigger: sec, start: 'top 55%', end: 'bottom 55%',
+        onToggle: apply, onRefresh: apply,
       });
     });
-
-    // CONTACT — the field converges back into the Z mark behind the card
-    const contactState = () => {
-      this._setCam(this.contactPos, new THREE.Vector3(0, 0.2, 0), 2.2);
-      this.world.setState('zglyph', 2.2);
-      this.world.setZVisible(true, 1.6);
-      this.world.setDim(1, 1.6);
-    };
     ScrollTrigger.create({
-      trigger: '#contact', start: 'top 70%',
-      onEnter: contactState,
-      onRefresh: (s) => { if (s.isActive) contactState(); },
-      onLeaveBack: () => {
-        this.world.setZVisible(false, 1.0);
-        this.world.setDim(0.25);
-      },
+      trigger: '#paper', start: 'top top', end: 'bottom bottom',
+      onToggle: (s) => { this._paper = s.isActive; if (!s.isActive) this.exp.invalidate(2); },
+      onRefresh: (s) => { this._paper = s.isActive; },
     });
   }
 
-  /** Cross-fade the three service captions along the scrub progress. */
-  _capsCaptions(p) {
-    const caps = document.querySelectorAll('.caps__track .caption');
-    const seg = 1 / caps.length;
-    caps.forEach((c, i) => {
-      const mid = (i + 0.5) * seg;
-      const d = Math.abs(p - mid);
-      const on = d < seg * 0.6;
-      const targetOpacity = on ? 1 - d / (seg * 0.6) : 0;
-      const targetScale = on ? 0.97 + 0.03 * targetOpacity : 0.97;
-      const targetBlur = on ? (1 - targetOpacity) * 2 : 2;
-      gsap.to(c, {
-        opacity: targetOpacity,
-        y: (1 - targetOpacity) * 20,
-        scale: targetScale,
-        filter: `blur(${targetBlur.toFixed(1)}px)`,
-        duration: 0.4, ease: 'power2.out', overwrite: 'auto',
-      });
+  /** Hold and drag in the opening view to look around. */
+  _initDrag() {
+    if (this.exp.reducedMotion) return;
+    let down = false, sx = 0, sy = 0;
+    window.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('a,button,input,textarea,select,label,.menu')) return;
+      down = true; sx = e.clientX; sy = e.clientY;
     });
+    window.addEventListener('pointermove', (e) => {
+      if (!down || (this.lenis.scroll || 0) > window.innerHeight * 0.6) return;
+      this._look.tx = ((e.clientX - sx) / innerWidth) * 9;
+      this._look.ty = -((e.clientY - sy) / innerHeight) * 4.5;
+    }, { passive: true });
+    const up = () => { down = false; this._look.tx = 0; this._look.ty = 0; };
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
   }
 
-  /** per-frame hook (called by Experience). Returns true if it wants a render. */
-  frame(delta) {
-    // Continuous mode whenever a live-background section is on screen — the
-    // particle drift must not freeze mid-view. Scrubbing/scrolling still swaps
-    // SMAA→FXAA via the motion state.
-    const live = this.heroActive || Object.values(this._live).some(Boolean);
-    const scrolling = Math.abs(this.lenis?.velocity || 0) > 0.08;
-    this.exp.setMotionState?.(live || scrolling);
-    this.exp.setInteractiveQuality?.(live);
-
-    if (this.heroActive) {
-      // slow auto-orbit + pointer parallax (disabled under reduced motion)
-      if (!this.exp.reducedMotion) this._heroAngle += delta * 0.05;
-      const ndc = this.world.mouseNDC;
-      const r = this.heroRadius;
-      this.cam.rig.position.set(
-        Math.sin(this._heroAngle) * r + ndc.x * 1.4,
-        0.8 + Math.sin(this._heroAngle * 0.7) * 0.4 + ndc.y * 0.9,
-        Math.cos(this._heroAngle) * r,
-      );
-      this.cam.rig.target.copy(this.heroTgt);
+  _measure() {
+    const sy = this.lenis?.scroll ?? window.scrollY ?? 0;
+    this.stopY = STOPS.map((s) => {
+      const el = document.querySelector(s.el);
+      return el ? el.getBoundingClientRect().top + sy : 0;
+    });
+    for (let i = 1; i < this.stopY.length; i++) {
+      if (this.stopY[i] <= this.stopY[i - 1]) this.stopY[i] = this.stopY[i - 1] + 1;
     }
+  }
+
+  /** Scroll offset to camera, light and each room's own progress. */
+  _apply(y, snap) {
+    const Y = this.stopY;
+    let i = 0;
+    while (i < Y.length - 2 && y >= Y[i + 1]) i++;
+    const f = clamp01((y - Y[i]) / (Y[i + 1] - Y[i]));
+    const u = (i + f) / (Y.length - 1);
+
+    this.posCurve.getPoint(u, this._pos);
+    this.tgtCurve.getPoint(u, this._tgt);
+    this.cam.rig.position.copy(this._pos);
+    this.cam.rig.target.copy(this._tgt);
+
+    const w = this.world;
+    w.atmosphere.blend(STOPS[i].mood, STOPS[i + 1].mood, smooth(f));
+    w.cull(this._pos.z);
+
+    const stop = i + f;
+    const between = (a, b) => clamp01((stop - a) / (b - a));
+    w.gate.setOpen(between(0.1, 1));
+
+    const { story, order, secA, secB } = this.I;
+    w.circuit.setLights(between(story + 0.1, order));
+    w.circuit.setLaunch(stop > order ? between(order + 0.03, order + 0.6) : 0);
+    w.vault.setProgress(between(secA, secB));
+    this._changing = STOPS[i].mood !== STOPS[i + 1].mood || i === 0 || (stop >= secA && stop <= secB);
+
+    if (snap) {
+      this.cam.instance.position.copy(this._pos);
+      this.cam._currentTarget?.copy(this._tgt);
+    }
+  }
+
+  /** Per-frame hook. Returns true while the world needs drawing. */
+  frame(delta) {
+    this._apply(this.lenis.scroll || 0);
+
+    const atHero = (this.lenis.scroll || 0) < window.innerHeight * 0.6;
+    if (atHero !== this._atHero) {
+      this._atHero = atHero;
+      document.body.classList.toggle('at-hero', atHero);
+    }
+
+    if (!this.exp.reducedMotion) {
+      const L = this._look, n = this.world.mouseNDC;
+      const k = Math.min(1, delta * 4);
+      L.x += (L.tx - L.x) * k;
+      L.y += (L.ty - L.y) * k;
+      this.cam.rig.target.x += L.x + n.x * 0.9;
+      this.cam.rig.target.y += L.y + n.y * 0.5;
+      this.cam.rig.position.x += n.x * 0.28;
+      this.cam.rig.position.y += n.y * 0.14;
+    }
+
+    const live = !this._paper;
+    const moving = Math.abs(this.lenis?.velocity || 0) > 0.08;
+    // Shadows are the same until a door swings or the sun moves, so only redraw then.
+    this._tick = ((this._tick || 0) + 1) % 3;
+    const q = this.exp.quality;
+    if (q.shadowSize > 0) {
+      const settled = this._wasMoving && !moving;
+      const during = q.shadowLive && moving && this._changing && this._tick === 0;
+      if (this.world.atmosphere.takeShadowDirty() || settled || during) this.exp.renderer.instance.shadowMap.needsUpdate = true;
+    }
+    this._wasMoving = moving;
+    this.exp.setInteractiveQuality?.(live);
     return live;
   }
 }

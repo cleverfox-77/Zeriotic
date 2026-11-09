@@ -16,7 +16,12 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
-    assetsInlineLimit: 0, // never inline the .glb binaries
+    minify: 'esbuild',
+    sourcemap: false,
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 600,
+    assetsInlineLimit: 4096,
+    cssMinify: true,
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
@@ -27,8 +32,12 @@ export default defineConfig({
         octadezx: path.resolve(__dirname, 'work/octadezx.html'),
         accertOne: path.resolve(__dirname, 'work/accert-one.html'),
         cybersecurityAudit: path.resolve(__dirname, 'work/cybersecurity-audit.html'),
-        howZerioticRenders: path.resolve(__dirname, 'work/how-zeriotic-renders.html'),
         compareAgencies: path.resolve(__dirname, 'compare/zeriotic-vs-agencies.html'),
+        softwareCompanyBangladesh: path.resolve(__dirname, 'software-company-bangladesh.html'),
+        cybersecurityCompanyBangladesh: path.resolve(__dirname, 'cybersecurity-company-bangladesh.html'),
+        gameStudioBangladesh: path.resolve(__dirname, 'game-studio-bangladesh.html'),
+        aiDevelopmentCompanyBangladesh: path.resolve(__dirname, 'ai-development-company-bangladesh.html'),
+        webDevelopmentCompanyBangladesh: path.resolve(__dirname, 'web-development-company-bangladesh.html'),
         phpVulnBlog: path.resolve(__dirname, 'blog/php-vulnerability-login-without-password.html'),
         uncensoredAiBlog: path.resolve(__dirname, 'blog/how-uncensored-ai-agents-increase-hacking.html'),
       },
@@ -37,7 +46,6 @@ export default defineConfig({
         manualChunks: {
           three: ['three'],
           gsap: ['gsap'],
-          react: ['react', 'react-dom']
         },
       },
     },

@@ -3,31 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Variant3D - Knitwear, rendered thread by thread | Zeriotic</title>
-  <meta name="description" content="Case study: Variant3D. A real-time 3D WebGL showcase where every garment renders as living geometry." />
+  <title>Variant3D | Interactive knitwear showcase | Zeriotic</title>
+  <meta name="description" content="An interactive showcase for an on-demand knitwear platform. Visitors turn every garment and look closely before they buy." />
   <link rel="canonical" href="https://zeriotic.com/work/variant3d" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image:alt" content="Zeriotic: a circular gate standing in still water, with the studio mark inside it." />
+  <meta name="twitter:image:alt" content="Zeriotic: a circular gate standing in still water, with the studio mark inside it." />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Zeriotic" />
-  <meta property="og:title" content="Variant3D - Knitwear, rendered thread by thread | Zeriotic" />
-  <meta property="og:description" content="Case study: Variant3D. A real-time 3D WebGL showcase where every garment renders as living geometry." />
+  <meta property="og:title" content="Variant3D | Interactive knitwear showcase | Zeriotic" />
+  <meta property="og:description" content="An interactive showcase for an on-demand knitwear platform. Visitors turn every garment and look closely before they buy." />
   <meta property="og:url" content="https://zeriotic.com/work/variant3d" />
   <meta property="og:image" content="https://zeriotic.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "CreativeWork",
-        "@id": "https://zeriotic.com/work/variant3d#case-study",
-        "name": "Variant3D - Knitwear, rendered thread by thread",
+        "@id": "https://zeriotic.com/work/variant3d#work",
+        "name": "Variant3D: interactive knitwear showcase",
         "url": "https://zeriotic.com/work/variant3d",
-        "description": "A real-time 3D WebGL showcase where every garment renders as living geometry: stitch patterns, material physics and color variations, orbit-able in the browser. 3.2x time on page, +68% demo requests.",
+        "description": "An interactive showcase for an on-demand knitwear platform. Visitors turn every garment and look closely before they buy.",
         "inLanguage": "en",
         "image": "https://zeriotic.com/og-image.png",
         "creator": { "@id": "https://zeriotic.com/#organization" },
-        "publisher": { "@id": "https://zeriotic.com/#organization" },
-        "about": { "@id": "https://zeriotic.com/#organization" }
+        "publisher": { "@id": "https://zeriotic.com/#organization" }
       },
       {
         "@type": "BreadcrumbList",
@@ -35,35 +39,21 @@
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Zeriotic", "item": "https://zeriotic.com/" },
           { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://zeriotic.com/#work" },
-          { "@type": "ListItem", "position": 3, "name": "Variant3D case study" }
+          { "@type": "ListItem", "position": 3, "name": "Variant3D" }
         ]
       }
     ]
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-tight-latin-400.woff2" />
   <link rel="stylesheet" href="/work/work.css">
-  <style>
-    body { background: var(--bg); color: var(--ink); }
-    .chrome { opacity: 1; position: absolute; background: transparent; padding: 30px var(--pad); }
-    .case-hero { padding: 25vh var(--pad) 10vh; max-width: 900px; margin: 0 auto; }
-    .case-hero h1 { font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; color: var(--ink-strong); line-height: 1.1; margin-bottom: 24px; text-transform: uppercase; letter-spacing: -0.03em; }
-    .case-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; margin-bottom: 40px; border-top: 1px solid var(--hairline); padding-top: 24px; }
-    .case-meta div { display: flex; flex-direction: column; gap: 4px; }
-    .case-section { padding: 60px 0; border-bottom: 1px solid var(--hairline); }
-    .case-section h2 { font-size: 1.4rem; color: var(--ink-strong); margin-bottom: 16px; text-transform: uppercase; }
-    .case-section p { font-size: 1rem; color: var(--ink); max-width: 680px; line-height: 1.6; }
-    .case-testimonial { padding: 80px 0; border-bottom: 1px solid var(--hairline); }
-    .case-testimonial blockquote { font-size: 1.2rem; color: var(--ink-strong); max-width: 800px; margin-bottom: 24px; line-height: 1.6; }
-    .case-footer { padding: 80px 0; display: flex; justify-content: space-between; align-items: center; }
-  </style>
   <script defer data-domain="zeriotic.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
   <header class="chrome">
-    <a class="brand" href="/">
+    <a class="brand" href="/" aria-label="Back to the Zeriotic homepage">
+      <i aria-hidden="true">&larr;</i>
       <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
         <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="1.6" />
         <rect x="11" y="10" width="18" height="18" rx="0.5" stroke="currentColor" stroke-width="1.2" />
@@ -73,59 +63,42 @@
     </a>
   </header>
 
-  <main>
+  <main data-router-wrapper><div data-router-view="work">
     <section class="case-hero">
-      <div class="eyebrow"><span>Case Study</span></div>
-      <h1>Variant3D - Knitwear, rendered <span class="accent">thread by thread</span></h1>
-      <div class="case-meta mono">
-        <div><span>Domain</span><b class="accent">3D Fashion Tech</b></div>
-        <div><span>Stack</span><b class="accent">WebGL · Three.js</b></div>
-        <div><span>Region</span><b class="accent">United States</b></div>
-      </div>
+      <div class="eyebrow"><span>Client project | Knitwear</span></div>
+      <h1>Variant3D. Every garment, <em>up close.</em></h1>
+      <p class="lede">An interactive showcase for an on-demand knitwear platform. Visitors turn every garment and look closely before they buy.</p>
     </section>
 
     <div class="studio__wrap">
       <section class="case-section">
-        <div class="sec-head"><h2>The Problem</h2></div>
-        <p>Variant3D needed a way to showcase their on-demand knitwear platform without photography - garments that don't exist yet can't be shot.</p>
+        <h2>The brief</h2>
+        <p>Variant3D runs an on-demand knitwear platform. That creates an unusual problem for selling it: a garment that has not been made yet cannot be photographed. Buyers still want to know what they are getting, and a flat picture was never going to answer that. They needed to see the knit, the colour and the shape for themselves before deciding.</p>
       </section>
 
       <section class="case-section">
-        <div class="sec-head"><h2>The Approach</h2></div>
-        <p>Built a real-time 3D WebGL showcase where every garment renders as living geometry - stitch patterns, material physics, and color variations orbit-able in the browser.</p>
+        <h2>What we made</h2>
+        <p>We made an interactive showcase that puts each garment in the visitor's hands. Every piece can be turned and looked at closely, the way you would pick up a jumper in a shop and turn it over. Nothing stands between the visitor and the product, so the decision to buy comes from having really looked at it.</p>
+        <p>Buyers explore before they commit, which is exactly what a made-to-order platform needs from its website.</p>
       </section>
 
-      <section class="case-section">
-        <div class="sec-head"><h2>The Outcome</h2></div>
-        <div class="case__metrics mono">
-          <div><span>Engagement</span><b class="accent">3.2× time on page</b></div>
-          <div><span>Impact</span><b class="accent">+68% demo requests</b></div>
+      <section class="cta">
+        <h2>Have something people <em>need to see?</em></h2>
+        <div class="cta__row">
+          <a href="/#contact" class="btn">Start a project <i>&rarr;</i></a>
+          <a href="/#work" class="btn btn--ghost">Back to all work</a>
         </div>
-        <p style="margin-top: 20px;">Buyers explore before they commit.</p>
-      </section>
-
-      <section class="case-testimonial">
-        <div class="sec-head"><div class="eyebrow"><span>Client Voice</span></div></div>
-        <blockquote>"They treated our product with the reverence it deserves. Every garment renders in real time, thread by thread - customers explore before they buy. Nothing else on the market comes close."</blockquote>
-        <div class="mono"> -  Garrett Gerson, CEO, Variant3D</div>
-      </section>
-
-      <section class="case-footer">
-        <a href="/" class="btn btn--ghost"><i>&larr; </i> Back to all work</a>
-        <a href="/work/mira" class="btn">Next case: Mira INC <i>&rarr;</i></a>
       </section>
     </div>
-  </main>
+  </div></main>
 
   <footer class="footer">
     <div class="studio__wrap">
       <div class="footer__bottom mono">
-        <span>© 2026 Zeriotic Studio</span>
+        <span>&copy; 2026 Zeriotic Studio</span>
         <span>Dhaka, BD</span>
       </div>
     </div>
   </footer>
 </body>
 </html>
-
-

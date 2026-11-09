@@ -1,7 +1,7 @@
 /**
  * Post-build gate on dist/.
  *
- * WHY: static-site regressions are invisible in a browser — the WebGL/React
+ * WHY: static-site regressions are invisible in a browser - the interactive
  * experience renders perfectly on top of a broken page. A canonical that
  * points at the homepage, a title that was never rewritten, JSON-LD that does
  * not parse, an FAQ answer that no longer matches the schema, a stat that only
@@ -62,7 +62,7 @@ async function checkRoute(p, problems) {
   try {
     html = await fs.readFile(file, "utf8");
   } catch {
-    fail(problems, `${label}: ${rel} is missing — the route silently fell out of the build`);
+    fail(problems, `${label}: ${rel} is missing - the route silently fell out of the build`);
     return;
   }
 
@@ -131,9 +131,9 @@ async function checkGlobals(problems) {
   }
 
   const full = await fs.readFile(path.join(DIST, "llms-full.txt"), "utf8").catch(() => null);
-  if (!full) fail(problems, "dist/llms-full.txt missing — it must be generated at build time");
+  if (!full) fail(problems, "dist/llms-full.txt missing - it must be generated at build time");
   else {
-    if (full.length < 8000) fail(problems, `llms-full.txt is only ${full.length} chars — case study text did not get inlined`);
+    if (full.length < 8000) fail(problems, `llms-full.txt is only ${full.length} chars - case study text did not get inlined`);
     for (const p of PAGES.filter((x) => x.out.startsWith("work/"))) {
       const name = p.title.replace(" | Zeriotic", "");
       if (!full.includes(name)) fail(problems, `llms-full.txt does not contain the case study "${name}"`);
@@ -161,12 +161,12 @@ async function checkGlobals(problems) {
 
   // 404.html must exist for Netlify to serve a real 404 status.
   const notFound = await fs.readFile(path.join(DIST, "404.html"), "utf8").catch(() => null);
-  if (!notFound) fail(problems, "dist/404.html missing — unknown paths would have no real 404");
+  if (!notFound) fail(problems, "dist/404.html missing - unknown paths would have no real 404");
   else if (!/noindex/i.test(notFound)) fail(problems, "404.html is not noindex");
 
   // Google Search Console verification file must ship byte-intact at the site root.
   const gsc = await fs.readFile(path.join(DIST, "googlea61f030e59885cd3.html"), "utf8").catch(() => null);
-  if (!gsc) fail(problems, "dist/googlea61f030e59885cd3.html missing — Search Console verification would fail");
+  if (!gsc) fail(problems, "dist/googlea61f030e59885cd3.html missing - Search Console verification would fail");
   else if (!gsc.includes("google-site-verification: googlea61f030e59885cd3.html")) {
     fail(problems, "dist/googlea61f030e59885cd3.html does not carry the expected verification token");
   }
@@ -182,13 +182,15 @@ async function checkGlobals(problems) {
     if (f !== expected) fail(problems, `index.html says "${f}" but the build window is "${expected}"`);
   }
 
-  // Cross-surface fact: the OctaDezx automation figure must agree everywhere.
+  // Cross-surface fact: the OctaDezx benchmark figure must agree everywhere,
+  // and the retired automation figure must not come back.
   const octa = await fs.readFile(path.join(DIST, "work/octadezx.html"), "utf8").catch(() => null);
-  if (octa) {
+  if (!octa) fail(problems, "dist/work/octadezx.html missing - cannot check the benchmark figure");
+  else {
     for (const [label, f] of [["index.html", home], ["work/octadezx.html", octa]]) {
-      if (f.includes("80% of tier-1") || f.includes("80% queries")) fail(problems, `${label}: stale "80%" automation claim (the agreed figure is 78%)`);
+      if (!f.includes("86.8%")) fail(problems, `${label}: lost the 86.8% OctaDezx benchmark figure`);
+      if (f.includes("78%")) fail(problems, `${label}: still states the retired 78% figure`);
     }
-    if (!octa.includes("78%")) fail(problems, "work/octadezx.html lost the 78% automation figure");
   }
 }
 

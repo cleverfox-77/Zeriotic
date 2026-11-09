@@ -3,131 +3,411 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#050508" />
+  <meta name="theme-color" content="#F5EFE9" />
 
-  <!-- ===== PRIMARY SEO ===== -->
-  <title>Zeriotic — Premium Web Development Studio</title>
-  <meta name="description" content="Zeriotic is a premium web development studio building high-performance web apps, e-commerce platforms and SaaS products — engineered with the precision of a product team and the polish of a design house." />
-  <meta name="keywords" content="Zeriotic, WebGL, Three.js, GSAP, Atropos, Anime.js, Babylon.js, WebGL2, agentic AI, OctaDezx, Accert One, mobile racing simulation, deterministic C#, interactive 3D, premium web development" />
+  <title>Zeriotic | Software Development Studio, Dhaka and Worldwide</title>
+  <meta name="description" content="Zeriotic builds almost every type of software: web and mobile apps, commerce, SaaS, AI, games and security testing. Based in Dhaka, working worldwide." />
   <link rel="canonical" href="https://zeriotic.com/" />
-  <meta name="robots" content="index,follow" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image:alt" content="Zeriotic: a circular gate standing in still water, with the studio mark inside it." />
+  <meta name="twitter:image:alt" content="Zeriotic: a circular gate standing in still water, with the studio mark inside it." />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/logo.png" />
 
-  <!-- ===== OPEN GRAPH ===== -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Zeriotic" />
-  <meta property="og:title" content="Zeriotic — Premium Web Development Studio" />
-  <meta property="og:description" content="Software crafted to outlast trends. High-performance web apps, commerce platforms and SaaS products." />
+  <meta property="og:title" content="Zeriotic | Software Development Studio, Dhaka and Worldwide" />
+  <meta property="og:description" content="Software crafted to outlast trends. Web and mobile apps, commerce, SaaS, AI, games and security testing, from a studio in Dhaka working worldwide." />
   <meta property="og:url" content="https://zeriotic.com/" />
   <meta property="og:image" content="https://zeriotic.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
-  <!-- ===== TWITTER ===== -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Zeriotic — Premium Web Development Studio" />
-  <meta name="twitter:description" content="Software crafted to outlast trends. Web apps, commerce and SaaS — built by a small, senior team." />
+  <meta name="twitter:title" content="Zeriotic | Software Development Studio, Dhaka and Worldwide" />
+  <meta name="twitter:description" content="Software crafted to outlast trends. Web and mobile apps, commerce, SaaS, AI, games and security testing, from a studio in Dhaka working worldwide." />
   <meta name="twitter:image" content="https://zeriotic.com/og-image.png" />
 
-  <!-- ===== STRUCTURED DATA ===== -->
-  <!-- Entity graph: every @id is stable and resolvable on this page. Case-study
-       pages reference #organization via their own JSON-LD. -->
   <script type="application/ld+json">
-  {
+{
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "ProfessionalService",
+        "additionalType": [
+          "https://schema.org/SoftwareCompany",
+          "https://schema.org/SecurityService",
+          "https://schema.org/LocalBusiness"
+        ],
         "@id": "https://zeriotic.com/#organization",
         "name": "Zeriotic",
-        "description": "Premium web development studio building high-performance web applications, e-commerce platforms and SaaS products.",
+        "description": "A software development studio in Dhaka, Bangladesh that takes on almost every type of software work, from web and mobile applications, e-commerce, SaaS and AI products to games, business systems and security testing.",
         "url": "https://zeriotic.com/",
         "image": "https://zeriotic.com/og-image.png",
         "email": "hello@zeriotic.com",
         "foundingDate": "2022",
         "slogan": "Software crafted to outlast trends.",
-        "areaServed": "Worldwide",
-        "address": { "@type": "PostalAddress", "addressLocality": "Dhaka", "addressCountry": "BD" },
-        "numberOfEmployees": { "@type": "QuantitativeValue", "value": 16 },
+        "areaServed": [
+          "Bangladesh",
+          "Worldwide"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dhaka",
+          "addressRegion": "Dhaka",
+          "addressCountry": "BD"
+        },
         "founder": [
-          { "@type": "Person", "name": "Al Mueid Hoque", "jobTitle": "Co-founder" },
-          { "@type": "Person", "name": "Mahdi Hasan", "jobTitle": "Co-founder" }
+          {
+            "@type": "Person",
+            "name": "Al Mueid Hoque",
+            "jobTitle": "Co-founder"
+          },
+          {
+            "@type": "Person",
+            "name": "Mahdi Hasan",
+            "jobTitle": "Co-founder"
+          }
         ],
         "sameAs": [
           "https://facebook.com/zeriotic",
           "https://instagram.com/zeriotic",
           "https://github.com/zeriotic",
-          "https://linkedin.com/company/zeriotic"
+          "https://linkedin.com/company/zeriotic",
+          "https://octadezx.com"
         ],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
           "name": "Zeriotic services",
           "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Full-stack web applications", "description": "Modern frameworks, edge rendering, clean architectures. Apps that stay fast at scale, from internal tools to consumer products." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-commerce platforms", "description": "Custom storefronts with seamless checkout, inventory orchestration and analytics that guide decisions." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SaaS products", "description": "Subscription platforms with auth, billing, roles and robust APIs that third parties build on." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI integration", "description": "RAG pipelines, embeddings and agent features integrated into existing products." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Interactive 3D and WebGL", "description": "Real-time 3D product experiences rendered live in the browser." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Autonomous agent platforms", "description": "Enterprise agentic AI systems with real-time phone calls, computer vision and Model Context Protocol (MCP) server integration." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Real-time physics and simulation", "description": "Deterministic 60 FPS mobile and cross-platform simulation and gaming engines engineered in Unity and C#." } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Defensive cybersecurity & AI hardening", "description": "Enterprise vulnerability auditing, SQLi dump prevention, API backend scrape defense, brute force & password dictionary auditing with John the Ripper, and anti-AI agent prompt injection mitigation." } }
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Web applications",
+                "description": "Products and internal tools that stay fast as they grow."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Mobile apps",
+                "description": "iOS and Android apps people keep on their phones."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Desktop software",
+                "description": "Applications for the computers your people already use."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "E-commerce",
+                "description": "Storefronts with a checkout people finish."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "SaaS products",
+                "description": "Subscription software, from first version to scale."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "AI products",
+                "description": "Assistants and agents that are held to a standard."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Games",
+                "description": "From first prototype to a finished release."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Business systems",
+                "description": "Internal tools, dashboards and automation that run the company."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "APIs and integrations",
+                "description": "Connecting the systems you already depend on."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Cloud and infrastructure",
+                "description": "Hosting, scaling and keeping it all running."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Interactive experiences",
+                "description": "Websites and products that people remember."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Security testing",
+                "description": "Independent testing for what you have already built."
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Support and rescue",
+                "description": "Taking over software that has stalled and getting it moving."
+              }
+            }
           ]
-        }
+        },
+        "alternateName": "Zeriotic Studio",
+        "logo": "https://zeriotic.com/logo.png",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 23.81,
+          "longitude": 90.41
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "hello@zeriotic.com",
+          "availableLanguage": "English"
+        },
+        "knowsAbout": [
+          "Software development in Bangladesh",
+          "Custom software development in Bangladesh",
+          "Enterprise software engineering",
+          "Cybersecurity and penetration testing in Bangladesh",
+          "Web application development",
+          "Mobile game development and 3D simulation",
+          "AI tool development and autonomous agents",
+          "Three.js and WebGL web development",
+          "Mobile app development",
+          "Desktop software development",
+          "E-commerce development",
+          "SaaS product development",
+          "AI products and automation",
+          "Game development",
+          "Business systems",
+          "API integration",
+          "Cloud infrastructure",
+          "Penetration testing",
+          "Application security",
+          "AI and agent security"
+        ]
       },
       {
         "@type": "SoftwareApplication",
         "@id": "https://zeriotic.com/#octadezx",
         "name": "OctaDezx",
         "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web, Cloud, SIP, Omnichannel",
-        "description": "Autonomous agentic AI sales and operations platform for every business category (healthcare clinics, automotive dealerships, B2B SaaS, real estate, hospitality, retail, trades), providing 24/7 sales operations, real phone voice calls with conversational barge-in, photo recognition, and native MCP protocol integration across 96 channels.",
+        "operatingSystem": "Web",
+        "description": "An AI customer support agent that answers on chat, messaging apps and the phone, and checks every written reply against the business's own records before a customer sees it.",
         "url": "https://octadezx.com",
-        "author": { "@id": "https://zeriotic.com/#organization" }
+        "author": {
+          "@id": "https://zeriotic.com/#organization"
+        },
+        "applicationSubCategory": "AI customer support",
+        "featureList": [
+          "Answers on chat, messaging apps and the phone",
+          "Every written reply checked against the business's own records",
+          "Order capture with verified prices",
+          "Answers in more than 50 languages",
+          "Learns only from corrections a person approves"
+        ],
+        "offers": {
+          "@type": "AggregateOffer",
+          "lowPrice": "29",
+          "priceCurrency": "USD",
+          "offerCount": 4,
+          "url": "https://octadezx.com/pricing"
+        },
+        "publisher": {
+          "@id": "https://zeriotic.com/#organization"
+        }
       },
       {
         "@type": "VideoGame",
         "@id": "https://zeriotic.com/#accert-one",
         "name": "Accert One",
         "applicationCategory": "Game",
-        "operatingSystem": "iOS, Android, Windows PC",
-        "gamePlatform": ["Phone", "iOS", "Android", "PC", "SIM Rig", "Controller"],
-        "genre": ["Formula 1 Racing Game", "Motorsport Simulation"],
-        "description": "Dedicated upcoming Formula 1 motorsport game releasing soon across Phone (iOS & Android with touch and gyroscope tilt), PC (144Hz+ display and telemetry export), SIM Rigs (direct-drive force feedback wheels and load-cell pedals), and Controllers (gamepads with impulse trigger haptics). Features 12 laser-surveyed Grand Prix circuits, competitive 20-car grid, dynamic weather, and the OctaDezx DX12 hypercar. 100% free to download with website pre-orders open.",
+        "operatingSystem": "iOS, Android",
+        "gamePlatform": [
+          "iOS",
+          "Android"
+        ],
+        "genre": [
+          "Racing"
+        ],
+        "description": "Single-seater racing built for your phone. Race a full field through day, night, rain and snow, call your pit stops and chase the championship. Coming to iOS and Android.",
         "offers": {
           "@type": "Offer",
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/PreOrder",
-          "url": "https://zeriotic.com/work/accert-one",
-          "description": "100% free to download. Pre-order directly on this website."
+          "url": "https://zeriotic.com/work/accert-one"
         },
-        "author": { "@id": "https://zeriotic.com/#organization" }
+        "author": {
+          "@id": "https://zeriotic.com/#organization"
+        },
+        "url": "https://zeriotic.com/work/accert-one",
+        "image": [
+          "https://zeriotic.com/media/accert/accert-grid.webp",
+          "https://zeriotic.com/media/accert/accert-rear.webp",
+          "https://zeriotic.com/media/accert/accert-straight.webp"
+        ],
+        "playMode": "SinglePlayer",
+        "publisher": {
+          "@id": "https://zeriotic.com/#organization"
+        }
       },
       {
         "@type": "Service",
         "@id": "https://zeriotic.com/#security",
-        "name": "Defensive Cybersecurity & AI Hardening Audits",
-        "serviceType": "Cybersecurity & Vulnerability Assessment",
-        "description": "Enterprise penetration testing and defensive vulnerability mitigation: SQLi database dump prevention, backend API scrape protection, password dictionary and brute force auditing using John the Ripper and Hashcat, and prompt injection defenses for autonomous AI agent architectures.",
-        "provider": { "@id": "https://zeriotic.com/#organization" },
-        "url": "https://zeriotic.com/work/cybersecurity-audit"
+        "name": "Security testing and AI assurance",
+        "serviceType": "Security testing",
+        "description": "Independent penetration testing, application security review, API and abuse protection, identity testing, and AI and agent security, followed by help with the fix and a retest.",
+        "provider": {
+          "@id": "https://zeriotic.com/#organization"
+        },
+        "url": "https://zeriotic.com/work/cybersecurity-audit",
+        "areaServed": "Worldwide",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Security capabilities",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Penetration testing"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Application security review"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "API and abuse protection"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Identity and access testing"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "AI and agent security"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Remediation and retest"
+              }
+            }
+          ]
+        }
       },
       {
         "@type": "WebSite",
         "@id": "https://zeriotic.com/#website",
         "url": "https://zeriotic.com/",
         "name": "Zeriotic",
-        "publisher": { "@id": "https://zeriotic.com/#organization" },
+        "publisher": {
+          "@id": "https://zeriotic.com/#organization"
+        },
         "inLanguage": "en"
       },
       {
         "@type": "WebPage",
         "@id": "https://zeriotic.com/#webpage",
         "url": "https://zeriotic.com/",
-        "name": "Zeriotic — Premium Web Development Studio",
-        "isPartOf": { "@id": "https://zeriotic.com/#website" },
-        "about": { "@id": "https://zeriotic.com/#organization" },
-        "inLanguage": "en"
+        "name": "Zeriotic | Software Development Studio, Dhaka and Worldwide",
+        "isPartOf": {
+          "@id": "https://zeriotic.com/#website"
+        },
+        "about": {
+          "@id": "https://zeriotic.com/#organization"
+        },
+        "inLanguage": "en",
+        "description": "Zeriotic builds almost every type of software: web and mobile apps, commerce, SaaS, AI, games and security testing. Based in Dhaka, working worldwide.",
+        "dateModified": "2026-11-10",
+        "primaryImageOfPage": "https://zeriotic.com/og-image.png",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": [
+            ".hero__sub",
+            "#faq"
+          ]
+        }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://zeriotic.com/#selected-projects",
+        "name": "Selected projects",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Variant3D",
+            "description": "An interactive showcase for an on-demand knitwear platform.",
+            "url": "https://zeriotic.com/work/variant3d"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Mira INC",
+            "description": "An interactive product site for an AI company.",
+            "url": "https://zeriotic.com/work/mira"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Melem Tokyo",
+            "description": "A global storefront for a Tokyo streetwear label.",
+            "url": "https://zeriotic.com/work/melem-tokyo"
+          }
+        ]
       },
       {
         "@type": "FAQPage",
@@ -136,27 +416,82 @@
           {
             "@type": "Question",
             "name": "What does Zeriotic build?",
-            "acceptedAnswer": { "@type": "Answer", "text": "High-performance web applications, e-commerce platforms and SaaS products, plus AI integration and interactive 3D/WebGL product experiences." }
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Almost every type of software, including web and mobile applications, e-commerce platforms, SaaS and AI products, games, business systems and security testing. Zeriotic also makes its own titles: the OctaDezx AI support agent and the Accert One racing game."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is OctaDezx?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "OctaDezx is an AI customer support agent from Zeriotic. It answers customers on chat, messaging apps and the phone, takes orders and booking requests, and checks every written reply against the business's own records before a customer sees it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How accurate is OctaDezx?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In its published safety benchmark, run on 2026-11-03, 86.8% of 303 multi-step test cases ended in a safe outcome, with 0 privacy leaks in 24 targeted tests. The cases are synthetic and the benchmark is not a head-to-head comparison."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Accert One?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Accert One is a single-seater mobile racing game from Zeriotic, coming to iOS and Android. Players race a full field through day, night, rain and snow, call their pit stops and chase a championship."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I pre-order Accert One?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Enter your email in the pre-order box on zeriotic.com. The game is free to download, and you will be told the moment it is ready on iOS and Android."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Zeriotic offer penetration testing?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Zeriotic runs independent security testing for web platforms, APIs and AI products, including penetration testing, application security review, and AI and agent security, followed by help with the fix and a retest."
+            }
           },
           {
             "@type": "Question",
             "name": "How much does a Zeriotic project cost?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Projects are scoped during discovery. Typical budget bands are $0 to $5k, $5k to $10k, $10k to $25k, $25k to $50k, $50k to $100k and $100k+." }
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Projects are scoped during discovery. Typical budget bands are $0 to $5k, $5k to $10k, $10k to $25k, $25k to $50k, $50k to $100k and $100k+."
+            }
           },
           {
             "@type": "Question",
             "name": "How does the engagement process work?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Four phases: discover and define (1-2 weeks), design the system (2-4 weeks), engineer and ship (4-10 weeks), then iterate in the open. You click through a staging environment from day one." }
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Four phases: discover and define (1-2 weeks), design the system (2-4 weeks), engineer and ship (4-10 weeks), then iterate in the open. You click through a staging environment from day one."
+            }
           },
           {
             "@type": "Question",
             "name": "Where is Zeriotic based and who does it work with?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Zeriotic is headquartered in Dhaka, Bangladesh and serves clients worldwide. It is an independent team of sixteen, founded in 2022." }
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zeriotic is headquartered in Dhaka, Bangladesh and serves clients worldwide. It was founded in 2022 and works with businesses of any size."
+            }
           },
           {
             "@type": "Question",
             "name": "When can Zeriotic start a new project?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Zeriotic takes on a handful of engagements each quarter. Email hello@zeriotic.com and you will get a response within 24 hours." }
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zeriotic is taking on new projects of almost every type. Email hello@zeriotic.com and you will get a response within 24 hours."
+            }
           }
         ]
       }
@@ -164,680 +499,357 @@
   }
   </script>
 
-  <!-- Font: JetBrains Mono — the whole site speaks monospace -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Preload the hero sculpture so decoding starts ASAP -->
-  <link rel="preload" as="fetch" href="./models/zeriotic-z.glb" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-tight-latin-400.woff2" />
   <script defer data-domain="zeriotic.com" src="https://plausible.io/js/script.js"></script>
 </head>
-<body>
-  <!-- ===================================================================== -->
-  <!--  WEBGL CANVAS  (fixed, full-viewport, sits behind the scrolling DOM)   -->
-  <!-- ===================================================================== -->
+<body data-ink="ink">
   <canvas id="webgl" aria-hidden="true"></canvas>
-
-  <!-- Static poster fallback — shown by main.js when WebGL is unavailable.
-       The page stays a fully readable studio pitch even with no 3D. -->
   <div id="webgl-fallback" style="background-image:url('/poster.png')" aria-hidden="true"></div>
 
-  <!-- ===================================================================== -->
-  <!--  PRELOADER                                                             -->
-  <!-- ===================================================================== -->
+  <!-- Preloader: the studio mark draws itself -->
   <div id="preloader" class="preloader">
     <div class="preloader__inner">
-      <!-- The Zeriotic mark draws itself on, then the wordmark resolves -->
-      <svg class="preloader__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <circle id="pre-ring" cx="20" cy="20" r="18.5" stroke="url(#pgrad)" stroke-width="1.6" />
-        <rect id="pre-rect" x="11" y="10" width="18" height="18" rx="0.5" stroke="url(#pgrad)" stroke-width="1.3" />
-        <line id="pre-diag" x1="11" y1="28" x2="29" y2="10" stroke="url(#pgrad)" stroke-width="2.4" />
+      <svg class="preloader__mark" viewBox="0 0 64 64" aria-hidden="true">
         <defs>
-          <linearGradient id="pgrad" x1="11" y1="10" x2="29" y2="28" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#ff5500" />
-            <stop offset="1" stop-color="#ffb380" />
+          <linearGradient id="mark-grad" x1="20" y1="19" x2="44" y2="43" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#ff5500"/><stop offset="1" stop-color="#ffb380"/>
           </linearGradient>
         </defs>
+        <circle id="pre-ring" pathLength="1" cx="32" cy="32" r="24" stroke="url(#mark-grad)" stroke-width="2.4"/>
+        <rect id="pre-rect" pathLength="1" x="20" y="19" width="24" height="24" stroke="url(#mark-grad)" stroke-width="1.8"/>
+        <line id="pre-diag" pathLength="1" x1="20" y1="43" x2="44" y2="19" stroke="url(#mark-grad)" stroke-width="3.4"/>
       </svg>
-      <div class="preloader__brand">ZERIOTIC</div>
+      <div class="preloader__brand">ZERIOTIC®</div>
+      <p class="preloader__tag">Software crafted to outlast trends.</p>
+      <div class="loader__enter">
+        <button class="btn js-enter-btn" data-audio="on">Enter <i>↘</i></button>
+        <button class="loader__btn js-enter-no-audio" data-audio="off">Enter without audio</button>
+      </div>
       <div class="preloader__bar"><i id="preloader-fill"></i></div>
-      <div class="preloader__meta">
-        <span id="preloader-pct" class="mono">0%</span>
-        <span class="mono">COMPILING THE EXPERIENCE</span>
+      <div class="preloader__meta"><span id="preloader-pct" class="mono">0%</span></div>
+    </div>
+  </div>
+
+  <!-- Persistent chrome -->
+  <header class="chrome chrome--top">
+    <a class="brand" href="#hero">ZERIOTIC<sup>®</sup></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#hero">Index</a>
+      <a href="#work">Projects</a>
+      <a href="#contact">Contact</a>
+      <button class="btn btn--circle menu-btn js-menu-toggle" aria-label="Toggle menu"><span class="menu-dots"><i></i><i></i></span></button>
+    </nav>
+  </header>
+
+  <div class="menu js-menu" aria-hidden="true">
+    <div class="menu__inner">
+      <nav class="menu__nav">
+        <a class="menu__nav-item" href="#hero"><span class="menu__nav-number">01</span><span class="menu__text">Index</span><span class="menu__hover-text">Index</span></a>
+        <a class="menu__nav-item" href="#octadezx"><span class="menu__nav-number">02</span><span class="menu__text">OctaDezx</span><span class="menu__hover-text">OctaDezx</span></a>
+        <a class="menu__nav-item" href="#accert-one"><span class="menu__nav-number">03</span><span class="menu__text">Accert One</span><span class="menu__hover-text">Accert One</span></a>
+        <a class="menu__nav-item" href="#security"><span class="menu__nav-number">04</span><span class="menu__text">Security</span><span class="menu__hover-text">Security</span></a>
+        <a class="menu__nav-item" href="#work"><span class="menu__nav-number">05</span><span class="menu__text">Projects</span><span class="menu__hover-text">Projects</span></a>
+        <a class="menu__nav-item" href="#contact"><span class="menu__nav-number">06</span><span class="menu__text">Contact</span><span class="menu__hover-text">Contact</span></a>
+      </nav>
+      <div class="menu__footer">
+        <div>
+          <a class="arrow-link" href="mailto:hello@zeriotic.com">hello@zeriotic.com</a>
+          <span class="arrow-link">Dhaka, Bangladesh</span>
+        </div>
+        <div>
+          <a class="social-link arrow-link" href="https://facebook.com/zeriotic" target="_blank" rel="noopener">Facebook</a>
+          <a class="social-link arrow-link" href="https://instagram.com/zeriotic" target="_blank" rel="noopener">Instagram</a>
+          <a class="social-link arrow-link" href="https://linkedin.com/company/zeriotic" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ===================================================================== -->
-  <!--  PERSISTENT UI CHROME                                                  -->
-  <!-- ===================================================================== -->
-  <header class="chrome chrome--top">
-    <a class="brand" href="#hero">
-      <svg class="brand__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="1.6" />
-        <rect x="11" y="10" width="18" height="18" rx="0.5" stroke="currentColor" stroke-width="1.2" />
-        <line x1="11" y1="28" x2="29" y2="10" stroke="currentColor" stroke-width="2.4" />
-      </svg>
-      ZERIOTIC
-    </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#octadezx">OctaDezx</a>
-      <a href="#accert-one">Accert One</a>
-      <a href="#security">Security</a>
-      <a href="#client-work">Client Work</a>
-      <a href="#services">Services</a>
-      <a href="#contact" class="nav__cta">Start a project</a>
-    </nav>
-  </header>
-  <div class="chrome chrome--side mono">
-    <span>REAL-TIME · WEBGL · 60FPS</span>
-  </div>
-  <div class="scroll-hint" id="scroll-hint">
-    <span class="mono">SCROLL</span><i></i>
-  </div>
+  <div class="scroll-hint" id="scroll-hint"><span class="mono">Scroll to walk through</span><i></i></div>
 
-  <!-- ===================================================================== -->
-  <!--  SCROLLING CONTENT                                                     -->
-  <!-- ===================================================================== -->
   <main id="content">
 
-    <!-- HERO -->
-    <section class="panel panel--hero" id="hero" data-screen-label="Hero">
+    <!-- HERO: the gate -->
+    <section class="ch ch--hero" id="hero" data-ink="ink">
       <div class="hero__inner">
-        <div class="eyebrow reveal"><span>Premium Web Development · <span data-availability>Available Q3 2026 / Q4 2026</span></span></div>
         <h1 class="hero__title">
-          <span class="line"><span class="word">Autonomous</span> <span class="word">AI,</span></span>
-          <span class="line"><span class="word">Motorsport</span> <span class="word">&amp;</span></span>
-          <span class="line"><span class="word accent">Cyber Defense.</span></span>
+          <span class="line"><span>Crafted to</span></span>
+          <span class="line"><span>outlast trends</span></span>
         </h1>
-        <p class="hero__sub reveal">We architect autonomous AI sales engines for every business category, engineer dedicated 60 FPS deterministic Formula 1 racing games, and conduct zero-trust defensive cybersecurity audits.</p>
-        <div class="hero__acts reveal">
-          <a href="#octadezx" class="btn">Explore OctaDezx <i>&rarr;</i></a>
-          <a href="#accert-one" class="btn btn--ghost">Accert One (F1 Game)</a>
-          <a href="#security" class="btn btn--ghost">Defensive Security</a>
-          <a href="#client-work" class="btn btn--ghost">Client Work</a>
-        </div>
-        <div class="hero__hud reveal mono">
-          <span class="hud-pill"><i class="hud-dot hud-dot--pulse"></i> WEBGL 60FPS MOTOR</span>
-          <span class="hud-pill"><i class="hud-dot"></i> OCTADEZX AI READY</span>
-          <span class="hud-pill"><i class="hud-dot"></i> ACCERT ONE PRE-ORDER OPEN</span>
-          <span class="hud-pill"><i class="hud-dot hud-dot--secure"></i> ZERO-TRUST AEGIS ACTIVE</span>
-        </div>
-        <ul class="hero__meta reveal">
-          <li>Autonomous AI (OctaDezx)</li>
-          <li>F1 Motorsport (Accert One)</li>
-          <li>Defensive Cybersecurity</li>
-          <li>E-Commerce &amp; Web Apps</li>
-          <li>Interactive 3D / WebGL</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- MANIFESTO -->
-    <section class="panel panel--manifesto" id="manifesto" data-screen-label="Manifesto">
-      <div class="manifesto__copy">
-        <p class="big reveal-line">Most software is built for the demo.
-          Ours is built for year five — fast on day one, faster at scale,
-          and engineered so it never has to be rebuilt from scratch.</p>
-        <p class="small reveal-line mono">Three disciplines, one studio</p>
-      </div>
-    </section>
-
-    <!-- SERVICES (pinned scrub — the sculpture re-forms per discipline) -->
-    <section class="panel panel--caps" id="services" data-screen-label="Services">
-      <div class="caps__track">
-        <div class="caption" data-beat="0">
-          <span class="caption__idx mono">01 / 03</span>
-          <h2>Full-stack web applications</h2>
-          <p>Modern frameworks, edge rendering, clean architectures. Apps that stay fast at scale — from internal tools to consumer products.</p>
-          <ul class="caption__tags mono"><li>Next.js</li><li>Remix</li><li>Astro</li><li>Realtime</li></ul>
-        </div>
-        <div class="caption" data-beat="1">
-          <span class="caption__idx mono">02 / 03</span>
-          <h2>E-commerce platforms</h2>
-          <p>Custom storefronts with seamless checkout, inventory orchestration and analytics that actually guide decisions.</p>
-          <ul class="caption__tags mono"><li>Headless</li><li>Custom checkout</li><li>ERP</li><li>Analytics</li></ul>
-        </div>
-        <div class="caption" data-beat="2">
-          <span class="caption__idx mono">03 / 03</span>
-          <h2>SaaS products</h2>
-          <p>Subscription platforms with auth, billing, roles and robust APIs that third parties love to build on.</p>
-          <ul class="caption__tags mono"><li>Auth</li><li>Billing</li><li>Public API</li><li>Multi-tenant</li></ul>
+        <div class="hero__foot">
+          <p class="hero__sub">Zeriotic builds almost every type of software, from web and mobile apps to AI, games and security. Dhaka and worldwide.</p>
+          <a href="#octadezx" class="btn">Walk through <i>↘</i></a>
         </div>
       </div>
     </section>
 
-    <!-- STATS -->
-    <section class="studio-sec studio-sec--stats" id="stats" data-screen-label="Stats">
-      <div class="studio__wrap">
-        <div class="stats-band">
-          <div class="stat"><div class="stat__k"><span class="count" data-to="47">47</span></div><p>Products shipped</p></div>
-          <div class="stat"><div class="stat__k"><span class="count" data-to="98">98</span><span>%</span></div><p>Client retention</p></div>
-          <div class="stat"><div class="stat__k"><span class="count" data-to="12">12</span><span>ms</span></div><p>Median TTFB</p></div>
-          <div class="stat"><div class="stat__k"><span class="count" data-to="4">4</span><span>.9</span></div><p>Client rating</p></div>
-        </div>
+    <section class="ch ch--statement" id="manifesto" data-ink="ink">
+      <div class="statement">
+        <p class="statement__big split">Most software is built for the demo. Ours is built for year five.</p>
+        <p class="statement__small reveal">Three things we made, and what we build for others.</p>
       </div>
     </section>
+    <div class="transit" id="through-gate" aria-hidden="true"></div>
 
-    <!-- FLAGSHIPS WORK -->
-    <section class="studio-sec studio-sec--work" id="work" data-screen-label="Work">
-      <div class="studio__wrap">
-        <div class="sec-head">
-          <div class="eyebrow reveal"><span>(01) · Studio Flagships</span></div>
-          <h2 class="reveal">Autonomous AI, motorsport &amp; cyber defense</h2>
-          <p class="reveal">Our primary proprietary platforms: an autonomous AI sales brain for every industry, upcoming dedicated Formula 1 racing game, and zero-trust defensive cybersecurity audits.</p>
+    <!-- OCTADEZX -->
+    <section class="ch-group" data-ink="ink">
+      <article class="ch ch--left" id="octadezx">
+        <div class="panel">
+          <p class="eyebrow reveal">01 &nbsp; OctaDezx, AI customer support</p>
+          <h2 class="title split">The AI support agent that checks its work.</h2>
+          <p class="lede reveal">OctaDezx answers customers on chat, messaging apps and the phone, takes the order or booking, and hands the hard ones to your team. Every written reply is checked against your own records before a customer sees it.</p>
+          <div class="actions reveal">
+            <a class="btn" href="https://octadezx.com" target="_blank" rel="noopener">Visit octadezx.com <i>↗</i></a>
+            <a class="btn btn--ghost" href="/work/octadezx">Read more</a>
+          </div>
         </div>
+      </article>
 
-        <!-- FLAGSHIP 01 · OctaDezx (Autonomous AI for Every Business Category) -->
-        <div id="octadezx" class="anchor-target"></div>
-        <article class="case reveal" id="case-octa">
-          <div class="case__copy">
-            <div class="case__tag mono"><span>Flagship 01 · Autonomous AI for Every Business</span><b>OctaDezx</b></div>
-            <h3>The 24/7 autonomous <span class="accent">sales brain.</span></h3>
-            <p>OctaDezx is an autonomous multi-agent intelligence platform engineered for <strong>every business category</strong> — healthcare clinics, automotive dealerships, B2B SaaS, real estate, hospitality, retail, and trades. Deploys across 96 channels (WhatsApp, Telegram, Apple Messages, Web, Voice, CRM) in 50+ languages with full-duplex conversational voice, computer vision, and 100% server-verified pricing and inventory guardrails.</p>
-
-            <div class="industry-strip mono">
-              <span class="industry-pill">Healthcare &amp; Clinics</span>
-              <span class="industry-pill">Auto Dealerships</span>
-              <span class="industry-pill">B2B SaaS</span>
-              <span class="industry-pill">Real Estate</span>
-              <span class="industry-pill">Hospitality</span>
-              <span class="industry-pill">Retail &amp; Trades</span>
-            </div>
-
-            <dl class="case__kv">
-              <div><dt>Domain</dt><dd>Agentic AI for Every Industry</dd></div>
-              <div><dt>Stack</dt><dd>Multi-Agent &bull; Native MCP</dd></div>
-              <div><dt>Channels</dt><dd>96 Platforms &bull; 50+ Languages</dd></div>
-              <div><dt>Integrity</dt><dd>100% Server-Verified</dd></div>
-            </dl>
-            <div class="case__metrics mono">
-              <div><span>Automation</span><b class="accent">78% queries handled by AI</b></div>
-              <div><span>Availability</span><b class="accent">24/7 &bull; Real phone numbers</b></div>
-            </div>
-            <div class="case__actions">
-              <a href="/work/octadezx" class="btn case__link">Explore OctaDezx <i>&rarr;</i></a>
-              <a href="https://octadezx.com" target="_blank" rel="noopener" class="btn btn--ghost case__link">Visit octadezx.com <i>↗</i></a>
-            </div>
+      <article class="ch ch--results" id="octa-results">
+        <div class="panel panel--wide">
+          <h3 class="kicker reveal">Results, published</h3>
+          <div class="metrics">
+            <div class="metric reveal" aria-label="86.8% safe outcomes"><b><span class="count" data-to="86.8">86.8</span><small>%</small></b><p>Safe outcomes on multi-step, multilingual questions</p><span class="mono">303 test cases</span></div>
+            <div class="metric reveal"><b>0<small> in 24</small></b><p>Privacy leaks when asked about another customer's data</p><span class="mono">24 targeted tests</span></div>
+            <div class="metric reveal"><b><span class="count" data-to="96.7">96.7</span><small>%</small></b><p>Corrupted replies refused before reaching a customer</p><span class="mono">59 of 61</span></div>
+            <div class="metric reveal"><b>6<small> of 6</small></b><p>Orders, refunds or bookings nobody asked for, blocked</p><span class="mono">Small sample</span></div>
           </div>
-          <div class="case__stage">
-            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
-              <div class="device device--browser">
-                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">octadezx.com / agent-mesh</span><em class="mono">● live · 96 channels</em></div>
-                <div class="device__body chat" id="octa-chat">
-                  <div class="chat__head" data-atropos-offset="-1"><span class="chat__avatar">O</span><span>OctaDezx <em class="mono">online · 50+ languages · voice &amp; vision</em></span></div>
-                  <div class="chat__log" id="octa-log" data-atropos-offset="3"></div>
-                  <div class="chat__input mono" data-atropos-offset="1">Ask anything about any business or product… <b>↑</b></div>
-                </div>
-              </div>
-            </div></div></div></div>
-          </div>
-        </article>
+          <p class="note reveal">From the published safety benchmark, run 2026-11-03. Synthetic test cases, not a head-to-head comparison. <a href="https://octadezx.com/benchmarks/multi-step-inquiries" target="_blank" rel="noopener">Read the benchmark ↗</a></p>
+        </div>
+      </article>
 
-        <!-- FLAGSHIP 02 · Accert One (Upcoming Dedicated F1 Racing Game) -->
-        <div id="accert-one" class="anchor-target"></div>
-        <article class="case case--flip reveal" id="case-accert">
-          <div class="case__copy">
-            <div class="case__tag mono"><span>Flagship 02 · Dedicated Formula 1 Racing Game</span><b>Accert One</b></div>
-            <div class="preorder-badge mono"><span class="accent">● RELEASING SOON</span> · 100% FREE TO DOWNLOAD · PRE-ORDER OPEN</div>
-            <h3>Accert One — Dedicated <span class="accent">F1 Racing Game.</span></h3>
-            <p>Accert One is our upcoming dedicated Formula 1 racing game — engineered with deterministic 60 FPS physics from our ApexFormula engine. <strong>100% free to download</strong>, with <strong>pre-orders available directly on this website</strong> to lock in day-one paddock access and the flagship OctaDezx DX12 formula hypercar. Features 12 laser-surveyed Grand Prix circuits, competitive 20-car grid, dynamic weather, and multi-platform hardware parity across Phone, PC, SIM Rigs, and Controllers.</p>
+      <article class="ch ch--right" id="octa-why">
+        <div class="panel">
+          <h3 class="kicker reveal">Why teams choose it</h3>
+          <ul class="points">
+            <li class="reveal"><b>Measured on what can go wrong</b><span>Most vendors publish how often they resolve. OctaDezx publishes wrong answers, leaks and unrequested actions.</span></li>
+            <li class="reveal"><b>Answers from your facts</b><span>Prices, promises, links and discount codes must match your records.</span></li>
+            <li class="reveal"><b>Finishes the job</b><span>Orders with verified prices, booking requests, leads and clean handovers.</span></li>
+            <li class="reveal"><b>Learns only what you approve</b><span>A correction becomes a proposed lesson. Nothing is used until a person says yes.</span></li>
+            <li class="reveal"><b>Picks up the phone</b><span>Your own number, answered in real time. It understands the photos customers send too.</span></li>
+          </ul>
+          <blockquote class="quote reveal">"Our response time went from hours to seconds and our online sales have grown without us adding a single new hire."<cite>Thomas Pini, CEO, Pini Parma</cite></blockquote>
+          <p class="facts reveal"><span>24/7</span><span>50+ languages</span><span>32 integrations live</span><span>3-day free trial</span></p>
+        </div>
+      </article>
+    </section>
+    <div class="transit" id="octa-exit" aria-hidden="true"><i class="transit__half" data-ink="paper"></i></div>
 
-            <div class="platform-strip mono">
-              <div class="platform-pill"><span>📱 Phone</span><small>iOS &amp; Android Touch / Gyro Tilt</small></div>
-              <div class="platform-pill"><span>💻 PC</span><small>144Hz+ &amp; MoTeC/CSV Telemetry</small></div>
-              <div class="platform-pill"><span>🏎️ SIM Rig</span><small>Direct-Drive FFB &amp; Load Cells</small></div>
-              <div class="platform-pill"><span>🎮 Controller</span><small>Gamepad Impulse Trigger Haptics</small></div>
-            </div>
+    <!-- ACCERT ONE -->
+    <section class="ch-group" data-ink="paper">
+      <article class="ch ch--game" id="accert-one">
+        <div class="game-title">
+          <p class="eyebrow reveal">02 &nbsp; A Zeriotic game. Coming to iOS and Android.</p>
+          <h2 class="game-name split">Accert One</h2>
+          <p class="game-tag reveal">Every lap is earned.</p>
+        </div>
+      </article>
 
-            <dl class="case__kv">
-              <div><dt>Title &amp; Genre</dt><dd>Accert One (F1 Motorsport Game)</dd></div>
-              <div><dt>Physics Engine</dt><dd>60 FPS Deterministic (ApexFormula)</dd></div>
-              <div><dt>Hardware</dt><dd class="accent">Phone · PC · SIM Rig · Controller</dd></div>
-              <div><dt>Grid &amp; Tracks</dt><dd class="accent">20 Cars · 12 Laser-Surveyed GP Tracks</dd></div>
-            </dl>
-            <div class="case__metrics mono">
-              <div><span>Pre-Order Window</span><b class="accent">Open on Website Now</b></div>
-              <div><span>Access &amp; Price</span><b class="accent">100% Free to Download</b></div>
-            </div>
+      <article class="ch ch--right" id="accert-story">
+        <div class="panel">
+          <p class="lede lede--big reveal">Single-seater racing, built for your phone. Line up on the grid, read the sky, and race a full field from lights out to the chequered flag.</p>
+          <p class="lede reveal">Tight street circuits punish one mistake. Fast open country rewards nerve. Day, sunset, night, rain and snow all change how the car feels under you.</p>
+          <ul class="points points--two">
+            <li class="reveal"><b>Race the conditions</b><span>Day into night, rain into snow.</span></li>
+            <li class="reveal"><b>Win it in the pits</b><span>Strategy, tyre calls and a crew that has to be perfect.</span></li>
+            <li class="reveal"><b>Drive it your way</b><span>Touch or tilt, cockpit or chase.</span></li>
+            <li class="reveal"><b>Chase the title</b><span>A full championship, with every point remembered.</span></li>
+          </ul>
+        </div>
+      </article>
 
-            <div class="case-preorder-inline">
-              <form class="preorder-mini-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Pre-Order Reserved ✓';">
-                <input type="email" placeholder="Enter your email to pre-order on site" required />
-                <button type="submit" class="btn btn--sm">Pre-Order Free <i>&rarr;</i></button>
-              </form>
-              <span class="mono preorder-mini-hint">Direct browser pre-order · Free to download · Day-one paddock access</span>
-            </div>
-
-            <a href="/work/accert-one" class="btn btn--ghost case__link">View Full F1 Specs &amp; Circuits <i>&rarr;</i></a>
-          </div>
-          <div class="case__stage">
-            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
-              <div class="device device--browser">
-                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">accert-one / apexformula-harness</span><em class="mono">● 60 fps lock</em></div>
-                <div class="device__body accert-mock mono">
-                  <div class="accert-mock__track" data-atropos-offset="1">
-                    <span>CIRCUIT: <b>SPA-FRANCORCHAMPS</b></span>
-                    <span>WEATHER: <b>DRY · 34°C</b></span>
-                    <span>CAR: <b>OCTADEZX DX12 (F1)</b></span>
-                  </div>
-                  <div class="accert-mock__cockpit" data-atropos-offset="4">
-                    <div class="accert-mock__tires">
-                      <div><span>FL TIRE</span><b class="accent">98°C · 98% GRIP</b></div>
-                      <div><span>FR TIRE</span><b>101°C · 96% GRIP</b></div>
-                      <div><span>SUSPENSION</span><b>-14mm COMPR</b></div>
-                    </div>
-                    <div class="accert-mock__gauge">
-                      <div class="accert-mock__gear">7</div>
-                      <div class="accert-mock__speed">328</div>
-                      <span style="font-size: 0.52rem; letter-spacing: 0.14em; color: var(--muted);">KM/H · 12,450 RPM</span>
-                      <div class="accert-mock__rpm">
-                        <i class="active"></i><i class="active"></i><i class="active"></i>
-                        <i class="active"></i><i class="active"></i><i class="active"></i>
-                        <i class="active"></i><i class="active"></i><i class="active"></i>
-                        <i class="peak"></i><i class="peak"></i>
-                      </div>
-                    </div>
-                    <div class="accert-mock__aero">
-                      <div><span>REAR WING</span><b class="drs-lit">DRS [OPEN]</b></div>
-                      <div><span>RL TIRE</span><b>94°C · 99% GRIP</b></div>
-                      <div><span>RR TIRE</span><b>96°C · 98% GRIP</b></div>
-                    </div>
-                  </div>
-                  <div class="accert-mock__footer" data-atropos-offset="2">
-                    <span>LATERAL: +2.84 G (COPSE)</span>
-                    <span>DELTA: -0.284s [PURPLE]</span>
-                    <span>ZERIOTIC LABS / GAMING</span>
-                  </div>
-                </div>
-              </div>
-            </div></div></div></div>
-          </div>
-        </article>
-
-        <!-- FLAGSHIP 03 · Defensive Cybersecurity & AI Hardening -->
-        <div id="security" class="anchor-target"></div>
-        <article class="case reveal" id="case-security">
-          <div class="case__copy">
-            <div class="case__tag mono"><span>Flagship 03 · Defensive Security &bull; AI Agent Audit</span><b>Security Labs</b></div>
-            <h3>Bulletproof defense for <span class="accent">modern web &amp; AI.</span></h3>
-            <p>Enterprise vulnerability auditing and ethical penetration testing. We help organizations prevent database SQLi dumps, shield backend APIs from automated scraper swarms, audit authentication resilience against brute force and password dictionary attacks using John the Ripper and Hashcat hash cracking tools, and engineer strict guardrails against autonomous AI agent prompt injection.</p>
-
-            <div class="threat-matrix-strip mono">
-              <span class="threat-pill">SQLi Injection &amp; DB Dump Prevention</span>
-              <span class="threat-pill">Backend Scrape Mitigation</span>
-              <span class="threat-pill">John the Ripper Hash Auditing</span>
-              <span class="threat-pill">Anti-AI Agent Prompt Defense</span>
-            </div>
-
-            <dl class="case__kv">
-              <div><dt>Domain</dt><dd>Defensive Cybersecurity</dd></div>
-              <div><dt>Stack</dt><dd>OWASP &bull; Argon2id &bull; MCP Guard</dd></div>
-              <div><dt>Database</dt><dd class="accent">SQLi Dump Immune</dd></div>
-              <div><dt>AI Guard</dt><dd class="accent">Anti-Prompt Injection</dd></div>
-            </dl>
-            <div class="case__metrics mono">
-              <div><span>Vulnerability Prevention</span><b class="accent">100% High-Risk Mitigated</b></div>
-              <div><span>AI Agent Integrity</span><b class="accent">Zero Jailbreak Exfiltration</b></div>
-            </div>
-            <div class="case__actions">
-              <a href="/work/cybersecurity-audit" class="btn case__link">View Security Audit &amp; Matrix <i>&rarr;</i></a>
-              <a href="/blog/how-uncensored-ai-agents-increase-hacking" class="btn btn--ghost case__link">AI Hacking Threat Report <i>&rarr;</i></a>
-              <a href="/blog/php-vulnerability-login-without-password" class="btn btn--ghost case__link">PHP Auth Bypass Bulletin <i>&rarr;</i></a>
-            </div>
-          </div>
-          <div class="case__stage">
-            <div class="atropos case-tilt"><div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">
-              <div class="device device--browser">
-                <div class="device__chrome" data-atropos-offset="-2"><i></i><i></i><i></i><span class="mono">zeriotic / security-harness</span><em class="mono">● live defense telemetry</em></div>
-                <div class="device__body security-mock mono">
-                  <div class="security-mock__status" data-atropos-offset="1">
-                    <span class="sec-pill sec-pill--shield">AEGIS SHIELD: ACTIVE</span>
-                    <span class="sec-pill sec-pill--db">DB: PREPARED AST</span>
-                    <span class="sec-pill sec-pill--ai">AI: GUARDED</span>
-                  </div>
-                  <div class="security-mock__radar" data-atropos-offset="4">
-                    <div class="security-mock__vectors">
-                      <div><span>SQLI INJECTION</span><b class="accent">BLOCKED · 0ms</b></div>
-                      <div><span>SQLI DB DUMP</span><b>PREVENTED · PoLP</b></div>
-                      <div><span>BACKEND SCRAPE</span><b>RATE-LIMITED · BOT-JA4</b></div>
-                    </div>
-                    <div class="security-mock__core">
-                      <div class="security-mock__hex">VAULT</div>
-                      <div class="security-mock__entropy">ARGON2id</div>
-                      <span style="font-size: 0.52rem; letter-spacing: 0.14em; color: var(--muted);">JOHN THE RIPPER: RESISTANT</span>
-                      <div class="security-mock__stream">
-                        <i class="active"></i><i class="active"></i><i class="active"></i>
-                        <i class="active"></i><i class="active"></i><i class="active"></i>
-                        <i class="active"></i><i class="active"></i><i class="active"></i>
-                        <i class="peak"></i><i class="peak"></i>
-                      </div>
-                    </div>
-                    <div class="security-mock__ai">
-                      <div><span>PROMPT INJECTION</span><b class="guard-lit">INTERCEPTED</b></div>
-                      <div><span>PASSWORD DICT</span><b>SALTED HASH RESISTANT</b></div>
-                      <div><span>BRUTE FORCE</span><b>EXPONENTIAL BACKOFF</b></div>
-                    </div>
-                  </div>
-                  <div class="security-mock__footer" data-atropos-offset="2">
-                    <span>AUDIT: FULL PEN-TEST MATRIX</span>
-                    <span>STATUS: 0 ACTIVE VULNERABILITIES</span>
-                    <span>ZERIOTIC DEFENSE LAB</span>
-                  </div>
-                </div>
-              </div>
-            </div></div></div></div>
-          </div>
-        </article>
-
+      <div class="shots">
+        <figure class="reveal"><img src="/media/accert/accert-grid.webp" alt="A deep red and gold single-seater on the starting grid" width="1600" height="631" loading="lazy" /></figure>
+        <figure class="reveal"><img src="/media/accert/accert-rear.webp" alt="Two green and gold cars seen from behind on a racing circuit" width="1600" height="631" loading="lazy" /></figure>
+        <figcaption class="mono">In-game capture. Work in progress.</figcaption>
       </div>
+
+      <article class="ch ch--order" id="accert-preorder">
+        <div class="order-card reveal">
+          <h3>Pre-order Accert One</h3>
+          <p>Free to download. Leave your email and we will tell you the moment it is ready.</p>
+          <form class="preorder js-preorder" novalidate>
+            <label class="preorder__label" for="po-email">Email</label>
+            <div class="preorder__row">
+              <input id="po-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+              <button type="submit" class="btn">Pre-order <i>&rarr;</i></button>
+            </div>
+            <div class="preorder__hp" aria-hidden="true"><input type="text" name="company" tabindex="-1" autocomplete="off" /></div>
+            <p class="preorder__status js-preorder-status" role="status"></p>
+          </form>
+          <p class="fine">iOS and Android. We only use your email for launch news. <a href="/privacy/">Privacy</a></p>
+        </div>
+        <a class="more-link" href="/work/accert-one">More about the game <i>&rarr;</i></a>
+      </article>
+    </section>
+    <div class="transit transit--long" id="accert-exit" aria-hidden="true"></div>
+
+    <!-- SECURITY -->
+    <section class="ch-group" data-ink="paper">
+      <article class="ch ch--left" id="security">
+        <div class="panel">
+          <p class="eyebrow reveal">03 &nbsp; Zeriotic Security</p>
+          <h2 class="title split">We break in first.</h2>
+          <p class="lede reveal">Independent security testing for web platforms, APIs and AI products. We work the way a real attacker would, under written authorization, and give you a clear path to fixing what we find.</p>
+          <div class="actions reveal">
+            <a class="btn" href="#contact">Request an assessment <i>↘</i></a>
+            <a class="btn btn--ghost" href="/work/cybersecurity-audit">How we work</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ch ch--grid" id="sec-capabilities">
+        <div class="panel panel--wide">
+          <h3 class="kicker reveal">Capabilities</h3>
+          <div class="capabilities">
+            <div class="cap reveal"><b>Penetration testing</b><p>Web apps, mobile backends and networks tested by hand, beyond what scanners catch.</p></div>
+            <div class="cap reveal"><b>Application security review</b><p>Source and design reviewed for the flaws that lead to real breaches.</p></div>
+            <div class="cap reveal"><b>API and abuse protection</b><p>Scraping, account takeover and business logic abuse, found and closed.</p></div>
+            <div class="cap reveal"><b>Identity and access</b><p>Logins, sessions and permissions tested against how accounts actually get stolen.</p></div>
+            <div class="cap reveal"><b>AI and agent security</b><p>Prompt injection, data leakage and unsafe actions in AI assistants and agents.</p></div>
+            <div class="cap reveal"><b>Remediation and retest</b><p>We work with your engineers on the fix, then verify it held.</p></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="ch ch--right" id="sec-how">
+        <div class="panel">
+          <h3 class="kicker reveal">How an engagement runs</h3>
+          <ol class="runs">
+            <li class="reveal"><span class="mono">01</span><div><b>Scope</b><p>We agree what is in bounds, in writing, under NDA.</p></div></li>
+            <li class="reveal"><span class="mono">02</span><div><b>Attack</b><p>Our team goes after the targets the way an adversary would.</p></div></li>
+            <li class="reveal"><span class="mono">03</span><div><b>Report</b><p>A summary your board can read and detail your engineers can act on.</p></div></li>
+            <li class="reveal"><span class="mono">04</span><div><b>Fix and retest</b><p>We help close the gaps, then confirm they stayed closed.</p></div></li>
+          </ol>
+          <p class="note reveal">Research: <a href="/blog/how-uncensored-ai-agents-increase-hacking">How uncensored AI agents raise the risk</a> and <a href="/blog/php-vulnerability-login-without-password">logging in without a password</a>.</p>
+        </div>
+      </article>
+    </section>
+    <div class="transit transit--long" id="sec-exit" aria-hidden="true"><i class="transit__half" data-ink="ink"></i></div>
+
+    <!-- PROJECTS -->
+    <section class="ch-group" data-ink="ink">
+      <article class="ch ch--work" id="work">
+        <div class="work-head">
+          <h2 class="title title--center split">Selected projects</h2>
+        </div>
+        <div class="work-grid">
+          <a class="work-card reveal" href="/work/variant3d">
+            <canvas data-art="knit" aria-hidden="true"></canvas>
+            <div class="work-card__meta"><div><b>Variant3D</b><span>Interactive knitwear showcase</span></div><i>↘</i></div>
+            <p>A showcase for an on-demand knitwear platform. Visitors turn every garment and look closely before they buy.</p>
+          </a>
+          <a class="work-card reveal" href="/work/mira">
+            <canvas data-art="signal" aria-hidden="true"></canvas>
+            <div class="work-card__meta"><div><b>Mira INC</b><span>Interactive product website</span></div><i>↘</i></div>
+            <p>A product site for an AI company, where the visuals show what the product does.</p>
+          </a>
+          <a class="work-card reveal" href="/work/melem-tokyo">
+            <canvas data-art="poster" aria-hidden="true"></canvas>
+            <div class="work-card__meta"><div><b>Melem Tokyo</b><span>Global streetwear storefront</span></div><i>↘</i></div>
+            <p>A storefront for a Tokyo streetwear label, made for limited drops.</p>
+          </a>
+        </div>
+      </article>
     </section>
 
-    <!-- SUBSECTION: E-COMMERCE & CLIENT EXPERIENCES -->
-    <section class="studio-sec studio-sec--clients" id="client-work" data-screen-label="Clients">
-      <div class="studio__wrap">
-        <div class="sec-head">
-          <div class="eyebrow reveal"><span>(02) · E-Commerce &amp; Digital Experiences</span></div>
-          <h2 class="reveal">Focused client engagements</h2>
-          <p class="reveal">High-conversion digital storefronts, real-time 3D product visualizers, and brand experiences crafted for global scale.</p>
+    <!-- Solid sections: the world rests behind these -->
+    <div id="paper" data-ink="ink">
+      <section class="studio-sec" id="services">
+        <div class="studio__wrap">
+          <div class="sec-head"><h2 class="reveal">What we build for you</h2></div>
+          <ul class="service-list">
+            <li class="reveal"><span class="mono">01</span><b>Web applications</b><p>Products and internal tools that stay fast as they grow.</p></li>
+            <li class="reveal"><span class="mono">02</span><b>Mobile apps</b><p>iOS and Android apps people keep on their phones.</p></li>
+            <li class="reveal"><span class="mono">03</span><b>Desktop software</b><p>Applications for the computers your people already use.</p></li>
+            <li class="reveal"><span class="mono">04</span><b>E-commerce</b><p>Storefronts with a checkout people finish.</p></li>
+            <li class="reveal"><span class="mono">05</span><b>SaaS products</b><p>Subscription software, from first version to scale.</p></li>
+            <li class="reveal"><span class="mono">06</span><b>AI products</b><p>Assistants and agents that are held to a standard.</p></li>
+            <li class="reveal"><span class="mono">07</span><b>Games</b><p>From first prototype to a finished release.</p></li>
+            <li class="reveal"><span class="mono">08</span><b>Business systems</b><p>Internal tools, dashboards and automation that run the company.</p></li>
+            <li class="reveal"><span class="mono">09</span><b>APIs and integrations</b><p>Connecting the systems you already depend on.</p></li>
+            <li class="reveal"><span class="mono">10</span><b>Cloud and infrastructure</b><p>Hosting, scaling and keeping it all running.</p></li>
+            <li class="reveal"><span class="mono">11</span><b>Interactive experiences</b><p>Websites and products that people remember.</p></li>
+            <li class="reveal"><span class="mono">12</span><b>Security testing</b><p>Independent testing for what you have already built.</p></li>
+            <li class="reveal"><span class="mono">13</span><b>Support and rescue</b><p>Taking over software that has stalled and getting it moving.</p></li>
+          </ul>
+          <p class="service-more reveal">Not on the list? Ask us. We take on almost every type of work in software.</p>
         </div>
+      </section>
 
-        <div class="client-showcase-grid reveal">
-          <!-- CARD 01: Variant3D -->
-          <div class="client-card">
-            <div class="client-card__header mono">
-              <span class="client-card__badge">3D Fashion Tech</span>
-              <span class="client-card__tag">Variant3D</span>
-            </div>
-            <h3 class="client-card__title">Knitwear, rendered <span class="accent">thread by thread.</span></h3>
-            <p class="client-card__desc">A real-time 3D showcase for an on-demand knitting platform — garments presented as living geometry the visitor can orbit and inspect in the browser.</p>
-            <div class="client-card__metrics mono">
-              <div><span>Engagement</span><b class="accent">3.2x time on page</b></div>
-              <div><span>Conversion</span><b class="accent">+68% demo requests</b></div>
-            </div>
-            <div class="client-card__tags mono">
-              <span>WebGL</span><span>Three.js</span><span>Loom Engine</span>
-            </div>
-            <a href="/work/variant3d" class="btn btn--ghost btn--sm">View case study <i>&rarr;</i></a>
-          </div>
-
-          <!-- CARD 02: Mira INC -->
-          <div class="client-card">
-            <div class="client-card__header mono">
-              <span class="client-card__badge">Real-Time Web</span>
-              <span class="client-card__tag">Mira INC</span>
-            </div>
-            <h3 class="client-card__title">A product site that <span class="accent">computes itself.</span></h3>
-            <p class="client-card__desc">An interactive experience for an AI-driven product company — scroll-composed scenes and generative visuals rendered live to demonstrate product intelligence.</p>
-            <div class="client-card__metrics mono">
-              <div><span>Session</span><b class="accent">4.1 min avg duration</b></div>
-              <div><span>Performance</span><b class="accent">99.4% 60fps lock</b></div>
-            </div>
-            <div class="client-card__tags mono">
-              <span>WebGL</span><span>GSAP</span><span>Generative UI</span>
-            </div>
-            <a href="/work/mira" class="btn btn--ghost btn--sm">View case study <i>&rarr;</i></a>
-          </div>
-
-          <!-- CARD 03: Melem Tokyo -->
-          <div class="client-card">
-            <div class="client-card__header mono">
-              <span class="client-card__badge">Omnichannel Apparel</span>
-              <span class="client-card__tag">Melem Tokyo</span>
-            </div>
-            <h3 class="client-card__title">Tokyo precision, <span class="accent">shipped worldwide.</span></h3>
-            <p class="client-card__desc">A headless e-commerce flagship for a high-end streetwear label — edge rendering, currency routing, and inventory orchestration for global flash drops.</p>
-            <div class="client-card__metrics mono">
-              <div><span>Checkout</span><b class="accent">-42% cart abandon</b></div>
-              <div><span>Availability</span><b class="accent">99.98% drop uptime</b></div>
-            </div>
-            <div class="client-card__tags mono">
-              <span>Next.js</span><span>Edge CDN</span><span>Custom ERP</span>
-            </div>
-            <a href="/work/melem-tokyo" class="btn btn--ghost btn--sm">View case study <i>&rarr;</i></a>
+      <section class="studio-sec studio-sec--stats">
+        <div class="studio__wrap">
+          <div class="stats-band">
+            <div class="stat"><div class="stat__k"><span class="count" data-to="47">47</span></div><p>Products shipped</p></div>
+            <div class="stat"><div class="stat__k"><span class="count" data-to="98">98</span><span>%</span></div><p>Client retention</p></div>
+            <div class="stat"><div class="stat__k">4.9</div><p>Client rating</p></div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ZERO-TRUST DEFENSIVE ARCHITECTURE MATRIX -->
-    <section class="studio-sec studio-sec--security" id="security-matrix" data-screen-label="Security Matrix">
-      <div class="studio__wrap">
-        <div class="sec-head">
-          <div class="eyebrow reveal"><span>(03) · Zero-Trust Defensive Architecture</span></div>
-          <h2 class="reveal">Built to withstand adversary scrutiny</h2>
-          <p class="reveal">We conduct rigorous vulnerability penetration tests and architect zero-trust defenses to protect databases, APIs, credential stores, and autonomous AI agents.</p>
+      <section class="studio-sec" id="process">
+        <div class="studio__wrap">
+          <div class="sec-head"><h2 class="reveal">Four phases. No surprises.</h2></div>
+          <ol class="steps">
+            <li class="step"><span class="step__num">Phase 01</span><div><h3>Discover and define</h3><p>We interrogate the problem and agree a clear measure of success before a single pixel is drawn.</p></div><span class="step__dur mono">1-2 wks</span></li>
+            <li class="step"><span class="step__num">Phase 02</span><div><h3>Design the system</h3><p>User flows, a full design system and a prototype, each decision tested against that measure.</p></div><span class="step__dur mono">2-4 wks</span></li>
+            <li class="step"><span class="step__num">Phase 03</span><div><h3>Engineer and ship</h3><p>We build in weekly slices you can click through from day one.</p></div><span class="step__dur mono">4-10 wks</span></li>
+            <li class="step"><span class="step__num">Phase 04</span><div><h3>Iterate in the open</h3><p>Launch is the midpoint. We measure, improve and hand over everything you need to own it.</p></div><span class="step__dur mono">Ongoing</span></li>
+          </ol>
         </div>
-        <div class="security-service-grid reveal">
-          <div class="sec-svc-card">
-            <span class="mono sec-svc-tag">01 · Database &amp; Web Defense</span>
-            <h3>SQLi Injection &amp; Database Dump Prevention</h3>
-            <p>Complete elimination of raw dynamic interpolation. Parameterized AST query layers, least-privilege user isolation, and egress firewalls preventing bulk data extraction and unauthorized database dumps.</p>
-            <ul class="sec-svc-list mono">
-              <li>Prepared SQL</li>
-              <li>Blind SQLi Mitigation</li>
-              <li>Dump Prevention</li>
-              <li>ORM Hardening</li>
-            </ul>
-          </div>
-          <div class="sec-svc-card">
-            <span class="mono sec-svc-tag">02 · API &amp; Scrape Defense</span>
-            <h3>API Shielding &amp; Backend Scrape Mitigation</h3>
-            <p>Guarding proprietary data pipelines and pricing APIs against automated scraper swarms. Device TLS fingerprinting (JA3/JA4), short-lived HMAC request signing, and adaptive token bucket rate limiters.</p>
-            <ul class="sec-svc-list mono">
-              <li>Token Bucket Throttling</li>
-              <li>Headless Bot Shield</li>
-              <li>Signed HMAC Payloads</li>
-              <li>Honeytoken Traps</li>
-            </ul>
-          </div>
-          <div class="sec-svc-card">
-            <span class="mono sec-svc-tag">03 · Authentication Resilience</span>
-            <h3>Brute-Force &amp; Password Cracking Auditing</h3>
-            <p>Simulating adversarial attacks using industry-grade tools including John the Ripper and Hashcat against password dictionary sets. Memory-hard Argon2id hash derivation, breached credential reject lists, and WebAuthn MFA.</p>
-            <ul class="sec-svc-list mono">
-              <li>John the Ripper Auditing</li>
-              <li>Argon2id (m=64M, t=3)</li>
-              <li>Brute-Force Backoff</li>
-              <li>Password Dict Defense</li>
-            </ul>
-          </div>
-          <div class="sec-svc-card">
-            <span class="mono sec-svc-tag">04 · Anti-AI Agent Defense</span>
-            <h3>Anti-AI Agent Audit &amp; Prompt Injection Guardrails</h3>
-            <p>Hardening autonomous LLMs and Model Context Protocol (MCP) tool-calling pipelines. Defending against direct prompt injections, indirect document context poisoning, system prompt exfiltration, and unauthorized tool execution.</p>
-            <ul class="sec-svc-list mono">
-              <li>Anti-AI Agent Audit</li>
-              <li>Prompt Injection Shield</li>
-              <li>MCP Tool Sandbox</li>
-              <li>Jailbreak Mitigation</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- TECH -->
-    <section class="studio-sec studio-sec--tech" id="tech" data-screen-label="Tech">
-      <div class="studio__wrap">
-        <div class="sec-head">
-          <div class="eyebrow reveal"><span>(04) · Tech stack</span></div>
-          <h2 class="reveal">Chosen for longevity</h2>
-          <p class="reveal">Every tool picked for performance, longevity and developer experience.</p>
+      <section class="studio-sec" id="voices">
+        <div class="studio__wrap">
+          <div class="sec-head"><h2 class="reveal">Taken at their word</h2></div>
+          <div class="voices">
+            <figure class="voice reveal">
+              <blockquote>"Zeriotic turned our product site into something that feels alive. It shows what we do instead of describing it."</blockquote>
+              <figcaption><span class="voice__avatar">SK</span><div><b>Sylvia Kang</b><span class="mono">CEO, Mira Inc</span></div></figcaption>
+            </figure>
+            <figure class="voice reveal">
+              <blockquote>"They treated our product with the reverence it deserves. Customers explore before they buy. Nothing else on the market comes close."</blockquote>
+              <figcaption><span class="voice__avatar">GG</span><div><b>Garrett Gerson</b><span class="mono">CEO, Variant3D</span></div></figcaption>
+            </figure>
+          </div>
         </div>
-        <div class="tech-grid reveal">
-          <div class="tech"><span class="mono">Framework</span><b>Next.js</b></div>
-          <div class="tech"><span class="mono">Framework</span><b>Remix</b></div>
-          <div class="tech"><span class="mono">Framework</span><b>Astro</b></div>
-          <div class="tech"><span class="mono">Runtime</span><b>Node.js</b></div>
-          <div class="tech"><span class="mono">Runtime</span><b>Bun</b></div>
-          <div class="tech"><span class="mono">Database</span><b>Postgres</b></div>
-          <div class="tech"><span class="mono">Database</span><b>Redis</b></div>
-          <div class="tech"><span class="mono">Infra</span><b>Vercel</b></div>
-          <div class="tech"><span class="mono">Infra</span><b>Cloudflare</b></div>
-          <div class="tech"><span class="mono">Infra</span><b>AWS</b></div>
-          <div class="tech"><span class="mono">Payments</span><b>Stripe</b></div>
-          <div class="tech"><span class="mono">Auth</span><b>Clerk</b></div>
-          <div class="tech"><span class="mono">AI</span><b>Anthropic</b></div>
-          <div class="tech"><span class="mono">AI</span><b>OpenAI</b></div>
-          <div class="tech"><span class="mono">Motion</span><b>GSAP</b></div>
-          <div class="tech"><span class="mono">Micro-Motion</span><b>Anime.js &bull; Atropos</b></div>
-          <div class="tech"><span class="mono">3D &amp; WebGL</span><b>Three.js &bull; GLSL</b></div>
-          <div class="tech"><span class="mono">Spatial 3D</span><b>Babylon &bull; Cesium &bull; A-Frame</b></div>
-          <div class="tech"><span class="mono">Engine</span><b>Unity</b></div>
-          <div class="tech"><span class="mono">Simulation</span><b>Deterministic C#</b></div>
-          <div class="tech"><span class="mono">Protocol</span><b>MCP Server</b></div>
-          <div class="tech"><span class="mono">Voice</span><b>WebRTC Telephony</b></div>
-          <div class="tech"><span class="mono">Security Audit</span><b>OWASP Top 10</b></div>
-          <div class="tech"><span class="mono">Hash Testing</span><b>John the Ripper &bull; Hashcat</b></div>
-          <div class="tech"><span class="mono">Password Hash</span><b>Argon2id &bull; Bcrypt</b></div>
-          <div class="tech"><span class="mono">AI Defense</span><b>Anti-Prompt Injection</b></div>
-          <div class="tech"><span class="mono">Database Defense</span><b>Parameterized SQL &bull; SQLi Shield</b></div>
-          <div class="tech"><span class="mono">API Protection</span><b>Bot Shield &bull; Rate Limiting</b></div>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- PROCESS -->
-    <section class="studio-sec studio-sec--process" id="process" data-screen-label="Process">
-      <div class="studio__wrap">
-        <div class="sec-head">
-          <div class="eyebrow reveal"><span>(05) · How we work</span></div>
-          <h2 class="reveal">Four phases. No ceremony, no surprises.</h2>
-        </div>
-        <ol class="steps">
-          <li class="step">
-            <span class="step__num">Phase 01</span>
-            <div>
-              <h3>Discover &amp; define</h3>
-              <p>We interrogate the problem. Stakeholder interviews, an audit of existing systems, competitive mapping — and a clear success metric before a single pixel is drawn.</p>
+      <section class="studio-sec" id="studio">
+        <div class="studio__wrap">
+          <div class="studio-layout">
+            <div class="studio-copy">
+              <p class="eyebrow reveal">The studio, since 2022</p>
+              <h2 class="reveal">One studio for almost any software.</h2>
+              <p class="reveal">Zeriotic takes on almost every type of work in software: new products, existing systems, mobile apps, internal tools, AI, games and security.</p>
+              <p class="reveal">Bring us the project, whatever shape it is in. No account managers: you work directly with the people building it.</p>
+              <dl class="studio-kv reveal">
+                <div><dt class="mono">Founded</dt><dd>2022</dd></div>
+                <div><dt class="mono">Work</dt><dd>Almost any software</dd></div>
+                <div><dt class="mono">HQ</dt><dd>Dhaka, BD</dd></div>
+                <div><dt class="mono">Serves</dt><dd>Worldwide</dd></div>
+              </dl>
+              <p class="process-more reveal"><a href="/compare/zeriotic-vs-agencies">Zeriotic vs a typical agency &rarr;</a></p>
             </div>
-            <span class="step__dur mono">1-2 wks</span>
-          </li>
-          <li class="step">
-            <span class="step__num">Phase 02</span>
-            <div>
-              <h3>Design the system</h3>
-              <p>Product architecture, user flows, a full design system and prototype. Every decision pressure-tested against the success metric from phase one.</p>
+            <div class="team-grid">
+              <div class="member reveal"><span class="mono">Co-founder, Engineering</span><h4>Al Mueid Hoque</h4><p>Formerly lead engineer on high-traffic commerce platforms.</p></div>
+              <div class="member reveal"><span class="mono">Design Director</span><h4>Kevin Mills</h4><p>Twelve years designing interfaces for SaaS and luxury retail.</p></div>
+              <div class="member reveal"><span class="mono">Co-founder, Engineering</span><h4>Mahdi Hasan</h4><p>Full-stack, and happiest when a server responds faster.</p></div>
+              <div class="member reveal"><span class="mono">Motion and 3D</span><h4>Muntasir Ahmed</h4><p>Brings interfaces to life, and knows when to cut motion entirely.</p></div>
             </div>
-            <span class="step__dur mono">2-4 wks</span>
-          </li>
-          <li class="step">
-            <span class="step__num">Phase 03</span>
-            <div>
-              <h3>Engineer &amp; ship</h3>
-              <p>Senior engineers only. We build in weekly slices against a staging environment you can click through from day one. No black-box development.</p>
-            </div>
-            <span class="step__dur mono">4-10 wks</span>
-          </li>
-          <li class="step">
-            <span class="step__num">Phase 04</span>
-            <div>
-              <h3>Iterate in the open</h3>
-              <p>Launch is the midpoint, not the finish line. We instrument, measure, iterate — and hand over ownership-grade documentation so the product outlives the engagement.</p>
-            </div>
-            <span class="step__dur mono">Ongoing</span>
-          </li>
-        </ol>
-        <p class="process-more mono reveal"><a href="/work/how-zeriotic-renders">Read: how zeriotic.com renders, a technical deep-dive &rarr;</a></p>
-      </div>
-    </section>
-
-    <!-- VOICES -->
-    <section class="studio-sec studio-sec--voices" id="voices" data-screen-label="Voices">
-      <div class="studio__wrap">
-        <div class="sec-head">
-          <div class="eyebrow reveal"><span>(06) · Client voices</span></div>
-          <h2 class="reveal">Taken at their word</h2>
-        </div>
-        <div class="voices">
-          <figure class="voice reveal">
-            <blockquote>“Zeriotic turned our product site into something that feels alive — real-time visuals that actually demonstrate what we do instead of describing it. Time-on-page more than doubled and demo requests climbed with it.”</blockquote>
-            <figcaption><span class="voice__avatar">SK</span><div><b>Sylvia Kang</b><span class="mono">CEO, Mira Inc</span></div></figcaption>
-          </figure>
-          <figure class="voice reveal">
-            <blockquote>“They engineer the way a product team engineers — not the way an agency engineers. Our AI assistant launched with real observability and an upgrade path from day one.”</blockquote>
-            <figcaption><span class="voice__avatar">EB</span><div><b>Ethan Brooks</b><span class="mono">CEO, OctaDezx</span></div></figcaption>
-          </figure>
-          <figure class="voice reveal">
-            <blockquote>“They treated our product with the reverence it deserves. Every garment renders in real time, thread by thread — customers explore before they buy. Nothing else on the market comes close.”</blockquote>
-            <figcaption><span class="voice__avatar">GG</span><div><b>Garrett Gerson</b><span class="mono">CEO, Variant3D</span></div></figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- STUDIO -->
-    <section class="studio-sec studio-sec--studio" id="studio" data-screen-label="Studio">
-      <div class="studio__wrap">
-        <div class="studio-layout">
-          <div class="studio-copy">
-            <div class="eyebrow reveal"><span>(07) · The studio — since 2022</span></div>
-            <h2 class="reveal">A small, senior team. <span class="accent">By design.</span></h2>
-            <p class="reveal">Zeriotic is an independent studio of sixteen. We take on a handful of engagements each year — enough to stay sharp, few enough that senior people do the actual work. No account managers, no subcontractor shuffle, no juniors learning on your budget.</p>
-            <p class="reveal">We work with founders who want a partner that treats their product like our own, and teams who want the polish of a design house with the rigour of a product engineering group.</p>
-            <dl class="studio-kv reveal">
-              <div><dt class="mono">Founded</dt><dd>2022</dd></div>
-              <div><dt class="mono">Team size</dt><dd>16</dd></div>
-              <div><dt class="mono">HQ</dt><dd>Dhaka, BD</dd></div>
-              <div><dt class="mono">Serves</dt><dd>Worldwide</dd></div>
-            </dl>
-            <p class="process-more mono reveal"><a href="/compare/zeriotic-vs-agencies">Zeriotic vs a typical agency - what's actually different &rarr;</a></p>
-          </div>
-          <div class="team-grid">
-            <div class="member reveal"><span class="mono">Co-founder · Engineering</span><h4>Al Mueid Hoque</h4><p>Formerly lead engineer on high-traffic commerce platforms. Specialises in performance and architecture.</p></div>
-            <div class="member reveal"><span class="mono">Design Director</span><h4>Kevin Mills</h4><p>Twelve years designing interfaces for SaaS and luxury retail. Brand, systems, and typographic obsession.</p></div>
-            <div class="member reveal"><span class="mono">Co-founder · Engineering</span><h4>Mahdi Hasan</h4><p>Full-stack, infra-first. Loves Postgres, caches, and anything that makes a server respond faster.</p></div>
-            <div class="member reveal"><span class="mono">Motion &amp; 3D</span><h4>Muntasir Ahmed</h4><p>Brings interfaces to life. WebGL, GSAP, and the discipline to know when to cut motion entirely.</p></div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <section id="react-ui-layer" style="position: relative; z-index: 10;">
-      <!-- Crawler fallback for the React capabilities accordion. React's
-           createRoot replaces this content on mount; without JavaScript this
-           static text IS the page (Readability strips <noscript>, so the
-           fallback must live in the DOM, inside the mount node). -->
-      <!-- prerender:start -->
-      <div class="caps-fallback">
-        <h2 class="mono caps-fallback__title">Capabilities</h2>
-        <p class="caps-fallback__sub">What we build for forward-thinking teams.</p>
-        <div class="caps-fallback__item">
-          <h3>High-performance Web Apps</h3>
-          <p>We build Next.js and Vite applications that load in milliseconds, respecting user bandwidth and battery life. Our architecture decouples heavy WebGL processes from layout threads.</p>
-        </div>
-        <div class="caps-fallback__item">
-          <h3>E-commerce Platforms</h3>
-          <p>Custom headless checkouts, bespoke ERP integrations, and 3D product configurators that let users interact with products before buying.</p>
-        </div>
-        <div class="caps-fallback__item">
-          <h3>Interactive 3D &amp; WebGL</h3>
-          <p>Zero-latency particle systems, dynamic resolution scaling, and responsive WebGL environments mapped to user scroll and interaction.</p>
-        </div>
-        <div class="caps-fallback__item">
-          <h3>Autonomous Agent Platforms</h3>
-          <p>Enterprise agentic AI systems like OctaDezx: real-time voice with conversational barge-in, computer-vision catalogue discovery, and native Model Context Protocol (MCP) servers with zero data-leak guarantees.</p>
-        </div>
-        <div class="caps-fallback__item">
-          <h3>Real-Time Physics &amp; Gaming Simulation</h3>
-          <p>Accert One motorsport engine: deterministic 60 FPS physics, multi-link suspension kinematics, raycast contact normals, and active DRS aerodynamics across mobile and cross-platform devices.</p>
-        </div>
-        <div class="caps-fallback__item">
-          <h3>Defensive Cybersecurity &amp; AI Agent Auditing</h3>
-          <p>Comprehensive vulnerability penetration testing and hardening: SQLi dump prevention, backend scrape defense, brute-force mitigation, John the Ripper password hash cracking resistance testing, and prompt injection guardrails for autonomous AI agent architectures.</p>
-        </div>
-      </div>
-      <!-- prerender:end -->
-    </section>
-
-    <!-- CONTACT -->
-    <section class="panel panel--contact" id="contact" data-screen-label="Contact">
+    <!-- CONTACT: the second gate, at golden hour -->
+    <section class="panel--contact" id="contact" data-ink="ink">
       <div class="contact__card">
-        <div class="eyebrow reveal"><span>Ready when you are</span></div>
-        <h2 class="reveal">Let's build something <span class="accent">remarkable.</span></h2>
-        <p class="contact__sub reveal">We take on a handful of engagements each quarter. If you're shipping something ambitious, we'd love to hear about it.</p>
+        <div class="contact__sayhello">
+          <h2 class="serif-title reveal">Say hello</h2>
+          <p class="reveal">Whatever you need built, tell us about it.</p>
+          <p class="reveal contact__mail"><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a></p>
+        </div>
         <form class="form reveal" id="enquiry" novalidate>
           <div class="form__row">
             <div class="field"><input type="text" name="name" required placeholder=" " autocomplete="name" /><label>Name</label></div>
@@ -848,10 +860,15 @@
               <select name="type" required>
                 <option value="" disabled selected>Select project type</option>
                 <option value="web-app">Web application</option>
+                <option value="mobile">Mobile app</option>
+                <option value="desktop">Desktop software</option>
                 <option value="ecommerce">E-commerce platform</option>
                 <option value="saas">SaaS product</option>
-                <option value="ai">AI integration</option>
-                <option value="security">Cybersecurity &amp; AI audit</option>
+                <option value="ai">AI product</option>
+                <option value="game">Game</option>
+                <option value="business-system">Business system or integration</option>
+                <option value="support">Support for existing software</option>
+                <option value="security">Security assessment</option>
                 <option value="other">Other</option>
               </select>
               <label>Project type</label>
@@ -870,66 +887,55 @@
             </div>
           </div>
           <div class="field"><textarea name="message" rows="4" required placeholder=" "></textarea><label>What are you building?</label></div>
-          <!-- honeypot — humans never see this -->
           <div class="field field--hp" aria-hidden="true"><input type="text" name="company" tabindex="-1" autocomplete="off" /></div>
           <button type="submit" class="btn">Send message <i>&rarr;</i></button>
           <p class="form__status mono" id="form-status" role="status"></p>
         </form>
         <div class="contact__cells reveal">
           <div><span class="mono">Email</span><b><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a></b></div>
-          <div><span class="mono">New work</span><b data-availability>Available Q3 2026 / Q4 2026</b></div>
+          <div><span class="mono">New work</span><b data-availability>Available Q4 2026 / Q1 2027</b></div>
           <div><span class="mono">Response time</span><b>Within 24 hours</b></div>
         </div>
 
-        <!-- FAQ: visible Q&A mirrored in the FAQPage JSON-LD in <head>.
-             Answers must stay word-identical to the schema, or the markup
-             describes content that is not on the page. -->
         <div class="contact-faq" id="faq">
           <h3 class="mono">Questions, answered</h3>
-          <div class="faq-item">
-            <h4>What does Zeriotic build?</h4>
-            <p>High-performance web applications, e-commerce platforms and SaaS products, plus AI integration and interactive 3D/WebGL product experiences.</p>
-          </div>
-          <div class="faq-item">
-            <h4>How much does a Zeriotic project cost?</h4>
-            <p>Projects are scoped during discovery. Typical budget bands are $0 to $5k, $5k to $10k, $10k to $25k, $25k to $50k, $50k to $100k and $100k+.</p>
-          </div>
-          <div class="faq-item">
-            <h4>How does the engagement process work?</h4>
-            <p>Four phases: discover and define (1-2 weeks), design the system (2-4 weeks), engineer and ship (4-10 weeks), then iterate in the open. You click through a staging environment from day one.</p>
-          </div>
-          <div class="faq-item">
-            <h4>Where is Zeriotic based and who does it work with?</h4>
-            <p>Zeriotic is headquartered in Dhaka, Bangladesh and serves clients worldwide. It is an independent team of sixteen, founded in 2022.</p>
-          </div>
-          <div class="faq-item">
-            <h4>When can Zeriotic start a new project?</h4>
-            <p>Zeriotic takes on a handful of engagements each quarter. Email hello@zeriotic.com and you will get a response within 24 hours.</p>
-          </div>
+          <div class="faq-item"><h4>What does Zeriotic build?</h4><p>Almost every type of software, including web and mobile applications, e-commerce platforms, SaaS and AI products, games, business systems and security testing. Zeriotic also makes its own titles: the OctaDezx AI support agent and the Accert One racing game.</p></div>
+          <div class="faq-item"><h4>What is OctaDezx?</h4><p>OctaDezx is an AI customer support agent from Zeriotic. It answers customers on chat, messaging apps and the phone, takes orders and booking requests, and checks every written reply against the business's own records before a customer sees it.</p></div>
+          <div class="faq-item"><h4>How accurate is OctaDezx?</h4><p>In its published safety benchmark, run on 2026-11-03, 86.8% of 303 multi-step test cases ended in a safe outcome, with 0 privacy leaks in 24 targeted tests. The cases are synthetic and the benchmark is not a head-to-head comparison.</p></div>
+          <div class="faq-item"><h4>What is Accert One?</h4><p>Accert One is a single-seater mobile racing game from Zeriotic, coming to iOS and Android. Players race a full field through day, night, rain and snow, call their pit stops and chase a championship.</p></div>
+          <div class="faq-item"><h4>How do I pre-order Accert One?</h4><p>Enter your email in the pre-order box on zeriotic.com. The game is free to download, and you will be told the moment it is ready on iOS and Android.</p></div>
+          <div class="faq-item"><h4>Does Zeriotic offer penetration testing?</h4><p>Yes. Zeriotic runs independent security testing for web platforms, APIs and AI products, including penetration testing, application security review, and AI and agent security, followed by help with the fix and a retest.</p></div>
+          <div class="faq-item"><h4>How much does a Zeriotic project cost?</h4><p>Projects are scoped during discovery. Typical budget bands are $0 to $5k, $5k to $10k, $10k to $25k, $25k to $50k, $50k to $100k and $100k+.</p></div>
+          <div class="faq-item"><h4>How does the engagement process work?</h4><p>Four phases: discover and define (1-2 weeks), design the system (2-4 weeks), engineer and ship (4-10 weeks), then iterate in the open. You click through a staging environment from day one.</p></div>
+          <div class="faq-item"><h4>Where is Zeriotic based and who does it work with?</h4><p>Zeriotic is headquartered in Dhaka, Bangladesh and serves clients worldwide. It was founded in 2022 and works with businesses of any size.</p></div>
+          <div class="faq-item"><h4>When can Zeriotic start a new project?</h4><p>Zeriotic is taking on new projects of almost every type. Email hello@zeriotic.com and you will get a response within 24 hours.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="footer">
       <div class="studio__wrap">
-        <div class="footer__big">ZERI<span class="accent">OTIC</span></div>
+        <div class="footer__big">ZERIOTIC</div>
         <div class="footer__grid">
-          <div><h4 class="mono">Studio</h4><p>Zeriotic is a premium web development studio building high-performance applications, e-commerce platforms and SaaS products for a handful of clients each year.</p></div>
-          <div><h4 class="mono">Services</h4><a href="#octadezx">OctaDezx (AI)</a><a href="#accert-one">Accert One (F1)</a><a href="/work/cybersecurity-audit">Security audits</a><a href="/blog/how-uncensored-ai-agents-increase-hacking">AI Threat Report</a><a href="/blog/php-vulnerability-login-without-password">Security bulletin</a><a href="#client-work">Client work</a><a href="/compare/zeriotic-vs-agencies">Why we're different</a></div>
-          <div><h4 class="mono">Studio</h4><a href="#work">Flagships</a><a href="#client-work">Client work</a><a href="#process">Process</a><a href="#studio">About</a><a href="#contact">Contact</a></div>
-          <div><h4 class="mono">Elsewhere</h4><a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a><a href="https://facebook.com/zeriotic" rel="noopener">Facebook</a><a href="https://instagram.com/zeriotic" rel="noopener">Instagram</a><a href="https://github.com/zeriotic" rel="noopener">GitHub</a><a href="https://linkedin.com/company/zeriotic" rel="noopener">LinkedIn</a></div>
+          <div><h4>Studio</h4><p>Software crafted to outlast trends. Bespoke software, AI, games and security engineered in Dhaka, Bangladesh for clients worldwide.</p></div>
+          <div><h4>Services</h4><a href="/software-company-bangladesh">Software Studio</a><a href="/cybersecurity-company-bangladesh">Cybersecurity</a><a href="/game-studio-bangladesh">Game Studio</a><a href="/ai-development-company-bangladesh">AI Systems</a><a href="/web-development-company-bangladesh">Web Development</a></div>
+          <div><h4>Made here</h4><a href="#octadezx">OctaDezx</a><a href="#accert-one">Accert One</a><a href="/compare/zeriotic-vs-agencies">How We Work</a><a href="/privacy/">Privacy Policy</a></div>
+          <div><h4>Elsewhere</h4><a href="mailto:hello@zeriotic.com">Email</a><a href="https://facebook.com/zeriotic">Facebook</a><a href="https://instagram.com/zeriotic">Instagram</a><a href="https://github.com/zeriotic">GitHub</a><a href="https://linkedin.com/company/zeriotic">LinkedIn</a></div>
         </div>
-        <div class="footer__bottom mono">
-          <span>&copy; 2026 Zeriotic Studio</span>
-          <span>Dhaka, BD &bull; 23.81&deg;N / 90.41&deg;E</span>
-          <span><a href="/privacy/">Privacy Policy</a></span>
-          <span>Crafted in-house</span>
-        </div>
+        <div class="footer__bottom"><span>©2026</span><span>Dhaka, BD</span></div>
       </div>
     </footer>
-
   </main>
+
+  <!-- Fixed footer chrome -->
+  <div class="footer__cta"><a href="#contact" class="btn">Start a project <i>↘</i></a></div>
+  <button class="btn btn--circle mute-btn js-mute-btn" aria-label="Toggle sound">
+    <span class="mute-btn__icon"><i style="height:6px"></i><i style="height:11px"></i><i style="height:8px"></i><i style="height:13px"></i><i style="height:6px"></i></span>
+  </button>
+  <div class="footer__cr">©2026</div>
+
+  <div id="p-cover" aria-hidden="true"></div>
+  <div class="asscrollbar" aria-hidden="true"><div class="asscrollbar__handle"><div></div></div></div>
 
   <script type="module" src="/src/main.jsx"></script>
 </body>

@@ -1,13 +1,7 @@
-import anime from 'animejs/lib/anime.es.js';
-
 /**
  * Preloader.js
- * The Zeriotic mark draws itself on (ring → square → diagonal, as SVG strokes),
- * the wordmark resolves beneath it, and a percentage counter is fed by the real
- * LoadingManager progress before the whole thing dissolves to reveal the scene.
- *
- * The percentage is eased toward the true load fraction so it never stalls or
- * jumps — it feels like a smooth fill even though bytes arrive in bursts.
+ * The mark draws itself in CSS, so it is moving from the very first paint.
+ * This only feeds the progress bar and opens the way in once the world is ready.
  */
 export default class Preloader {
   constructor(onComplete) {
@@ -15,75 +9,56 @@ export default class Preloader {
     this.el = document.getElementById('preloader');
     this.fill = document.getElementById('preloader-fill');
     this.pct = document.getElementById('preloader-pct');
-    this.target = 0;     // true fraction 0..1 from Resources
-    this.shown = 0;      // displayed fraction, eased
+    this.target = 0;
+    this.shown = 0;
     this._done = false;
 
     document.body.classList.add('is-loading');
 
-    this._drawMark();
-
-    // Hard timeout — if resources haven't loaded after 12s, force-dismiss the
-    // preloader so the site remains usable (poster fallback visible behind).
-    this._timeout = setTimeout(() => {
-      if (!this._done) { this.target = 1; }
-    }, 12000);
-
-    this._raf = requestAnimationFrame(() => this._loop());
-  }
-
-  /** Stroke-draw the mark (ring → square → diagonal), then resolve the wordmark. */
-  _drawMark() {
-    const parts = ['pre-ring', 'pre-rect', 'pre-diag']
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
-    const tl = anime.timeline({ easing: 'easeInOutQuart' });
-    parts.forEach((p, i) => {
-      const len = p.getTotalLength();
-      p.style.strokeDasharray = len;
-      p.style.strokeDashoffset = len;
-      tl.add({ targets: p, strokeDashoffset: [len, 0], duration: 520 + i * 60 }, i === 0 ? 0 : '-=260');
+    this.el.querySelectorAll('.js-enter-btn, .js-enter-no-audio').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const on = btn.dataset.audio !== 'off';
+        import('../utils/Sound.js').then(({ sound }) => {
+          sound.setEnabled(on);
+          document.querySelector('.js-mute-btn')?.classList.toggle('is-muted', !on);
+        }).catch(() => {});
+        this._dismiss();
+      });
     });
-    tl.add({
-      targets: '.preloader__brand',
-      opacity: [0, 1], translateY: [8, 0], duration: 900, easing: 'easeOutExpo',
-    }, '-=300');
+
+    this._timeout = setTimeout(() => { if (!this._done) this.target = 1; }, 12000);
+    requestAnimationFrame(() => this._loop());
   }
 
-  /** Wired to Resources 'progress'. */
+  /** Fed by the world as it builds. */
   setProgress(frac) { this.target = Math.max(this.target, frac); }
 
   _loop() {
-    // Ease toward the real fraction; once everything is in, drive firmly to 100%
-    // so the bar never lingers asymptotically at 99%.
-    const rate = this.target >= 1 ? 0.16 : 0.08;
-    this.shown += (this.target - this.shown) * rate + (this.target >= 1 ? 0.004 : 0);
-    this.shown = Math.min(this.shown, 1);
-    const p = Math.round(this.shown * 100);
-    this.pct.textContent = p + '%';
-    this.fill.style.width = (this.shown * 100).toFixed(1) + '%';
+    const rate = this.target >= 1 ? 0.3 : 0.14;
+    this.shown = Math.min(1, this.shown + (this.target - this.shown) * rate + (this.target >= 1 ? 0.01 : 0));
+    this.pct.textContent = `${Math.round(this.shown * 100)}%`;
+    this.fill.style.width = `${(this.shown * 100).toFixed(1)}%`;
 
     if (this.target >= 1 && this.shown > 0.995 && !this._done) {
       this._done = true;
-      this._finish();
+      this.el.classList.add('is-ready');
+      setTimeout(() => { if (!this._dismissed) this._dismiss(); }, 8000);
       return;
     }
-    this._raf = requestAnimationFrame(() => this._loop());
+    requestAnimationFrame(() => this._loop());
   }
 
-  _finish() {
+  _dismiss() {
+    if (this._dismissed) return;
+    this._dismissed = true;
     clearTimeout(this._timeout);
     this.pct.textContent = '100%';
     this.fill.style.width = '100%';
-    anime.timeline({ easing: 'easeInOutQuart' })
-      .add({ targets: '.preloader__inner', opacity: [1, 0], translateY: [0, -16], duration: 700, delay: 250 })
-      .add({
-        targets: '#preloader', opacity: [1, 0], duration: 900,
-        complete: () => {
-          this.el.style.display = 'none';
-          document.body.classList.remove('is-loading');
-          this.onComplete?.();
-        },
-      }, '-=400');
+    this.el.classList.add('is-leaving');
+    document.body.classList.remove('is-loading');
+    // The opening starts while the veil lifts, not after it.
+    requestAnimationFrame(() => this.onComplete?.());
+    setTimeout(() => { this.el.style.display = 'none'; }, 560);
   }
 }
