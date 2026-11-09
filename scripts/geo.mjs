@@ -67,7 +67,7 @@ async function generateLlmsFull() {
     return;
   }
   let corpus = "";
-  for (const p of PAGES.filter((x) => x.out === "index.html" || x.out.startsWith("work/") || x.out.startsWith("compare/") || x.out.startsWith("blog/") || x.out.endsWith("-bangladesh.html"))) {
+  for (const p of PAGES.filter((x) => x.out === "index.html" || x.out.startsWith("work/") || x.out.startsWith("compare/") || x.out.startsWith("blog/"))) {
     const html = await fs.readFile(path.join(DIST, p.out), "utf8");
     const name = p.title.replace(" | Zeriotic", "");
     corpus += `\n### ${name}\n\n${textOf(html)}\n`;

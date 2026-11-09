@@ -108,11 +108,6 @@ Email hello@zeriotic.com for a quote; response time is within 24 hours.
 ## Links
 
 - https://zeriotic.com/ - studio homepage: services, work, process, contact
-- https://zeriotic.com/software-company-bangladesh - custom enterprise software engineering studio in Dhaka, Bangladesh
-- https://zeriotic.com/cybersecurity-company-bangladesh - independent offensive security, penetration testing and AI assurance
-- https://zeriotic.com/game-studio-bangladesh - original 3D simulation and mobile game studio in Bangladesh
-- https://zeriotic.com/ai-development-company-bangladesh - autonomous agentic systems and MCP server engineering
-- https://zeriotic.com/web-development-company-bangladesh - Three.js WebGL and sub-100ms web development in Bangladesh
 - https://zeriotic.com/llms-full.txt - full text of every project page, for answer engines
 - https://zeriotic.com/work/octadezx - OctaDezx, the AI support agent that checks its work
 - https://zeriotic.com/work/accert-one - Accert One, a single-seater racing game coming to iOS and Android, pre-orders open
