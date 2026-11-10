@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import nodemailer from 'nodemailer';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 /**
@@ -85,7 +86,102 @@ const telemetryBuffer = [];
 const MAX_TELEMETRY_LOGS = 2000;
 const ADMIN_KEY = process.env.ADMIN_KEY || 'zeriotic-admin-77';
 
+// Rate limiter for login brute force prevention
+const failedLogins = new Map();
+
+function isIpLocked(ip) {
+  const record = failedLogins.get(ip);
+  if (!record) return false;
+  const now = Date.now();
+  if (record.lockedUntil && now < record.lockedUntil) return true;
+  if (record.lockedUntil && now >= record.lockedUntil) {
+    failedLogins.delete(ip);
+    return false;
+  }
+  if (now - record.firstFail > 15 * 60 * 1000) {
+    failedLogins.delete(ip);
+    return false;
+  }
+  return false;
+}
+
+function recordFailedLogin(ip) {
+  const now = Date.now();
+  const record = failedLogins.get(ip) || { count: 0, firstFail: now, lockedUntil: null };
+  record.count += 1;
+  if (record.count >= 5) {
+    record.lockedUntil = now + 15 * 60 * 1000; // 15 mins lock
+  }
+  failedLogins.set(ip, record);
+  return record;
+}
+
+function safeCompare(a, b) {
+  const hashA = crypto.createHash('sha256').update(String(a)).digest();
+  const hashB = crypto.createHash('sha256').update(String(b)).digest();
+  return crypto.timingSafeEqual(hashA, hashB);
+}
+
+function makeSessionToken(secret) {
+  const expiresAt = Date.now() + 8 * 3600 * 1000; // 8 hours
+  const payload = `ZR_ADMIN_${expiresAt}`;
+  const sig = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+  return `${payload}.${sig}`;
+}
+
+function verifySessionToken(token, secret) {
+  if (!token || typeof token !== 'string') return false;
+  const parts = token.split('.');
+  if (parts.length !== 2) return false;
+  const [payload, sig] = parts;
+  const expectedSig = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+  const bufA = crypto.createHash('sha256').update(sig).digest();
+  const bufB = crypto.createHash('sha256').update(expectedSig).digest();
+  if (!crypto.timingSafeEqual(bufA, bufB)) return false;
+
+  const match = payload.match(/^ZR_ADMIN_(\d+)$/);
+  if (!match) return false;
+  const expiresAt = Number(match[1]);
+  return Date.now() < expiresAt;
+}
+
+// 1. Auth Endpoint: POST /api/telemetry?auth=1
 app.post('/api/telemetry', (req, res) => {
+  const isAuthRequest = req.query.auth === '1' || req.query.action === 'auth';
+
+  if (isAuthRequest) {
+    if (isIpLocked(req.ip)) {
+      return res.status(429).json({
+        ok: false,
+        error: 'Too many failed authentication attempts. IP locked for 15 minutes.'
+      });
+    }
+
+    const candidateKey = req.body?.key || '';
+    if (candidateKey && safeCompare(candidateKey, ADMIN_KEY)) {
+      failedLogins.delete(req.ip);
+      const token = makeSessionToken(ADMIN_KEY);
+      return res.json({
+        ok: true,
+        authenticated: true,
+        token,
+        expiresIn: '8h',
+        message: 'Cryptographic authentication successful.'
+      });
+    } else {
+      const rec = recordFailedLogin(req.ip);
+      const remaining = Math.max(0, 5 - rec.count);
+      return res.status(401).json({
+        ok: false,
+        error: remaining > 0
+          ? `Invalid administrative key. ${remaining} attempts remaining before 15-minute IP lockout.`
+          : 'Too many failed authentication attempts. IP locked for 15 minutes.',
+        remainingAttempts: remaining
+      });
+    }
+  }
+
+  // Regular telemetry beacon ingestion
   const data = req.body;
   if (data && data.vid) {
     telemetryBuffer.unshift({
@@ -99,11 +195,27 @@ app.post('/api/telemetry', (req, res) => {
 });
 
 app.get('/api/telemetry', (req, res) => {
-  const key = req.headers['x-admin-key'] || req.headers['x-key'] || req.query.key;
-  if (!key || key !== ADMIN_KEY) {
-    return res.status(401).json({ ok: false, error: 'Unauthorized: Valid administrator authentication key required.' });
+  const authHeader = req.headers['authorization'] || '';
+  const bearerToken = authHeader.startsWith('Bearer ') ? authHeader.slice(7).trim() : '';
+  const rawKey = req.headers['x-admin-key'] || req.headers['x-key'] || req.query.key || '';
+
+  const isTokenValid = bearerToken && verifySessionToken(bearerToken, ADMIN_KEY);
+  const isKeyValid = rawKey && safeCompare(rawKey, ADMIN_KEY);
+  const isRawTokenValid = rawKey && verifySessionToken(rawKey, ADMIN_KEY);
+
+  if (!isTokenValid && !isKeyValid && !isRawTokenValid) {
+    return res.status(401).json({
+      ok: false,
+      error: 'Unauthorized: Valid cryptographic administrator token or key required.'
+    });
   }
-  res.json({ ok: true, total: telemetryBuffer.length, records: telemetryBuffer, serverTime: new Date().toISOString() });
+
+  res.json({
+    ok: true,
+    total: telemetryBuffer.length,
+    records: telemetryBuffer,
+    serverTime: new Date().toISOString()
+  });
 });
 
 // ---- production: serve the built site from the same process ----

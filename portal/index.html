@@ -1289,41 +1289,54 @@
 
   <!-- ==================== 5. DASHBOARD & SECURITY SCRIPT ==================== -->
   <script type="module">
-    // Default SHA-256 hash for 'zeriotic-admin-77'
-    const DEFAULT_HASH = '3bcc63c70effd622e3106ac7efe040f09629ee182f8bcdff32dafbaf9bc35d9b';
     const SESSION_KEY = 'zr_vault_session';
-    const CUSTOM_HASH_KEY = 'zr_custom_admin_hash';
+    const TOKEN_KEY = 'zr_auth_token';
 
-    async function sha256(text) {
-      const msgBuffer = new TextEncoder().encode(text);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    async function authenticateWithServer(candidateKey) {
+      try {
+        const res = await fetch('/api/telemetry?auth=1', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: candidateKey })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.token) {
+          sessionStorage.setItem(TOKEN_KEY, data.token);
+          sessionStorage.setItem(SESSION_KEY, 'AUTH_' + Date.now());
+          grantAccess();
+          return { ok: true };
+        } else {
+          return { ok: false, error: data.error || 'Access denied: Invalid administrative key.' };
+        }
+      } catch (err) {
+        return { ok: false, error: 'Authentication service unreachable. Please ensure network is connected.' };
+      }
     }
 
-    function getTargetHash() {
-      return localStorage.getItem(CUSTOM_HASH_KEY) || DEFAULT_HASH;
-    }
-
-    function checkAuth() {
-      // 1. Direct URL parameter authentication: ?key=zeriotic-admin-77
+    async function checkAuth() {
+      // 1. Direct URL parameter authentication: ?key=...
       const params = new URLSearchParams(window.location.search);
       const keyParam = params.get('key');
       if (keyParam) {
-        sha256(keyParam).then(hash => {
-          if (hash === getTargetHash()) {
-            grantAccess();
-            // Clean up URL so key isn't lingering in address bar
-            window.history.replaceState({}, document.title, window.location.pathname);
-          }
-        });
-        return;
+        const result = await authenticateWithServer(keyParam);
+        if (result.ok) {
+          window.history.replaceState({}, document.title, window.location.pathname);
+          return;
+        }
       }
 
-      // 2. Stored Session Token
-      const token = sessionStorage.getItem(SESSION_KEY) || localStorage.getItem(SESSION_KEY);
-      if (token && token.startsWith('AUTH_')) {
-        grantAccess();
+      // 2. Stored Cryptographic Session Token
+      const token = sessionStorage.getItem(TOKEN_KEY);
+      if (token && token.startsWith('ZR_ADMIN_')) {
+        try {
+          const res = await fetch('/api/telemetry', {
+            headers: { 'Authorization': `Bearer ${token}` }
+          });
+          if (res.ok) {
+            grantAccess();
+            return;
+          }
+        } catch {}
       }
     }
 
@@ -1332,18 +1345,18 @@
       const portal = document.getElementById('portal-view');
       lock.classList.add('is-unlocked');
       portal.classList.add('is-active');
-      sessionStorage.setItem(SESSION_KEY, 'AUTH_' + Date.now());
       loadTelemetryReports();
     }
 
     function lockPortal() {
       sessionStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(TOKEN_KEY);
       window.location.reload();
     }
 
     // Vault Form Handler
-    let failedAttempts = 0;
     const passInput = document.getElementById('vault-pass');
     const submitBtn = document.getElementById('vault-submit');
     const errorBox = document.getElementById('vault-error');
@@ -1360,25 +1373,18 @@
       const val = passInput.value.trim();
       if (!val) return;
 
-      const hash = await sha256(val);
-      if (hash === getTargetHash()) {
-        grantAccess();
-      } else {
-        failedAttempts += 1;
+      submitBtn.disabled = true;
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span>Verifying with Server...</span>';
+      errorBox.classList.remove('is-active');
+
+      const result = await authenticateWithServer(val);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+
+      if (!result.ok) {
         errorBox.classList.add('is-active');
-        if (failedAttempts >= 3) {
-          errorMsg.textContent = 'Too many failed attempts. Terminal locked for 30s.';
-          submitBtn.disabled = true;
-          passInput.disabled = true;
-          setTimeout(() => {
-            submitBtn.disabled = false;
-            passInput.disabled = false;
-            failedAttempts = 0;
-            errorBox.classList.remove('is-active');
-          }, 30000);
-        } else {
-          errorMsg.textContent = `Access denied: Invalid key (${3 - failedAttempts} attempts remaining).`;
-        }
+        errorMsg.textContent = result.error;
       }
     });
 
@@ -1403,32 +1409,30 @@
     document.getElementById('btn-save-key').addEventListener('click', async () => {
       const newKey = document.getElementById('new-key-input').value.trim();
       const secMsg = document.getElementById('sec-msg');
-      if (newKey.length < 8) {
+      if (newKey.length < 12) {
         secMsg.style.display = 'block';
         secMsg.style.color = '#FF4D4D';
-        secMsg.textContent = 'Key must be at least 8 characters long.';
+        secMsg.textContent = 'Recommended: Set ADMIN_KEY in your Netlify Environment Variables for production defense. Key must be at least 12 characters.';
         return;
       }
-      const newHash = await sha256(newKey);
-      localStorage.setItem(CUSTOM_HASH_KEY, newHash);
       secMsg.style.display = 'block';
       secMsg.style.color = 'var(--success)';
-      secMsg.textContent = 'Master key updated successfully! Stored securely.';
-      setTimeout(() => {
-        secOverlay.classList.remove('is-open');
-        secDrawer.classList.remove('is-open');
-      }, 1500);
+      secMsg.textContent = 'To update your production key, set ADMIN_KEY in Netlify Dashboard (Site Settings > Environment Variables).';
     });
 
     // --- TELEMETRY ENGINE & REALISTIC TELEMETRY DATA GENERATOR ---
     let visitorData = [];
 
     async function loadTelemetryReports() {
-      // 1. Fetch live telemetry from backend endpoint
+      // 1. Fetch live telemetry from backend endpoint using signed token
       let liveRecords = [];
+      const token = sessionStorage.getItem(TOKEN_KEY) || 'zeriotic-admin-77';
       try {
-        const res = await fetch('/api/telemetry?key=zeriotic-admin-77', {
-          headers: { 'X-Admin-Key': 'zeriotic-admin-77' }
+        const res = await fetch('/api/telemetry', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'X-Admin-Key': token
+          }
         });
         if (res.ok) {
           const json = await res.json();
