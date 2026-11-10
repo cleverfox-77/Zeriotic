@@ -779,12 +779,12 @@ function renderBanner(forceOpen = false) {
 
   banner.innerHTML = `
     <div class="zr-cookie-header">
-      <div class="zr-cookie-eyebrow">Visitor Telemetry & Cookies</div>
+      <div class="zr-cookie-eyebrow">Cookie Preferences</div>
       <div class="zr-cookie-badge">Dhaka &amp; Worldwide</div>
     </div>
-    <div class="zr-cookie-title">We measure detailed visitor activity, scroll depth, and referral attribution.</div>
+    <div class="zr-cookie-title">We use cookies to enhance your experience.</div>
     <div class="zr-cookie-desc">
-      Zeriotic uses activity cookies to understand how prospective clients and developers engage with our work. You can accept all tracking cookies or select necessary cookies only.
+      We use cookies to enhance your experience, analyze site traffic, and understand how visitors engage with our work. You can accept all cookies or choose necessary cookies only.
     </div>
     <div class="zr-cookie-actions">
       <button type="button" class="zr-btn zr-btn--primary" id="zr-accept-all">Accept all cookies</button>
@@ -795,7 +795,7 @@ function renderBanner(forceOpen = false) {
       <div class="zr-pref-row">
         <div class="zr-pref-info">
           <div class="zr-pref-name">Strictly Necessary Cookies</div>
-          <div class="zr-pref-desc">Stores your consent choices (<code style="font-size:11px;color:#FF5500">zr_consent</code>) and security tokens. Required for the website to function.</div>
+          <div class="zr-pref-desc">Essential for the website to function securely and remember your choices (<code style="font-size:11px;color:#FF5500">zr_consent</code>). Always active.</div>
         </div>
         <label class="zr-toggle">
           <input type="checkbox" checked disabled>
@@ -804,8 +804,8 @@ function renderBanner(forceOpen = false) {
       </div>
       <div class="zr-pref-row">
         <div class="zr-pref-info">
-          <div class="zr-pref-name">Activity, Scroll &amp; Dwell Telemetry</div>
-          <div class="zr-pref-desc">Tracks scroll milestones (25%–100%), chapter dwell time, button clicks, and hardware telemetry (<code style="font-size:11px;color:#FF5500">_zr_vid, _zr_sid, _zr_depth, _zr_act</code>).</div>
+          <div class="zr-pref-name">Analytics &amp; Performance</div>
+          <div class="zr-pref-desc">Helps us analyze site traffic and understand how visitors engage with our content (<code style="font-size:11px;color:#FF5500">_zr_vid, _zr_sid, _zr_depth, _zr_act</code>).</div>
         </div>
         <label class="zr-toggle">
           <input type="checkbox" id="zr-pref-analytics" ${currentPrefs.analytics ? 'checked' : ''}>
@@ -814,8 +814,8 @@ function renderBanner(forceOpen = false) {
       </div>
       <div class="zr-pref-row">
         <div class="zr-pref-info">
-          <div class="zr-pref-name">Attribution &amp; Campaign Source</div>
-          <div class="zr-pref-desc">Records external referrers, entry landing page, and UTM campaign parameters (<code style="font-size:11px;color:#FF5500">_zr_ref, _zr_landing, _zr_utm</code>).</div>
+          <div class="zr-pref-name">Traffic &amp; Referral Sources</div>
+          <div class="zr-pref-desc">Measures referral channels to help us understand how audiences find Zeriotic (<code style="font-size:11px;color:#FF5500">_zr_ref, _zr_landing, _zr_utm</code>).</div>
         </div>
         <label class="zr-toggle">
           <input type="checkbox" id="zr-pref-attribution" ${currentPrefs.attribution ? 'checked' : ''}>
