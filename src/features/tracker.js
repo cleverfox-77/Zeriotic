@@ -629,105 +629,11 @@ function injectBannerStyles() {
       background: rgba(255, 255, 255, 0.08);
       border-color: rgba(255, 255, 255, 0.4);
     }
-    .zr-btn--link {
-      background: transparent;
-      color: rgba(245, 239, 233, 0.7);
-      border: none;
-      padding: 10px 12px;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-    .zr-btn--link:hover {
-      color: #FFFFFF;
-    }
-    .zr-cookie-drawer {
-      display: none;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-    }
-    .zr-cookie-drawer.is-open {
-      display: block;
-      animation: zrFadeIn 0.25s ease;
-    }
-    @keyframes zrFadeIn {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .zr-pref-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .zr-pref-info {
-      flex: 1;
-    }
-    .zr-pref-name {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: #FFFFFF;
-      margin-bottom: 3px;
-    }
-    .zr-pref-desc {
-      font-size: 12px;
-      color: rgba(245, 239, 233, 0.6);
-      line-height: 1.4;
-    }
-    .zr-toggle {
-      position: relative;
-      width: 40px;
-      height: 22px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .zr-toggle input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .zr-toggle-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 22px;
-      transition: background-color 0.25s ease;
-    }
-    .zr-toggle-slider:before {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      left: 3px;
-      bottom: 3px;
-      background-color: #FFFFFF;
-      border-radius: 50%;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .zr-toggle input:checked + .zr-toggle-slider {
-      background-color: #FF5500;
-    }
-    .zr-toggle input:checked + .zr-toggle-slider:before {
-      transform: translateX(18px);
-    }
-    .zr-toggle input:disabled + .zr-toggle-slider {
-      cursor: not-allowed;
-      opacity: 0.55;
-    }
-    .zr-drawer-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 16px;
-      padding-top: 8px;
-    }
     .zr-policy-link {
       font-size: 12px;
       color: rgba(245, 239, 233, 0.6);
       text-decoration: underline;
+      margin-left: auto;
     }
     .zr-policy-link:hover {
       color: #FF5500;
@@ -751,6 +657,11 @@ function injectBannerStyles() {
       .zr-btn {
         width: 100%;
       }
+      .zr-policy-link {
+        margin-left: 0;
+        text-align: center;
+        margin-top: 6px;
+      }
     }
   `;
   document.head.appendChild(style);
@@ -761,8 +672,6 @@ function renderBanner(forceOpen = false) {
     const banner = document.getElementById('zr-cookie-banner');
     if (forceOpen) {
       banner.classList.add('is-visible');
-      const drawer = document.getElementById('zr-cookie-drawer');
-      if (drawer) drawer.classList.add('is-open');
     }
     return;
   }
@@ -775,57 +684,19 @@ function renderBanner(forceOpen = false) {
   banner.setAttribute('role', 'region');
   banner.setAttribute('aria-label', 'Cookie and visitor tracking consent');
 
-  const currentPrefs = getConsentPrefs();
-
   banner.innerHTML = `
     <div class="zr-cookie-header">
-      <div class="zr-cookie-eyebrow">Cookie Preferences</div>
+      <div class="zr-cookie-eyebrow">Cookies &amp; Privacy</div>
       <div class="zr-cookie-badge">Dhaka &amp; Worldwide</div>
     </div>
     <div class="zr-cookie-title">We use cookies to enhance your experience.</div>
     <div class="zr-cookie-desc">
-      We use cookies to enhance your experience, analyze site traffic, and understand how visitors engage with our work. You can accept all cookies or choose necessary cookies only.
+      We use cookies to analyze site traffic, improve your browsing experience, and understand how visitors engage with our work. You can accept all cookies or choose necessary cookies only.
     </div>
     <div class="zr-cookie-actions">
       <button type="button" class="zr-btn zr-btn--primary" id="zr-accept-all">Accept all cookies</button>
       <button type="button" class="zr-btn zr-btn--secondary" id="zr-accept-necessary">Accept necessary cookies only</button>
-      <button type="button" class="zr-btn zr-btn--link" id="zr-toggle-details">Preferences ▾</button>
-    </div>
-    <div class="zr-cookie-drawer" id="zr-cookie-drawer">
-      <div class="zr-pref-row">
-        <div class="zr-pref-info">
-          <div class="zr-pref-name">Strictly Necessary Cookies</div>
-          <div class="zr-pref-desc">Essential for the website to function securely and remember your choices (<code style="font-size:11px;color:#FF5500">zr_consent</code>). Always active.</div>
-        </div>
-        <label class="zr-toggle">
-          <input type="checkbox" checked disabled>
-          <span class="zr-toggle-slider"></span>
-        </label>
-      </div>
-      <div class="zr-pref-row">
-        <div class="zr-pref-info">
-          <div class="zr-pref-name">Analytics &amp; Performance</div>
-          <div class="zr-pref-desc">Helps us analyze site traffic and understand how visitors engage with our content (<code style="font-size:11px;color:#FF5500">_zr_vid, _zr_sid, _zr_depth, _zr_act</code>).</div>
-        </div>
-        <label class="zr-toggle">
-          <input type="checkbox" id="zr-pref-analytics" ${currentPrefs.analytics ? 'checked' : ''}>
-          <span class="zr-toggle-slider"></span>
-        </label>
-      </div>
-      <div class="zr-pref-row">
-        <div class="zr-pref-info">
-          <div class="zr-pref-name">Traffic &amp; Referral Sources</div>
-          <div class="zr-pref-desc">Measures referral channels to help us understand how audiences find Zeriotic (<code style="font-size:11px;color:#FF5500">_zr_ref, _zr_landing, _zr_utm</code>).</div>
-        </div>
-        <label class="zr-toggle">
-          <input type="checkbox" id="zr-pref-attribution" ${currentPrefs.attribution ? 'checked' : ''}>
-          <span class="zr-toggle-slider"></span>
-        </label>
-      </div>
-      <div class="zr-drawer-actions">
-        <a href="/privacy/" class="zr-policy-link">Read our full Privacy Policy &rarr;</a>
-        <button type="button" class="zr-btn zr-btn--primary" id="zr-save-custom" style="padding: 8px 16px;">Save chosen preferences</button>
-      </div>
+      <a href="/privacy/" class="zr-policy-link">Privacy Policy &rarr;</a>
     </div>
   `;
 
@@ -844,11 +715,6 @@ function renderBanner(forceOpen = false) {
   // Event handlers
   const acceptAllBtn = banner.querySelector('#zr-accept-all');
   const acceptNecBtn = banner.querySelector('#zr-accept-necessary');
-  const toggleDetailsBtn = banner.querySelector('#zr-toggle-details');
-  const drawer = banner.querySelector('#zr-cookie-drawer');
-  const saveCustomBtn = banner.querySelector('#zr-save-custom');
-  const analyticsCheck = banner.querySelector('#zr-pref-analytics');
-  const attributionCheck = banner.querySelector('#zr-pref-attribution');
 
   const closeBanner = () => {
     banner.classList.remove('is-visible');
@@ -867,31 +733,6 @@ function renderBanner(forceOpen = false) {
   if (acceptNecBtn) {
     acceptNecBtn.addEventListener('click', () => {
       saveConsent('necessary', { necessary: true, analytics: false, attribution: false, telemetry: false });
-      closeBanner();
-    });
-  }
-
-  if (toggleDetailsBtn && drawer) {
-    toggleDetailsBtn.addEventListener('click', () => {
-      const isOpen = drawer.classList.toggle('is-open');
-      toggleDetailsBtn.textContent = isOpen ? 'Hide details ▴' : 'Preferences ▾';
-    });
-  }
-
-  if (saveCustomBtn) {
-    saveCustomBtn.addEventListener('click', () => {
-      const isAnalytics = !!analyticsCheck?.checked;
-      const isAttribution = !!attributionCheck?.checked;
-      const isAll = isAnalytics && isAttribution;
-      const isNone = !isAnalytics && !isAttribution;
-
-      const state = isAll ? 'all' : (isNone ? 'necessary' : 'custom');
-      saveConsent(state, {
-        necessary: true,
-        analytics: isAnalytics,
-        attribution: isAttribution,
-        telemetry: isAnalytics
-      });
       closeBanner();
     });
   }
