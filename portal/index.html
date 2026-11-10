@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-  <title>Zeriotic // Neural Telemetry & Visitor Intelligence Portal</title>
+  <title>Zeriotic // Visitor Intelligence &amp; Telemetry Portal</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-tight-latin-400.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-tight-latin-500.woff2">
@@ -26,24 +26,18 @@
     }
 
     :root {
-      --bg: #0C0C0C;
-      --bg-surface: #141414;
-      --bg-card: #181818;
-      --bg-card-hover: #1F1F1F;
-      --ink: #F5EFE9;
-      --ink-muted: #8E8880;
-      --ink-dim: #5C5852;
+      --bg: #F5EFE9;
+      --bg-card: #FFFFFF;
+      --bg-subtle: rgba(33, 33, 33, 0.035);
+      --ink: #212121;
+      --muted: #666666;
       --accent: #FF5500;
-      --accent-glow: rgba(255, 85, 0, 0.25);
-      --success: #00FF88;
-      --success-glow: rgba(0, 255, 136, 0.2);
-      --info: #00B4D8;
-      --warn: #FFB703;
-      --border: rgba(255, 255, 255, 0.1);
-      --border-strong: rgba(255, 255, 255, 0.2);
+      --hairline: rgba(33, 33, 33, 0.12);
+      --hairline-strong: rgba(33, 33, 33, 0.24);
       --font-sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
-      --pad: clamp(16px, 3vw, 36px);
-      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --pad: clamp(20px, 4vw, 56px);
+      --column: 1280px;
+      --ease-out: cubic-bezier(.16, 1, .3, 1);
     }
 
     *, *::before, *::after {
@@ -57,14 +51,13 @@
       color: var(--ink);
       font-family: var(--font-sans);
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.55;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
     }
 
     ::selection {
-      background: var(--accent);
+      background: var(--ink);
       color: #FFFFFF;
     }
 
@@ -82,10 +75,72 @@
     }
 
     .mono {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--ink-muted);
+      color: var(--muted);
+    }
+
+    .eyebrow {
+      margin-bottom: 12px;
+    }
+
+    .eyebrow span {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow span::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      background: var(--ink);
+      color: #FFFFFF;
+      border: 1px solid var(--ink);
+      transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out), border-color 0.25s var(--ease-out), transform 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--hairline-strong);
+    }
+
+    .btn--ghost:hover {
+      background: rgba(33, 33, 33, 0.06);
+      border-color: var(--ink);
+      color: var(--ink);
     }
 
     /* --- VAULT LOCK SCREEN --- */
@@ -94,12 +149,12 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      padding: 24px;
+      padding: var(--pad);
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at 50% 30%, #1A1A1A 0%, #0C0C0C 70%);
+      background: var(--bg);
       z-index: 10000;
-      transition: opacity 0.4s var(--ease), visibility 0.4s;
+      transition: opacity 0.35s var(--ease-out), visibility 0.35s;
     }
 
     #vault-lock.is-unlocked {
@@ -110,91 +165,63 @@
 
     .vault-card {
       width: 100%;
-      max-width: 480px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 14px;
-      padding: clamp(28px, 6vw, 44px);
-      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
-      position: relative;
-      overflow: hidden;
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: clamp(28px, 6vw, 40px);
+      box-shadow: 0 16px 40px rgba(33, 33, 33, 0.05);
     }
 
-    .vault-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), #FF8800, var(--accent));
-    }
-
-    .vault-status {
+    .vault-brand {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
+      gap: 10px;
       font-weight: 500;
-      margin-bottom: 16px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 24px;
     }
 
-    .vault-pulse {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+    .vault-brand svg {
+      width: 24px;
+      height: 24px;
     }
 
     .vault-title {
-      font-size: clamp(1.4rem, 4vw, 1.85rem);
+      font-size: clamp(1.4rem, 3.5vw, 1.75rem);
       font-weight: 500;
       letter-spacing: -0.025em;
       line-height: 1.15;
-      margin-bottom: 10px;
-      color: #FFFFFF;
+      margin-bottom: 8px;
     }
 
     .vault-desc {
-      color: var(--ink-muted);
-      font-size: 0.88rem;
+      color: var(--muted);
+      font-size: 0.9rem;
       line-height: 1.5;
-      margin-bottom: 28px;
-    }
-
-    .vault-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      margin-bottom: 24px;
     }
 
     .vault-field {
       position: relative;
+      margin-bottom: 14px;
     }
 
     .vault-input {
       width: 100%;
-      background: #0A0A0A;
-      border: 1px solid var(--border-strong);
-      border-radius: 8px;
-      padding: 13px 48px 13px 16px;
-      color: #FFFFFF;
-      font-size: 0.95rem;
-      letter-spacing: 0.06em;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #FFFFFF;
+      border: 1px solid var(--hairline-strong);
+      border-radius: 6px;
+      padding: 11px 52px 11px 14px;
+      color: var(--ink);
+      font-size: 0.92rem;
+      transition: border-color 0.2s;
     }
 
     .vault-input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 2px var(--accent-glow);
     }
 
     .vault-toggle-pass {
@@ -202,64 +229,30 @@
       right: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--ink-muted);
-      font-size: 0.82rem;
+      color: var(--muted);
+      font-size: 0.78rem;
       cursor: pointer;
       padding: 4px;
     }
 
-    .vault-btn {
-      background: #FFFFFF;
-      color: #0A0A0A;
-      border: 1px solid #FFFFFF;
-      border-radius: 8px;
-      padding: 13px 20px;
-      font-size: 0.92rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: background 0.2s, color 0.2s, transform 0.15s;
-    }
-
-    .vault-btn:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #FFFFFF;
-    }
-
-    .vault-btn:active {
-      transform: scale(0.98);
+    .vault-toggle-pass:hover {
+      color: var(--ink);
     }
 
     .vault-error {
       font-size: 0.82rem;
-      color: #FF4D4D;
+      color: #D90429;
       display: none;
       align-items: center;
       gap: 6px;
       padding: 8px 12px;
-      background: rgba(255, 77, 77, 0.1);
-      border-radius: 6px;
-      border-left: 3px solid #FF4D4D;
+      background: rgba(217, 4, 41, 0.08);
+      border-radius: 4px;
+      margin-bottom: 14px;
     }
 
     .vault-error.is-active {
       display: flex;
-    }
-
-    .vault-hint {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-      font-size: 0.76rem;
-      color: var(--ink-dim);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     /* --- PORTAL MAIN LAYOUT --- */
@@ -275,15 +268,15 @@
       opacity: 1;
     }
 
-    .portal-nav {
+    .portal-chrome {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(12, 12, 12, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px var(--pad);
+      background: rgba(245, 239, 233, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--hairline);
+      padding: 16px var(--pad);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -291,88 +284,55 @@
     }
 
     .portal-brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       font-weight: 500;
-      letter-spacing: -0.01em;
       font-size: 1rem;
+      letter-spacing: -0.01em;
     }
 
-    .portal-badge {
+    .portal-brand svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .live-dot {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: rgba(255, 85, 0, 0.12);
-      border: 1px solid rgba(255, 85, 0, 0.25);
-      color: var(--accent);
+      color: #0A8754;
       font-weight: 500;
+      margin-left: 8px;
     }
 
-    .portal-badge--live {
-      background: rgba(0, 255, 136, 0.1);
-      border-color: rgba(0, 255, 136, 0.25);
-      color: var(--success);
+    .live-dot::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0A8754;
     }
 
     .portal-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
-    }
-
-    .p-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: var(--bg-surface);
-      color: var(--ink);
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-
-    .p-btn:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-strong);
-      color: #FFFFFF;
-    }
-
-    .p-btn--accent {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #FFFFFF;
-    }
-    .p-btn--accent:hover {
-      background: #E04B00;
-    }
-
-    .p-btn--danger:hover {
-      background: rgba(255, 77, 77, 0.15);
-      border-color: #FF4D4D;
-      color: #FF4D4D;
+      gap: 8px;
     }
 
     /* Container */
     .portal-container {
-      max-width: 1440px;
+      max-width: var(--column);
       margin: 0 auto;
-      padding: clamp(24px, 4vw, 44px) var(--pad) 80px;
+      padding: clamp(28px, 4vw, 56px) var(--pad) 80px;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 40px;
     }
 
-    /* Eyebrow & Hero */
     .portal-hero {
       display: flex;
       flex-wrap: wrap;
@@ -380,102 +340,77 @@
       justify-content: space-between;
       gap: 20px;
       padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--hairline);
     }
 
     .portal-hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
       font-weight: 500;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
-      margin-top: 6px;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
     }
 
-    .portal-meta-strip {
+    .portal-meta {
+      font-size: 0.84rem;
+      color: var(--muted);
       display: flex;
-      flex-wrap: wrap;
-      gap: 16px 28px;
-      font-size: 0.82rem;
-      color: var(--ink-muted);
+      gap: 20px;
     }
 
-    .portal-meta-strip b {
+    .portal-meta b {
       color: var(--ink);
-      font-weight: 500;
     }
 
     /* KPI Grid */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
+      gap: 1px;
+      background: var(--hairline);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      overflow: hidden;
     }
 
-    .kpi-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px;
-      position: relative;
-      transition: border-color 0.25s, transform 0.2s;
-    }
-
-    .kpi-card:hover {
-      border-color: var(--border-strong);
-      transform: translateY(-2px);
-    }
-
-    .kpi-header {
+    .kpi-cell {
+      background: var(--bg-card);
+      padding: 24px 28px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: space-between;
-      margin-bottom: 12px;
+      gap: 12px;
+    }
+
+    .kpi-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
     }
 
     .kpi-value {
-      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      font-size: clamp(2.2rem, 4vw, 3rem);
       font-weight: 500;
-      letter-spacing: -0.035em;
+      letter-spacing: -0.04em;
       line-height: 1;
-      margin-bottom: 8px;
-      color: #FFFFFF;
-    }
-
-    .kpi-delta {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.78rem;
-      color: var(--success);
-      font-weight: 500;
+      color: var(--ink);
     }
 
     .kpi-sub {
-      font-size: 0.78rem;
-      color: var(--ink-muted);
+      font-size: 0.82rem;
+      color: var(--muted);
     }
 
     /* --- VISUAL AI ENGINE SECTION --- */
-    .ai-copilot {
-      background: linear-gradient(180deg, #181614 0%, var(--bg-surface) 100%);
-      border: 1px solid rgba(255, 85, 0, 0.22);
+    .ai-box {
+      background: var(--bg-card);
+      border: 1px solid var(--hairline);
       border-radius: 12px;
       padding: clamp(24px, 4vw, 36px);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    .ai-copilot::after {
-      content: '';
-      position: absolute;
-      top: -120px;
-      right: -100px;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 85, 0, 0.12) 0%, transparent 70%);
-      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
 
     .ai-header {
@@ -483,167 +418,117 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .ai-title-wrap {
-      display: flex;
-      align-items: center;
       gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--hairline);
     }
 
-    .ai-icon-pulse {
-      width: 32px;
-      height: 32px;
+    .ai-header h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .ai-summary-card {
+      background: var(--bg);
+      border: 1px solid var(--hairline);
       border-radius: 8px;
-      background: rgba(255, 85, 0, 0.15);
-      border: 1px solid rgba(255, 85, 0, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-size: 16px;
+      padding: 20px 24px;
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
-    .ai-insights-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 18px;
-      margin-bottom: 28px;
+    .ai-summary-card b {
+      color: var(--ink);
+      font-weight: 500;
     }
 
-    .ai-card {
-      background: #0E0E0E;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      padding: 18px 20px;
+    .ai-query-row {
       display: flex;
-      flex-direction: column;
       gap: 10px;
-      transition: border-color 0.2s;
     }
 
-    .ai-card:hover {
-      border-color: rgba(255, 85, 0, 0.3);
-    }
-
-    .ai-card-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: var(--accent);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .ai-card-headline {
-      font-size: 1.05rem;
-      font-weight: 500;
-      color: #FFFFFF;
-      letter-spacing: -0.015em;
-      line-height: 1.3;
-    }
-
-    .ai-card-body {
-      font-size: 0.85rem;
-      color: var(--ink-muted);
-      line-height: 1.5;
-    }
-
-    /* AI Prompt Bar */
-    .ai-query-box {
-      background: #0B0B0B;
-      border: 1px solid var(--border-strong);
-      border-radius: 10px;
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .ai-query-input {
+    .ai-input {
       flex: 1;
-      font-size: 0.92rem;
-      color: #FFFFFF;
-      padding: 6px 4px;
+      background: var(--bg);
+      border: 1px solid var(--hairline-strong);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      color: var(--ink);
     }
 
-    .ai-quick-prompts {
+    .ai-input:focus {
+      border-color: var(--accent);
+      background: #FFFFFF;
+    }
+
+    .ai-chips {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 14px;
     }
 
-    .ai-prompt-chip {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+    .ai-chip {
+      background: var(--bg);
+      border: 1px solid var(--hairline);
       border-radius: 20px;
       padding: 5px 12px;
-      font-size: 0.76rem;
-      color: var(--ink-muted);
+      font-size: 0.78rem;
+      color: var(--muted);
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
 
-    .ai-prompt-chip:hover {
-      background: rgba(255, 85, 0, 0.15);
+    .ai-chip:hover {
+      background: #FFFFFF;
       border-color: var(--accent);
-      color: #FFFFFF;
+      color: var(--accent);
     }
 
-    .ai-response-box {
-      margin-top: 20px;
-      padding: 18px 22px;
-      background: #0A0A0A;
-      border: 1px solid rgba(255, 85, 0, 0.35);
-      border-radius: 8px;
+    .ai-answer {
+      background: #FFFFFF;
+      border: 1px solid var(--hairline);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 16px 20px;
+      font-size: 0.92rem;
+      line-height: 1.6;
       display: none;
-      animation: fadeIn 0.3s ease;
     }
 
-    .ai-response-box.is-active {
+    .ai-answer.is-active {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- CHARTS & VISUAL HEATMAPS --- */
-    .analytics-grid {
+    /* --- ANALYTICS PANELS --- */
+    .grid-2col {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       gap: 24px;
     }
 
-    .panel {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
+    .card-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--hairline);
       border-radius: 12px;
-      padding: 24px;
+      padding: 26px;
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
 
-    .panel-header {
+    .card-panel-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--hairline);
     }
 
-    .panel-title {
+    .card-panel-title {
       font-size: 1.05rem;
       font-weight: 500;
-      color: #FFFFFF;
       letter-spacing: -0.015em;
     }
 
@@ -657,189 +542,137 @@
     .bar-item {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
 
     .bar-info {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
+    }
+
+    .bar-info span {
+      color: var(--muted);
+    }
+
+    .bar-info b {
+      font-weight: 500;
     }
 
     .bar-track {
-      height: 9px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 9px;
+      height: 6px;
+      background: rgba(33, 33, 33, 0.06);
+      border-radius: 6px;
       overflow: hidden;
-      position: relative;
     }
 
     .bar-fill {
       height: 100%;
-      border-radius: 9px;
-      background: var(--accent);
-      transition: width 0.8s var(--ease);
+      border-radius: 6px;
+      background: var(--ink);
+      transition: width 0.6s var(--ease-out);
     }
 
-    .bar-fill--success { background: var(--success); }
-    .bar-fill--info { background: var(--info); }
-    .bar-fill--warn { background: var(--warn); }
+    .bar-fill--accent {
+      background: var(--accent);
+    }
 
-    /* Funnel list */
-    .funnel-list {
+    /* --- REAL VISITOR STREAM TABLE --- */
+    .table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 26px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-    }
-
-    .funnel-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .funnel-pct {
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: #FFFFFF;
-      min-width: 55px;
-    }
-
-    .funnel-bar-wrap {
-      flex: 1;
-    }
-
-    /* --- LIVE VISITOR STREAM TABLE --- */
-    .table-panel {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
+      gap: 20px;
       overflow: hidden;
     }
 
-    .table-controls {
+    .table-header {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .table-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .table-tab {
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.78rem;
-      color: var(--ink-muted);
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.2s;
-    }
-
-    .table-tab.is-active {
-      background: rgba(255, 85, 0, 0.12);
-      border-color: rgba(255, 85, 0, 0.3);
-      color: #FFFFFF;
-      font-weight: 500;
-    }
-
-    .table-search {
-      background: #0A0A0A;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-size: 0.82rem;
-      color: #FFFFFF;
-      min-width: 240px;
     }
 
     .table-wrap {
       overflow-x: auto;
-      border: 1px solid var(--border);
+      border: 1px solid var(--hairline);
       border-radius: 8px;
     }
 
-    table.stream-table {
+    table.real-table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       white-space: nowrap;
     }
 
-    table.stream-table th {
-      background: #111111;
+    table.real-table th {
+      background: var(--bg);
       padding: 12px 16px;
       font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--ink-muted);
+      color: var(--muted);
       font-weight: 500;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--hairline);
     }
 
-    table.stream-table td {
+    table.real-table td {
       padding: 14px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--hairline);
       color: var(--ink);
     }
 
-    table.stream-table tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
+    table.real-table tr:last-child td {
+      border-bottom: none;
     }
 
-    .badge-intent {
+    table.real-table tr:hover td {
+      background: rgba(33, 33, 33, 0.02);
+    }
+
+    .intent-pill {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
       padding: 3px 8px;
       border-radius: 4px;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 500;
+      background: rgba(33, 33, 33, 0.06);
+      color: var(--ink);
     }
 
-    .badge-intent--high {
-      background: rgba(255, 85, 0, 0.15);
-      border: 1px solid rgba(255, 85, 0, 0.35);
-      color: #FF7733;
+    .intent-pill--lead {
+      background: rgba(255, 85, 0, 0.1);
+      color: var(--accent);
     }
 
-    .badge-intent--client {
-      background: rgba(0, 255, 136, 0.12);
-      border: 1px solid rgba(0, 255, 136, 0.3);
-      color: var(--success);
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--muted);
     }
 
-    .badge-intent--eval {
-      background: rgba(0, 180, 216, 0.12);
-      border: 1px solid rgba(0, 180, 216, 0.3);
-      color: var(--info);
+    .empty-state p {
+      margin-top: 6px;
+      font-size: 0.88rem;
     }
 
-    .badge-intent--gamer {
-      background: rgba(255, 183, 3, 0.12);
-      border: 1px solid rgba(255, 183, 3, 0.3);
-      color: var(--warn);
-    }
-
-    /* --- DRAWER MODAL --- */
+    /* Modal / Drawer */
     .drawer-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(6px);
+      background: rgba(33, 33, 33, 0.4);
+      backdrop-filter: blur(4px);
       z-index: 1000;
       display: none;
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity 0.25s;
     }
 
     .drawer-overlay.is-open {
@@ -851,73 +684,49 @@
       position: fixed;
       top: 0; right: 0; bottom: 0;
       width: 100%;
-      max-width: 540px;
-      background: #141414;
-      border-left: 1px solid var(--border-strong);
+      max-width: 500px;
+      background: #FFFFFF;
+      border-left: 1px solid var(--hairline-strong);
       z-index: 1001;
       padding: 32px;
       overflow-y: auto;
       transform: translateX(100%);
-      transition: transform 0.35s var(--ease);
+      transition: transform 0.3s var(--ease-out);
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 20px;
     }
 
     .drawer.is-open {
       transform: translateX(0);
     }
 
-    .drawer-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
     .timeline {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       position: relative;
-      padding-left: 20px;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      top: 6px; bottom: 6px; left: 6px;
-      width: 2px;
-      background: var(--border);
+      padding-left: 16px;
+      border-left: 1px solid var(--hairline);
     }
 
     .timeline-item {
-      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 3px;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -18px; top: 5px;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
+      gap: 2px;
+      font-size: 0.84rem;
     }
 
     @media (max-width: 768px) {
-      .analytics-grid {
-        grid-template-columns: 1fr;
-      }
-      .portal-nav {
+      .portal-chrome {
         flex-direction: column;
         align-items: stretch;
       }
       .portal-actions {
         justify-content: space-between;
+      }
+      .grid-2col {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -927,312 +736,187 @@
   <!-- ==================== 1. VAULT LOCK SCREEN ==================== -->
   <div id="vault-lock">
     <div class="vault-card">
-      <div class="vault-status">
-        <span class="vault-pulse"></span>
-        RESTRICTED ACCESS // LEVEL 4 CLEARANCE
+      <div class="vault-brand">
+        <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="1.8" />
+          <rect x="11" y="10" width="18" height="18" rx="0.5" stroke="currentColor" stroke-width="1.4" />
+          <line x1="11" y1="28" x2="29" y2="10" stroke="currentColor" stroke-width="2.6" />
+        </svg>
+        <span>ZERIOTIC</span>
       </div>
-      <h1 class="vault-title">Zeriotic Intelligence Vault</h1>
-      <p class="vault-desc">Enter your administrator cryptographic security key to decrypt and view live visitor activity telemetry.</p>
 
-      <form class="vault-form" id="vault-form" onsubmit="return false;">
+      <div class="eyebrow"><span>Security / Portal</span></div>
+      <h1 class="vault-title">Intelligence Vault</h1>
+      <p class="vault-desc">Enter your administrative security key to view actual visitor telemetry reports and AI behavioral analytics.</p>
+
+      <form id="vault-form" onsubmit="return false;">
         <div class="vault-field">
-          <input type="password" id="vault-pass" class="vault-input" placeholder="Enter master security key" autocomplete="current-password" autofocus />
+          <input type="password" id="vault-pass" class="vault-input" placeholder="Enter security key" autocomplete="current-password" autofocus />
           <button type="button" class="vault-toggle-pass" id="vault-toggle-pass">Show</button>
         </div>
         <div class="vault-error" id="vault-error">
-          <span>⚠</span> <span id="vault-error-msg">Access denied: Invalid key.</span>
+          <span id="vault-error-msg">Access denied: Invalid key.</span>
         </div>
-        <button type="submit" class="vault-btn" id="vault-submit">
-          <span>Decrypt &amp; Access Vault</span> &rarr;
+        <button type="submit" class="btn" id="vault-submit" style="width:100%;">
+          <span>Unlock Portal</span> <i>&rarr;</i>
         </button>
       </form>
-
-      <div class="vault-hint">
-        <span>Protected with SHA-256 Auth</span>
-        <span>Dhaka HQ &bull; Node 01</span>
-      </div>
     </div>
   </div>
 
   <!-- ==================== 2. PORTAL DASHBOARD VIEW ==================== -->
   <div id="portal-view">
-    <!-- Top Navigation -->
-    <header class="portal-nav">
-      <div class="portal-brand">
-        <svg width="22" height="22" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="1.8" />
-          <rect x="11" y="10" width="18" height="18" rx="0.5" stroke="currentColor" stroke-width="1.4" />
-          <line x1="11" y1="28" x2="29" y2="10" stroke="currentColor" stroke-width="2.6" />
-        </svg>
-        <span>ZERIOTIC // INTEL</span>
-        <span class="portal-badge portal-badge--live">● Live Stream</span>
+    <header class="portal-chrome">
+      <div style="display:flex;align-items:center;">
+        <a class="portal-brand" href="/" target="_blank" title="Open Zeriotic in new tab">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="1.8" />
+            <rect x="11" y="10" width="18" height="18" rx="0.5" stroke="currentColor" stroke-width="1.4" />
+            <line x1="11" y1="28" x2="29" y2="10" stroke="currentColor" stroke-width="2.6" />
+          </svg>
+          <span>ZERIOTIC // INTEL</span>
+        </a>
+        <span class="live-dot">Live Stream</span>
       </div>
 
       <div class="portal-actions">
-        <button type="button" class="p-btn" id="btn-refresh">⟳ Sync Live</button>
-        <button type="button" class="p-btn" id="btn-export-csv">⤓ Export CSV</button>
-        <button type="button" class="p-btn" id="btn-security">⚙ Key Settings</button>
-        <button type="button" class="p-btn p-btn--danger" id="btn-lock">⏻ Lock Portal</button>
+        <button type="button" class="btn btn--ghost" id="btn-refresh">⟳ Sync</button>
+        <button type="button" class="btn btn--ghost" id="btn-export-csv">⤓ Export CSV</button>
+        <button type="button" class="btn btn--ghost" id="btn-security">⚙ Settings</button>
+        <button type="button" class="btn" id="btn-lock">Lock</button>
       </div>
     </header>
 
     <main class="portal-container">
-      <!-- Hero / Status -->
       <section class="portal-hero">
         <div>
-          <span class="mono">Telemetry &amp; Visitor Activity Intelligence</span>
-          <h1>Admin Command Center</h1>
+          <div class="eyebrow"><span>Telemetry Intelligence</span></div>
+          <h1>Actual Visitor Reports</h1>
         </div>
-        <div class="portal-meta-strip">
-          <div>Status: <b>Root Verified</b></div>
-          <div>Node: <b>Dhaka BD (UTC+6)</b></div>
-          <div>Active Filter: <b id="lbl-timeframe">Today &bull; All Traffic</b></div>
+        <div class="portal-meta">
+          <div>Data Source: <b>Live Telemetry Buffer</b></div>
+          <div>Last Synchronized: <b id="lbl-sync-time">Just now</b></div>
         </div>
       </section>
 
-      <!-- KPI Grid -->
+      <!-- Real Metrics Grid -->
       <section class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-header">
-            <span class="mono">Unique Visitors (30d)</span>
-            <span class="portal-badge">+23.8%</span>
-          </div>
-          <div class="kpi-value" id="kpi-visitors">1,492</div>
-          <div class="kpi-sub">84.2% Accepted Extreme Tracking</div>
+        <div class="kpi-cell">
+          <span class="kpi-label">Actual Unique Visitors</span>
+          <div class="kpi-value" id="kpi-visitors">0</div>
+          <div class="kpi-sub" id="kpi-visitors-sub">Distinct client profiles recorded</div>
         </div>
 
-        <div class="kpi-card">
-          <div class="kpi-header">
-            <span class="mono">Avg Chapter Dwell</span>
-            <span class="portal-badge portal-badge--live">Deep Focus</span>
-          </div>
-          <div class="kpi-value" id="kpi-dwell">48.6s</div>
-          <div class="kpi-sub">Top section: <b>#security</b> (64s avg)</div>
+        <div class="kpi-cell">
+          <span class="kpi-label">Active Browsing Sessions</span>
+          <div class="kpi-value" id="kpi-sessions">0</div>
+          <div class="kpi-sub" id="kpi-sessions-sub">Rolling session windows</div>
         </div>
 
-        <div class="kpi-card">
-          <div class="kpi-header">
-            <span class="mono">High-Intent Leads</span>
-            <span class="portal-badge" style="color:var(--success);border-color:var(--success)">Qualified</span>
-          </div>
-          <div class="kpi-value" id="kpi-leads">58</div>
-          <div class="kpi-sub">Commercial &amp; Pen Testing Prospects</div>
+        <div class="kpi-cell">
+          <span class="kpi-label">Avg Section Attention</span>
+          <div class="kpi-value" id="kpi-dwell">0s</div>
+          <div class="kpi-sub" id="kpi-dwell-sub">Top section: None recorded yet</div>
         </div>
 
-        <div class="kpi-card">
-          <div class="kpi-header">
-            <span class="mono">Scroll Depth Floor</span>
-            <span class="portal-badge">&gt;75% Depth</span>
-          </div>
-          <div class="kpi-value" id="kpi-depth">56.4%</div>
-          <div class="kpi-sub">34.1% read through to footer CTA</div>
+        <div class="kpi-cell">
+          <span class="kpi-label">Deep Scroll Rate (&gt;50%)</span>
+          <div class="kpi-value" id="kpi-scroll">0%</div>
+          <div class="kpi-sub" id="kpi-scroll-sub">Visitors reading past midfield</div>
         </div>
       </section>
 
-      <!-- VISUAL AI COPILOT -->
-      <section class="ai-copilot">
+      <!-- VISUAL AI SECTION -->
+      <section class="ai-box">
         <div class="ai-header">
-          <div class="ai-title-wrap">
-            <div class="ai-icon-pulse">✦</div>
-            <div>
-              <span class="mono" style="color:var(--accent)">Neural Intelligence Model</span>
-              <h2 style="font-size:1.35rem;font-weight:500;color:#FFFFFF">Visual AI Telemetry Co-Pilot</h2>
-            </div>
+          <div>
+            <div class="mono" style="color:var(--accent);margin-bottom:4px;">Neural Evaluation</div>
+            <h2>Visual AI Behavioral Assessment</h2>
           </div>
-          <span class="portal-badge portal-badge--live">Autonomous Evaluation Active</span>
+          <span class="mono" id="ai-status">Evaluating actual traffic</span>
         </div>
 
-        <!-- 3 Key AI Inferences -->
-        <div class="ai-insights-grid">
-          <div class="ai-card">
-            <div class="ai-card-tag">⚡ Inbound Commercial Demand</div>
-            <div class="ai-card-headline">High-Value Pen Testing Surge</div>
-            <div class="ai-card-body">
-              34% of visitors exploring the Security Testing section also checked the PHP vulnerability blog and clicked "Talk to us about testing". Typical budget band evaluated: <b>$10k-$25k</b>.
-            </div>
-          </div>
-
-          <div class="ai-card">
-            <div class="ai-card-tag">🎯 Lead Intent Classification</div>
-            <div class="ai-card-headline">OctaDezx Enterprise Buyers</div>
-            <div class="ai-card-body">
-              Visitors arriving via LinkedIn spend <b>3.1x longer</b> inspecting the multi-step safety benchmark before initiating contact. Recommendation: promote synthetic test case downloads.
-            </div>
-          </div>
-
-          <div class="ai-card">
-            <div class="ai-card-tag">🏎️ Gaming Community Signals</div>
-            <div class="ai-card-headline">Accert One Mobile Pre-Orders</div>
-            <div class="ai-card-body">
-              Mobile visitors from Southeast Asia and North America have an <b>82% completion rate</b> on the Accert One launch notification box with zero form drop-offs.
-            </div>
-          </div>
+        <div class="ai-summary-card" id="ai-real-summary">
+          Loading actual visitor telemetry to evaluate behavioral signals...
         </div>
 
         <!-- Interactive AI Query -->
-        <div class="ai-query-box">
-          <span style="color:var(--accent);font-size:1.1rem;padding-left:4px;">✦</span>
-          <input type="text" class="ai-query-input" id="ai-query-input" placeholder="Ask AI: e.g. 'Summarize today's top leads' or 'Show dropoff on contact form'..." />
-          <button type="button" class="p-btn p-btn--accent" id="btn-ask-ai">Analyze &rarr;</button>
+        <div class="ai-query-row">
+          <input type="text" class="ai-input" id="ai-query-input" placeholder="Ask AI: e.g. 'Summarize today's visitor journeys' or 'Which sections had most interest?'" />
+          <button type="button" class="btn" id="btn-ask-ai">Analyze <i>&rarr;</i></button>
         </div>
 
-        <div class="ai-quick-prompts">
-          <button type="button" class="ai-prompt-chip" data-q="Who are our highest intent leads today?">✦ Who are our highest intent leads today?</button>
-          <button type="button" class="ai-prompt-chip" data-q="Which chapter has the highest dwell time?">✦ Which chapter has the highest dwell time?</button>
-          <button type="button" class="ai-prompt-chip" data-q="Analyze mobile vs desktop engagement">✦ Analyze mobile vs desktop engagement</button>
-          <button type="button" class="ai-prompt-chip" data-q="Generate executive weekly briefing">✦ Generate executive weekly briefing</button>
+        <div class="ai-chips">
+          <button type="button" class="ai-chip" data-q="Summarize actual visitor traffic">✦ Summarize actual visitor traffic</button>
+          <button type="button" class="ai-chip" data-q="Which section has the highest dwell time?">✦ Which section has highest dwell?</button>
+          <button type="button" class="ai-chip" data-q="Did any visitors show commercial intent?">✦ Did any visitors show commercial intent?</button>
         </div>
 
-        <div class="ai-response-box" id="ai-response-box">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-            <span class="mono" style="color:var(--accent)">AI Copilot Response</span>
-            <span class="mono" id="ai-response-time">Generated just now</span>
-          </div>
-          <div id="ai-response-text" style="color:#FFFFFF;line-height:1.6;font-size:0.92rem;"></div>
+        <div class="ai-answer" id="ai-answer-box">
+          <div class="mono" style="color:var(--accent);margin-bottom:6px;">AI Analysis of Actual Telemetry</div>
+          <div id="ai-answer-text"></div>
         </div>
       </section>
 
-      <!-- ANALYTICS HEATMAPS & CHARTS -->
-      <section class="analytics-grid">
+      <!-- ANALYTICS PANELS -->
+      <section class="grid-2col">
         <!-- Chapter Dwell Heatmap -->
-        <div class="panel">
-          <div class="panel-header">
+        <div class="card-panel">
+          <div class="card-panel-header">
             <div>
-              <span class="mono">Section Engagement</span>
-              <h3 class="panel-title">Chapter Dwell Heatmap (Avg Seconds)</h3>
+              <div class="mono">Section Attention</div>
+              <h3 class="card-panel-title">Actual Chapter Dwell (Seconds)</h3>
             </div>
-            <span class="portal-badge">Observer Threshold 0.35</span>
+            <span class="mono">Actual Duration</span>
           </div>
 
-          <div class="bar-list" id="dwell-bars">
-            <div class="bar-item">
-              <div class="bar-info"><span>#security (Pen Testing &amp; AI Assurance)</span><b>64s</b></div>
-              <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-info"><span>#contact (Enquiry Form &amp; FAQ)</span><b>58s</b></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--success" style="width: 86%;"></div></div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-info"><span>#octadezx (AI Support Agent)</span><b>48s</b></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--info" style="width: 72%;"></div></div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-info"><span>#work (Showcase &amp; Case Studies)</span><b>42s</b></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--info" style="width: 63%;"></div></div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-info"><span>#accert-one (Mobile Racing Title)</span><b>36s</b></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--warn" style="width: 54%;"></div></div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-info"><span>#manifesto (Studio Offering)</span><b>24s</b></div>
-              <div class="bar-track"><div class="bar-fill" style="width: 38%;"></div></div>
-            </div>
-            <div class="bar-item">
-              <div class="bar-info"><span>#hero (Intro &amp; WebGL Gate)</span><b>16s</b></div>
-              <div class="bar-track"><div class="bar-fill" style="width: 25%;"></div></div>
-            </div>
+          <div class="bar-list" id="dwell-list">
+            <!-- Dynamically populated from actual records -->
           </div>
         </div>
 
-        <!-- Scroll Depth Milestone Funnel -->
-        <div class="panel">
-          <div class="panel-header">
+        <!-- Scroll Depth Milestone Distribution -->
+        <div class="card-panel">
+          <div class="card-panel-header">
             <div>
-              <span class="mono">Conversion Pathway</span>
-              <h3 class="panel-title">Scroll Depth Milestone Funnel</h3>
+              <div class="mono">Engagement Depth</div>
+              <h3 class="card-panel-title">Actual Scroll Milestones Reached</h3>
             </div>
-            <span class="portal-badge portal-badge--live">100% Top to Bottom</span>
+            <span class="mono">Actual Visitors</span>
           </div>
 
-          <div class="funnel-list">
-            <div class="funnel-row">
-              <span class="funnel-pct">100%</span>
-              <div class="funnel-bar-wrap">
-                <div class="bar-info"><span>Page Ingress (Hero Section)</span><b>1,492 visitors</b></div>
-                <div class="bar-track"><div class="bar-fill bar-fill--success" style="width: 100%;"></div></div>
-              </div>
-            </div>
-
-            <div class="funnel-row">
-              <span class="funnel-pct">87.4%</span>
-              <div class="funnel-bar-wrap">
-                <div class="bar-info"><span>25% Scroll Milestone (Manifesto)</span><b>1,304 visitors</b></div>
-                <div class="bar-track"><div class="bar-fill bar-fill--success" style="width: 87.4%;"></div></div>
-              </div>
-            </div>
-
-            <div class="funnel-row">
-              <span class="funnel-pct">71.8%</span>
-              <div class="funnel-bar-wrap">
-                <div class="bar-info"><span>50% Scroll Milestone (OctaDezx &amp; Accert)</span><b>1,071 visitors</b></div>
-                <div class="bar-track"><div class="bar-fill bar-fill--info" style="width: 71.8%;"></div></div>
-              </div>
-            </div>
-
-            <div class="funnel-row">
-              <span class="funnel-pct">56.4%</span>
-              <div class="funnel-bar-wrap">
-                <div class="bar-info"><span>75% Scroll Milestone (Security &amp; Work)</span><b>841 visitors</b></div>
-                <div class="bar-track"><div class="bar-fill bar-fill--info" style="width: 56.4%;"></div></div>
-              </div>
-            </div>
-
-            <div class="funnel-row">
-              <span class="funnel-pct">41.2%</span>
-              <div class="funnel-bar-wrap">
-                <div class="bar-info"><span>90% Scroll Milestone (Enquiry Form)</span><b>614 visitors</b></div>
-                <div class="bar-track"><div class="bar-fill" style="width: 41.2%;"></div></div>
-              </div>
-            </div>
-
-            <div class="funnel-row">
-              <span class="funnel-pct">34.1%</span>
-              <div class="funnel-bar-wrap">
-                <div class="bar-info"><span>100% Scroll Milestone (Footer / FAQ)</span><b>508 visitors</b></div>
-                <div class="bar-track"><div class="bar-fill" style="width: 34.1%;"></div></div>
-              </div>
-            </div>
+          <div class="bar-list" id="scroll-list">
+            <!-- Dynamically populated from actual records -->
           </div>
         </div>
       </section>
 
-      <!-- LIVE VISITOR STREAM -->
-      <section class="table-panel">
-        <div class="table-controls">
+      <!-- ACTUAL VISITOR STREAM TABLE -->
+      <section class="table-card">
+        <div class="table-header">
           <div>
-            <span class="mono">Visitor Telemetry Stream</span>
-            <h3 class="panel-title">Real-Time Inbound Activity</h3>
+            <div class="mono">Telemetry Feed</div>
+            <h3 style="font-size:1.15rem;font-weight:500;">Actual Inbound Visitor Stream</h3>
           </div>
-
-          <div class="table-tabs">
-            <button type="button" class="table-tab is-active" data-filter="all">All Visitors</button>
-            <button type="button" class="table-tab" data-filter="lead">🔥 High-Intent Leads</button>
-            <button type="button" class="table-tab" data-filter="security">🛡️ Security Inquiries</button>
-            <button type="button" class="table-tab" data-filter="ai">🤖 AI / OctaDezx</button>
-            <button type="button" class="table-tab" data-filter="gaming">🏎️ Accert One</button>
-          </div>
-
-          <input type="text" class="table-search" id="stream-search" placeholder="Search by VID, IP, Referrer..." />
+          <span class="mono" id="table-count-label">0 Records</span>
         </div>
 
         <div class="table-wrap">
-          <table class="stream-table">
+          <table class="real-table">
             <thead>
               <tr>
                 <th>Visitor ID</th>
-                <th>AI Classification</th>
+                <th>Classification</th>
                 <th>Referrer &bull; Landing</th>
                 <th>Scroll Depth</th>
                 <th>Top Dwell</th>
                 <th>Device &bull; Telemetry</th>
-                <th>Last Active</th>
+                <th>Timestamp</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody id="stream-tbody">
-              <!-- Populated by JavaScript -->
+            <tbody id="real-tbody">
+              <!-- Dynamically populated from actual records -->
             </tbody>
           </table>
         </div>
@@ -1243,51 +927,49 @@
   <!-- ==================== 3. EVENT STREAM INSPECTOR DRAWER ==================== -->
   <div class="drawer-overlay" id="drawer-overlay"></div>
   <div class="drawer" id="visitor-drawer">
-    <div class="drawer-header">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--hairline);">
       <div>
-        <span class="mono">Deep Session Telemetry</span>
-        <h3 id="drawer-vid" style="font-size:1.15rem;color:#FFFFFF">zr_vid_...</h3>
+        <div class="mono">Real Session Log</div>
+        <h3 id="drawer-vid" style="font-size:1.05rem;font-weight:500;margin-top:2px;">zr_vid_...</h3>
       </div>
-      <button type="button" class="p-btn" id="btn-close-drawer">&times; Close</button>
+      <button type="button" class="btn btn--ghost" id="btn-close-drawer">&times; Close</button>
     </div>
 
     <div>
-      <span class="mono">AI Behavioral Profile</span>
-      <div id="drawer-profile" style="margin-top:8px;font-size:0.88rem;color:var(--ink);background:#0A0A0A;padding:14px;border-radius:8px;border:1px solid var(--border)">
+      <div class="mono" style="margin-bottom:8px;">Visitor Metadata</div>
+      <div id="drawer-meta" style="font-size:0.86rem;color:var(--muted);background:var(--bg);padding:14px;border-radius:6px;border:1px solid var(--hairline);line-height:1.6;">
       </div>
     </div>
 
     <div>
-      <span class="mono">Chronological Event Timeline</span>
-      <div class="timeline" id="drawer-timeline" style="margin-top:14px;">
+      <div class="mono" style="margin-bottom:10px;">Chronological Action Stream</div>
+      <div class="timeline" id="drawer-timeline">
       </div>
     </div>
   </div>
 
-  <!-- ==================== 4. SECURITY SETTINGS MODAL ==================== -->
+  <!-- ==================== 4. SETTINGS MODAL ==================== -->
   <div class="drawer-overlay" id="sec-modal-overlay"></div>
   <div class="drawer" id="sec-drawer">
-    <div class="drawer-header">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--hairline);">
       <div>
-        <span class="mono">Access Configuration</span>
-        <h3 style="font-size:1.15rem;color:#FFFFFF">Admin Key Management</h3>
+        <div class="mono">Access Configuration</div>
+        <h3 style="font-size:1.05rem;font-weight:500;margin-top:2px;">Security Key Settings</h3>
       </div>
-      <button type="button" class="p-btn" id="btn-close-sec">&times; Close</button>
+      <button type="button" class="btn btn--ghost" id="btn-close-sec">&times; Close</button>
     </div>
 
-    <div style="font-size:0.86rem;color:var(--ink-muted);line-height:1.5;">
-      You can update your master key here. The new key's SHA-256 hash will be stored in your authenticated browser storage, immediately locking out any unauthorized parties.
+    <div style="font-size:0.88rem;color:var(--muted);line-height:1.6;">
+      Authentication is verified directly by the serverless backend. To configure a custom secret key for production, set the environment variable <code>ADMIN_KEY</code> in your Netlify Dashboard (<b>Site Settings &rarr; Environment Variables</b>).
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <label class="mono">New Master Passkey</label>
-      <input type="password" id="new-key-input" class="vault-input" placeholder="Enter new secret passkey..." />
-      <button type="button" class="p-btn p-btn--accent" id="btn-save-key">Save &amp; Update Security Key</button>
-      <div id="sec-msg" style="font-size:0.82rem;display:none;"></div>
+    <div style="margin-top:16px;">
+      <div class="mono" style="margin-bottom:6px;">Current Clearance Level</div>
+      <div style="font-weight:500;">Administrator / Root Verified</div>
     </div>
   </div>
 
-  <!-- ==================== 5. DASHBOARD & SECURITY SCRIPT ==================== -->
+  <!-- ==================== 5. DASHBOARD JAVASCRIPT ==================== -->
   <script type="module">
     const SESSION_KEY = 'zr_vault_session';
     const TOKEN_KEY = 'zr_auth_token';
@@ -1306,10 +988,10 @@
           grantAccess();
           return { ok: true };
         } else {
-          return { ok: false, error: data.error || 'Access denied: Invalid administrative key.' };
+          return { ok: false, error: data.error || 'Access denied: Invalid key.' };
         }
       } catch (err) {
-        return { ok: false, error: 'Authentication service unreachable. Please ensure network is connected.' };
+        return { ok: false, error: 'Authentication service unreachable.' };
       }
     }
 
@@ -1345,7 +1027,7 @@
       const portal = document.getElementById('portal-view');
       lock.classList.add('is-unlocked');
       portal.classList.add('is-active');
-      loadTelemetryReports();
+      loadActualTelemetryReports();
     }
 
     function lockPortal() {
@@ -1374,13 +1056,12 @@
       if (!val) return;
 
       submitBtn.disabled = true;
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span>Verifying with Server...</span>';
+      submitBtn.innerHTML = '<span>Verifying...</span>';
       errorBox.classList.remove('is-active');
 
       const result = await authenticateWithServer(val);
       submitBtn.disabled = false;
-      submitBtn.innerHTML = originalText;
+      submitBtn.innerHTML = '<span>Unlock Portal</span> <i>&rarr;</i>';
 
       if (!result.ok) {
         errorBox.classList.add('is-active');
@@ -1388,8 +1069,9 @@
       }
     });
 
-    // Lock and Security Buttons
+    // Top action triggers
     document.getElementById('btn-lock').addEventListener('click', lockPortal);
+    document.getElementById('btn-refresh').addEventListener('click', loadActualTelemetryReports);
 
     const secOverlay = document.getElementById('sec-modal-overlay');
     const secDrawer = document.getElementById('sec-drawer');
@@ -1406,27 +1088,15 @@
       secDrawer.classList.remove('is-open');
     });
 
-    document.getElementById('btn-save-key').addEventListener('click', async () => {
-      const newKey = document.getElementById('new-key-input').value.trim();
-      const secMsg = document.getElementById('sec-msg');
-      if (newKey.length < 12) {
-        secMsg.style.display = 'block';
-        secMsg.style.color = '#FF4D4D';
-        secMsg.textContent = 'Recommended: Set ADMIN_KEY in your Netlify Environment Variables for production defense. Key must be at least 12 characters.';
-        return;
-      }
-      secMsg.style.display = 'block';
-      secMsg.style.color = 'var(--success)';
-      secMsg.textContent = 'To update your production key, set ADMIN_KEY in Netlify Dashboard (Site Settings > Environment Variables).';
-    });
+    // --- ACTUAL TELEMETRY ENGINE (100% REAL DATA ONLY) ---
+    let actualRecords = [];
 
-    // --- TELEMETRY ENGINE & REALISTIC TELEMETRY DATA GENERATOR ---
-    let visitorData = [];
+    async function loadActualTelemetryReports() {
+      document.getElementById('lbl-sync-time').textContent = new Date().toLocaleTimeString();
 
-    async function loadTelemetryReports() {
-      // 1. Fetch live telemetry from backend endpoint using signed token
-      let liveRecords = [];
+      let serverRecords = [];
       const token = sessionStorage.getItem(TOKEN_KEY) || 'zeriotic-admin-77';
+
       try {
         const res = await fetch('/api/telemetry', {
           headers: {
@@ -1437,181 +1107,260 @@
         if (res.ok) {
           const json = await res.json();
           if (json.records && Array.isArray(json.records)) {
-            liveRecords = json.records;
+            serverRecords = json.records;
+          }
+        }
+      } catch (err) {
+        console.warn('Backend fetch error:', err);
+      }
+
+      // Merge real local visitor session if present in browser storage
+      let localSession = null;
+      try {
+        if (window.ZerioticTracker) {
+          const profile = window.ZerioticTracker.getProfile();
+          const events = window.ZerioticTracker.getEvents();
+          if (profile && profile.visitorId) {
+            localSession = {
+              vid: profile.visitorId,
+              sid: profile.sessionId,
+              landing: profile.landingPage || '/',
+              ref: profile.referrer || 'direct',
+              depth: profile.scrollDepth || '0%',
+              telemetry: profile.telemetry || {},
+              events: events || [],
+              receivedAt: profile.lastSeen || new Date().toISOString()
+            };
           }
         }
       } catch {}
 
-      // 2. Also inspect local visitor tracker if available
-      const localProfile = window.ZerioticTracker ? window.ZerioticTracker.getProfile() : null;
-      const localEvents = window.ZerioticTracker ? window.ZerioticTracker.getEvents() : [];
-
-      // 3. Synthesize comprehensive baseline intelligence stream
-      visitorData = generateTelemetryStream(liveRecords, localProfile, localEvents);
-      renderTable(visitorData);
-    }
-
-    function generateTelemetryStream(live, local, localEvents) {
-      const items = [];
-
-      // Include real local visitor session if present
-      if (local && local.visitorId) {
-        items.push({
-          vid: local.visitorId,
-          intent: 'client',
-          intentLabel: '🔥 High-Value Client',
-          intentClass: 'badge-intent--high',
-          referrer: local.referrer || 'direct',
-          landing: local.landingPage || '/',
-          scrollDepth: local.scrollDepth || '100%',
-          topDwell: 'Security (54s)',
-          device: `${local.telemetry?.platform || 'Desktop'} · ${local.telemetry?.screen || '1920x1080'}`,
-          time: 'Active now',
-          events: localEvents.length ? localEvents : [
-            ['23:45:10', 'pageview', '/'],
-            ['23:45:22', 'scroll', '50%'],
-            ['23:45:34', 'dwell', 'security', { seconds: 54 }],
-            ['23:45:50', 'click:cta', 'Talk to us about testing']
-          ]
-        });
+      // Combine server records and local session without duplicates
+      const map = new Map();
+      serverRecords.forEach(r => {
+        if (r && r.vid) map.set(r.vid + '_' + (r.sid || ''), r);
+      });
+      if (localSession && localSession.vid) {
+        map.set(localSession.vid + '_' + (localSession.sid || ''), localSession);
       }
 
-      // Add real live records from serverless buffer if any
-      live.forEach(r => {
-        items.push({
-          vid: r.vid || 'zr_vid_live',
-          intent: r.event?.[1]?.includes('security') ? 'security' : 'lead',
-          intentLabel: r.event?.[1]?.includes('security') ? '🛡️ Pen Testing Lead' : '💼 Commercial Prospect',
-          intentClass: 'badge-intent--high',
-          referrer: r.ref || 'google.com',
-          landing: r.landing || '/',
-          scrollDepth: r.depth || '90%',
-          topDwell: 'Contact (62s)',
-          device: `${r.telemetry?.viewport || '1440x900'} · ${r.telemetry?.networkType || '4G'}`,
-          time: r.receivedAt ? new Date(r.receivedAt).toLocaleTimeString() : 'Recent',
-          events: [
-            ['10:14:02', 'pageview', r.landing || '/'],
-            ['10:14:20', 'scroll', r.depth || '75%'],
-            ['10:14:45', r.event?.[1] || 'dwell', r.event?.[2] || 'security']
-          ]
+      actualRecords = Array.from(map.values());
+
+      // Update Dashboard with ACTUAL data
+      renderActualMetrics(actualRecords);
+      renderActualHeatmap(actualRecords);
+      renderActualScrollMilestones(actualRecords);
+      renderActualTable(actualRecords);
+      renderActualAiSummary(actualRecords);
+    }
+
+    function renderActualMetrics(records) {
+      const distinctVids = new Set(records.map(r => r.vid).filter(Boolean));
+      const distinctSids = new Set(records.map(r => r.sid).filter(Boolean));
+
+      document.getElementById('kpi-visitors').textContent = distinctVids.size;
+      document.getElementById('kpi-visitors-sub').textContent = distinctVids.size === 1
+        ? '1 verified unique visitor'
+        : `${distinctVids.size} verified unique visitors`;
+
+      document.getElementById('kpi-sessions').textContent = distinctSids.size;
+      document.getElementById('kpi-sessions-sub').textContent = distinctSids.size === 1
+        ? '1 browsing session'
+        : `${distinctSids.size} browsing sessions`;
+
+      // Calculate actual dwell events
+      const dwellValues = [];
+      const sectionDwells = {};
+
+      records.forEach(r => {
+        const evts = Array.isArray(r.events) ? r.events : (r.event ? [r.event] : []);
+        evts.forEach(e => {
+          if (Array.isArray(e) && (e[1] === 'dwell' || e[1]?.startsWith('dwell'))) {
+            const sec = typeof e[3] === 'object' ? (e[3]?.seconds || 0) : (Number(e[3]) || 0);
+            if (sec > 0) {
+              dwellValues.push(sec);
+              const sectionId = String(e[2] || 'section');
+              sectionDwells[sectionId] = (sectionDwells[sectionId] || 0) + sec;
+            }
+          }
         });
       });
 
-      // Populate rich high-fidelity baseline intelligence logs
-      const baseTemplates = [
-        {
-          vid: 'zr_vid_mwaz9_7a1b',
-          intent: 'security',
-          intentLabel: '🛡️ Security Testing Lead',
-          intentClass: 'badge-intent--high',
-          referrer: 'linkedin.com/feed',
-          landing: '/work/cybersecurity-audit',
-          scrollDepth: '100%',
-          topDwell: 'Security Audit (72s)',
-          device: 'Mac · 2560x1440 · Wifi',
-          time: '4 mins ago',
-          events: [
-            ['23:41:00', 'pageview', '/work/cybersecurity-audit'],
-            ['23:41:18', 'scroll', '50%'],
-            ['23:41:40', 'dwell', 'cybersecurity-audit', { seconds: 72 }],
-            ['23:42:15', 'click:cta', 'Talk to us about testing', { href: '/#contact' }],
-            ['23:42:30', 'form:start', 'enquiry', { firstField: 'name' }]
-          ]
-        },
-        {
-          vid: 'zr_vid_mwaz8_4c99',
-          intent: 'ai',
-          intentLabel: '🤖 OctaDezx Evaluator',
-          intentClass: 'badge-intent--eval',
-          referrer: 'news.ycombinator.com',
-          landing: '/work/octadezx',
-          scrollDepth: '90%',
-          topDwell: 'OctaDezx (58s)',
-          device: 'Ubuntu · 1920x1080 · 4G',
-          time: '12 mins ago',
-          events: [
-            ['23:33:10', 'pageview', '/work/octadezx'],
-            ['23:33:28', 'scroll', '75%'],
-            ['23:33:50', 'dwell', 'octadezx', { seconds: 58 }],
-            ['23:34:20', 'click:cta', 'Try OctaDezx', { href: 'https://octadezx.com' }]
-          ]
-        },
-        {
-          vid: 'zr_vid_mwaz7_1e34',
-          intent: 'lead',
-          intentLabel: '💼 Client Prospect ($25k+)',
-          intentClass: 'badge-intent--client',
-          referrer: 'google.com (organic)',
-          landing: '/',
-          scrollDepth: '100%',
-          topDwell: 'Enquiry Form (84s)',
-          device: 'Windows 11 · 1920x1080',
-          time: '28 mins ago',
-          events: [
-            ['23:18:02', 'pageview', '/'],
-            ['23:18:30', 'scroll', '50%'],
-            ['23:18:55', 'dwell', 'work', { seconds: 44 }],
-            ['23:19:35', 'scroll', '100%'],
-            ['23:20:10', 'form:focus', 'budget'],
-            ['23:20:25', 'form:focus', 'message']
-          ]
-        },
-        {
-          vid: 'zr_vid_mwaz6_99aa',
-          intent: 'gaming',
-          intentLabel: '🏎️ Accert One Player',
-          intentClass: 'badge-intent--gamer',
-          referrer: 'instagram.com',
-          landing: '/work/accert-one',
-          scrollDepth: '90%',
-          topDwell: 'Accert One (45s)',
-          device: 'iOS (iPhone 15) · Touch',
-          time: '42 mins ago',
-          events: [
-            ['23:04:12', 'pageview', '/work/accert-one'],
-            ['23:04:25', 'scroll', '50%'],
-            ['23:04:50', 'dwell', 'accert-one', { seconds: 45 }],
-            ['23:05:15', 'form:focus', 'accert_preorder']
-          ]
-        },
-        {
-          vid: 'zr_vid_mwaz5_812c',
-          intent: 'lead',
-          intentLabel: '🔥 High-Value Client',
-          intentClass: 'badge-intent--high',
-          referrer: 'google.com/search?q=best+software+company+bangladesh',
-          landing: '/',
-          scrollDepth: '100%',
-          topDwell: 'Manifesto & Studio (66s)',
-          device: 'Windows · 1920x1080',
-          time: '1 hour ago',
-          events: [
-            ['22:45:00', 'pageview', '/'],
-            ['22:45:20', 'dwell', 'manifesto', { seconds: 32 }],
-            ['22:45:50', 'dwell', 'studio', { seconds: 34 }],
-            ['22:46:25', 'click:mailto', 'hello@zeriotic.com']
-          ]
-        }
-      ];
+      const avgDwell = dwellValues.length
+        ? Math.round(dwellValues.reduce((a, b) => a + b, 0) / dwellValues.length)
+        : 0;
 
-      return items.concat(baseTemplates);
+      document.getElementById('kpi-dwell').textContent = `${avgDwell}s`;
+
+      let topSectionName = 'None recorded yet';
+      let maxDwellVal = 0;
+      for (const [sec, val] of Object.entries(sectionDwells)) {
+        if (val > maxDwellVal) {
+          maxDwellVal = val;
+          topSectionName = `#${sec}`;
+        }
+      }
+      document.getElementById('kpi-dwell-sub').textContent = `Top section: ${topSectionName}`;
+
+      // Calculate actual scroll depth >50%
+      let over50Count = 0;
+      records.forEach(r => {
+        const d = parseInt(String(r.depth || '0').replace('%', ''), 10);
+        if (d >= 50) over50Count++;
+      });
+      const deepScrollPct = records.length ? Math.round((over50Count / records.length) * 100) : 0;
+      document.getElementById('kpi-scroll').textContent = `${deepScrollPct}%`;
+      document.getElementById('kpi-scroll-sub').textContent = `${over50Count} of ${records.length} visitors past midfield`;
     }
 
-    function renderTable(data) {
-      const tbody = document.getElementById('stream-tbody');
-      tbody.innerHTML = '';
+    function renderActualHeatmap(records) {
+      const container = document.getElementById('dwell-list');
+      container.innerHTML = '';
 
-      data.forEach((row, idx) => {
+      const sectionTotals = {};
+      const sectionCounts = {};
+
+      records.forEach(r => {
+        const evts = Array.isArray(r.events) ? r.events : (r.event ? [r.event] : []);
+        evts.forEach(e => {
+          if (Array.isArray(e) && (e[1] === 'dwell' || e[1]?.startsWith('dwell'))) {
+            const sec = String(e[2] || 'section');
+            const seconds = typeof e[3] === 'object' ? (e[3]?.seconds || 0) : (Number(e[3]) || 0);
+            if (seconds > 0) {
+              sectionTotals[sec] = (sectionTotals[sec] || 0) + seconds;
+              sectionCounts[sec] = (sectionCounts[sec] || 0) + 1;
+            }
+          }
+        });
+      });
+
+      const sections = Object.keys(sectionTotals);
+      if (sections.length === 0) {
+        container.innerHTML = '<div style="color:var(--muted);font-size:0.86rem;padding:12px 0;">No section dwell events recorded yet. Visit and browse sections on zeriotic.com to record actual reading times.</div>';
+        return;
+      }
+
+      let maxAvg = 1;
+      const averages = {};
+      sections.forEach(s => {
+        averages[s] = Math.round(sectionTotals[s] / sectionCounts[s]);
+        if (averages[s] > maxAvg) maxAvg = averages[s];
+      });
+
+      sections.sort((a, b) => averages[b] - averages[a]).forEach(s => {
+        const avg = averages[s];
+        const pct = Math.round((avg / maxAvg) * 100);
+        const div = document.createElement('div');
+        div.className = 'bar-item';
+        div.innerHTML = `
+          <div class="bar-info"><span>#${s}</span><b>${avg}s avg (${sectionCounts[s]} views)</b></div>
+          <div class="bar-track"><div class="bar-fill ${avg >= 30 ? 'bar-fill--accent' : ''}" style="width: ${pct}%;"></div></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function renderActualScrollMilestones(records) {
+      const container = document.getElementById('scroll-list');
+      container.innerHTML = '';
+
+      if (records.length === 0) {
+        container.innerHTML = '<div style="color:var(--muted);font-size:0.86rem;padding:12px 0;">No scroll milestones recorded yet.</div>';
+        return;
+      }
+
+      const milestones = [25, 50, 75, 90, 100];
+      const counts = { 25: 0, 50: 0, 75: 0, 90: 0, 100: 0 };
+
+      records.forEach(r => {
+        const maxDepth = parseInt(String(r.depth || '0').replace('%', ''), 10);
+        milestones.forEach(m => {
+          if (maxDepth >= m) counts[m]++;
+        });
+      });
+
+      milestones.forEach(m => {
+        const count = counts[m];
+        const pct = records.length ? Math.round((count / records.length) * 100) : 0;
+        const div = document.createElement('div');
+        div.className = 'bar-item';
+        div.innerHTML = `
+          <div class="bar-info"><span>Reached ${m}% Depth</span><b>${count} of ${records.length} (${pct}%)</b></div>
+          <div class="bar-track"><div class="bar-fill" style="width: ${pct}%;"></div></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function renderActualTable(records) {
+      const tbody = document.getElementById('real-tbody');
+      tbody.innerHTML = '';
+      document.getElementById('table-count-label').textContent = `${records.length} Actual Records`;
+
+      if (records.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8">
+              <div class="empty-state">
+                <b>No actual visitor sessions recorded yet.</b>
+                <p>Browse any page on <a href="/" target="_blank" style="text-decoration:underline;color:var(--accent)">zeriotic.com</a> to generate live telemetry.</p>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      records.forEach((r, idx) => {
+        const vidShort = (r.vid || 'unknown').slice(0, 16);
+        const depth = r.depth || '0%';
+        const landing = r.landing || '/';
+        const ref = r.ref || 'direct';
+        const time = r.receivedAt ? new Date(r.receivedAt).toLocaleTimeString() : 'Recent';
+
+        // Find top dwell
+        let topDwellText = 'None';
+        const evts = Array.isArray(r.events) ? r.events : (r.event ? [r.event] : []);
+        evts.forEach(e => {
+          if (Array.isArray(e) && (e[1] === 'dwell' || e[1]?.startsWith('dwell'))) {
+            const sec = typeof e[3] === 'object' ? (e[3]?.seconds || 0) : (Number(e[3]) || 0);
+            topDwellText = `${e[2]} (${sec}s)`;
+          }
+        });
+
+        // Determine real intent classification
+        let intentLabel = 'Casual Visitor';
+        let intentClass = 'intent-pill';
+        const depthNum = parseInt(String(depth).replace('%', ''), 10);
+
+        if (landing.includes('security') || topDwellText.includes('security')) {
+          intentLabel = '🛡️ Security Testing Prospect';
+          intentClass = 'intent-pill intent-pill--lead';
+        } else if (landing.includes('octadezx') || topDwellText.includes('octadezx')) {
+          intentLabel = '🤖 AI / OctaDezx Evaluator';
+          intentClass = 'intent-pill intent-pill--lead';
+        } else if (landing.includes('accert') || topDwellText.includes('accert')) {
+          intentLabel = '🏎️ Accert One Visitor';
+          intentClass = 'intent-pill';
+        } else if (depthNum >= 75) {
+          intentLabel = '💼 Engaged Client Prospect';
+          intentClass = 'intent-pill intent-pill--lead';
+        }
+
+        const device = r.telemetry
+          ? `${r.telemetry.viewport || 'Desktop'} &bull; ${r.telemetry.timezone || 'UTC'}`
+          : 'Standard Desktop';
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><code style="color:var(--accent);font-size:0.78rem">${row.vid.slice(0, 15)}...</code></td>
-          <td><span class="badge-intent ${row.intentClass}">${row.intentLabel}</span></td>
-          <td><b>${row.referrer}</b> &bull; <span style="color:var(--ink-muted)">${row.landing}</span></td>
-          <td><span style="color:#FFFFFF;font-weight:500">${row.scrollDepth}</span></td>
-          <td><span style="color:var(--success)">${row.topDwell}</span></td>
-          <td><span style="color:var(--ink-muted)">${row.device}</span></td>
-          <td>${row.time}</td>
-          <td><button type="button" class="p-btn btn-inspect" data-idx="${idx}" style="padding:4px 8px;font-size:0.75rem;">Inspect &rarr;</button></td>
+          <td><code>${vidShort}...</code></td>
+          <td><span class="${intentClass}">${intentLabel}</span></td>
+          <td><b>${ref}</b> &bull; <span style="color:var(--muted)">${landing}</span></td>
+          <td><b>${depth}</b></td>
+          <td>${topDwellText}</td>
+          <td>${device}</td>
+          <td>${time}</td>
+          <td><button type="button" class="btn btn--ghost btn-inspect" data-idx="${idx}" style="padding:4px 10px;font-size:0.75rem;">Inspect &rarr;</button></td>
         `;
         tbody.appendChild(tr);
       });
@@ -1620,98 +1369,117 @@
       document.querySelectorAll('.btn-inspect').forEach(btn => {
         btn.addEventListener('click', () => {
           const idx = parseInt(btn.getAttribute('data-idx'), 10);
-          openDrawer(data[idx]);
+          openDrawer(records[idx]);
         });
       });
     }
 
-    // --- VISUAL AI COPILOT INTERACTION ---
+    function renderActualAiSummary(records) {
+      const summaryBox = document.getElementById('ai-real-summary');
+      if (records.length === 0) {
+        summaryBox.innerHTML = '<b>Awaiting live traffic:</b> No visitor sessions recorded in buffer yet. Once prospective clients or engineering teams browse zeriotic.com, the AI model will evaluate their actual dwell times, scroll depths, and conversion intent in real time.';
+        return;
+      }
+
+      const total = records.length;
+      const deepScrolls = records.filter(r => parseInt(String(r.depth || '0').replace('%', ''), 10) >= 50).length;
+      const securityVisitors = records.filter(r => (r.landing || '').includes('security')).length;
+      const octadezxVisitors = records.filter(r => (r.landing || '').includes('octadezx')).length;
+
+      let leadObservation = 'Traffic is primarily exploring the homepage offering.';
+      if (securityVisitors > 0) {
+        leadObservation = `<b>${securityVisitors} of ${total} visitor(s)</b> directly inspected the Cybersecurity &amp; AI Security Testing offerings.`;
+      } else if (octadezxVisitors > 0) {
+        leadObservation = `<b>${octadezxVisitors} of ${total} visitor(s)</b> evaluated the OctaDezx AI customer support benchmarks.`;
+      }
+
+      summaryBox.innerHTML = `
+        <b>AI Behavioral Synthesis of ${total} Real Visitor(s):</b><br>
+        • <b>Engagement Rate:</b> <b>${Math.round((deepScrolls / total) * 100)}%</b> of visitors engaged past midfield (50% depth).<br>
+        • <b>Observed Intent:</b> ${leadObservation}<br>
+        • <b>Attribution:</b> Top inbound channel is <b>${records[0].ref || 'Direct / Organic'}</b> with entry point <code>${records[0].landing || '/'}</code>.
+      `;
+    }
+
+    // --- INTERACTIVE AI QUERY (GROUNDED IN ACTUAL DATA) ---
     const aiInput = document.getElementById('ai-query-input');
     const aiBtn = document.getElementById('btn-ask-ai');
-    const aiResBox = document.getElementById('ai-response-box');
-    const aiResText = document.getElementById('ai-response-text');
-    const aiResTime = document.getElementById('ai-response-time');
+    const aiAnswerBox = document.getElementById('ai-answer-box');
+    const aiAnswerText = document.getElementById('ai-answer-text');
 
-    function queryAI(query) {
-      aiResBox.classList.add('is-active');
-      aiResTime.textContent = new Date().toLocaleTimeString();
-      aiResText.innerHTML = '<span style="color:var(--accent)">Analyzing telemetry graph and behavioral clusters...</span>';
+    function answerActualQuery(query) {
+      aiAnswerBox.classList.add('is-active');
+      const q = query.toLowerCase();
 
-      setTimeout(() => {
-        const q = query.toLowerCase();
-        let answer = '';
+      if (actualRecords.length === 0) {
+        aiAnswerText.innerHTML = '<b>No live data recorded yet.</b> The AI analyzer operates exclusively on actual telemetry. Visit any page on <a href="/" target="_blank" style="text-decoration:underline;">zeriotic.com</a> to generate your first live telemetry record.';
+        return;
+      }
 
-        if (q.includes('lead') || q.includes('who')) {
-          answer = `<b>AI Inferred Lead Summary:</b><br>
-          • <b>Top Lead:</b> Visitor <code>zr_vid_mwaz9_7a1b</code> (via LinkedIn) spent 72 seconds on Cybersecurity Audit, clicked 'Talk to us about testing' and engaged the enquiry form.<br>
-          • <b>Second Lead:</b> Visitor <code>zr_vid_mwaz5_812c</code> searched 'best software company bangladesh', read the Studio section for 66s, and triggered the direct mail link to <code>hello@zeriotic.com</code>.<br>
-          • <b>Total Qualified Opportunities:</b> 58 distinct commercial leads identified this period.`;
-        } else if (q.includes('dwell') || q.includes('chapter')) {
-          answer = `<b>Deep Dwell Analysis:</b><br>
-          • <b>Highest Attention:</b> <code>#security</code> leads site-wide with an average dwell time of <b>64.2 seconds</b>, followed by <code>#contact</code> at <b>58.1 seconds</b>.<br>
-          • <b>Key Finding:</b> Visitors who dwell on OctaDezx for >40 seconds have a 68% probability of clicking outbound to try the app.<br>
-          • <b>Lowest Drop-off:</b> Only 12.6% bounce before reaching the Manifesto section.`;
-        } else if (q.includes('mobile') || q.includes('desktop')) {
-          answer = `<b>Device Telemetry Breakdown:</b><br>
-          • <b>Desktop (62%):</b> Longest reading time (3m 48s avg). Primary driver of custom software and penetration testing inquiries.<br>
-          • <b>Mobile (38%):</b> Highest engagement on Accert One pre-order (82% form submission rate) and fast swipe-through of case studies.<br>
-          • <b>Resolution Floor:</b> 74% of desktop users run High-DPI / Retina displays.`;
-        } else {
-          answer = `<b>Executive Telemetry Briefing:</b><br>
-          • <b>Traffic Health:</b> 1,492 unique visitors with an 84.2% acceptance rate for extreme activity cookies.<br>
-          • <b>Commercial Intent:</b> 56.4% of traffic reaches past 75% scroll depth into the core services and contact zone.<br>
-          • <b>Actionable Insight:</b> Strong organic resonance for Bangladesh software studio and cybersecurity services. Recommend publishing a dedicated 48-hour security assessment package.`;
-        }
+      const total = actualRecords.length;
+      let text = '';
 
-        aiResText.innerHTML = answer;
-      }, 400);
+      if (q.includes('dwell') || q.includes('highest')) {
+        text = `<b>Actual Dwell Analysis:</b> Analyzed ${total} real session(s). Check the Section Attention heatmap above to view the exact seconds recorded per chapter.`;
+      } else if (q.includes('lead') || q.includes('intent') || q.includes('commercial')) {
+        const leads = actualRecords.filter(r => parseInt(String(r.depth || '0').replace('%', ''), 10) >= 75 || (r.landing || '').includes('security'));
+        text = `<b>Actual Inbound Leads:</b> ${leads.length} of ${total} recorded visitor(s) reached past 75% scroll depth or inspected high-value security offerings.`;
+      } else {
+        text = `<b>Actual Traffic Summary:</b> Total of ${total} verified visitor session(s) recorded in the live telemetry buffer. Average deep-scroll rate is ${Math.round((actualRecords.filter(r => parseInt(String(r.depth || '0').replace('%', ''), 10) >= 50).length / total) * 100)}%.`;
+      }
+
+      aiAnswerText.innerHTML = text;
     }
 
     aiBtn.addEventListener('click', () => {
       const q = aiInput.value.trim();
-      if (q) queryAI(q);
+      if (q) answerActualQuery(q);
     });
 
-    document.querySelectorAll('.ai-prompt-chip').forEach(chip => {
+    document.querySelectorAll('.ai-chip').forEach(chip => {
       chip.addEventListener('click', () => {
         const q = chip.getAttribute('data-q');
         aiInput.value = q;
-        queryAI(q);
+        answerActualQuery(q);
       });
     });
 
-    // --- DRAWER EVENT INSPECTOR ---
+    // --- DRAWER MODAL ---
     const drawerOverlay = document.getElementById('drawer-overlay');
     const drawer = document.getElementById('visitor-drawer');
     const btnCloseDrawer = document.getElementById('btn-close-drawer');
 
-    function openDrawer(item) {
-      document.getElementById('drawer-vid').textContent = item.vid;
-      document.getElementById('drawer-profile').innerHTML = `
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-          <div>Classification: <b>${item.intentLabel}</b></div>
-          <div>Scroll Depth: <b>${item.scrollDepth}</b></div>
-          <div>Referrer: <b>${item.referrer}</b></div>
-          <div>Landing: <b>${item.landing}</b></div>
-          <div>Device: <b>${item.device}</b></div>
-          <div>Last Active: <b>${item.time}</b></div>
-        </div>
+    function openDrawer(record) {
+      document.getElementById('drawer-vid').textContent = record.vid;
+      document.getElementById('drawer-meta').innerHTML = `
+        <div>Entry Page: <b>${record.landing || '/'}</b></div>
+        <div>Referrer: <b>${record.ref || 'direct'}</b></div>
+        <div>Max Scroll Depth: <b>${record.depth || '0%'}</b></div>
+        <div>Time: <b>${record.receivedAt ? new Date(record.receivedAt).toLocaleString() : 'Recent'}</b></div>
+        <div>Viewport: <b>${record.telemetry?.viewport || 'Unknown'}</b></div>
+        <div>Timezone: <b>${record.telemetry?.timezone || 'Unknown'}</b></div>
       `;
 
       const tl = document.getElementById('drawer-timeline');
       tl.innerHTML = '';
-      (item.events || []).forEach(e => {
-        const div = document.createElement('div');
-        div.className = 'timeline-item';
-        div.innerHTML = `
-          <div style="display:flex;align-items:center;gap:8px">
-            <span class="mono" style="color:var(--accent)">${e[0]}</span>
-            <b style="color:#FFFFFF">${e[1]}</b>
-          </div>
-          <div style="color:var(--ink-muted);font-size:0.8rem">${e[2] || ''} ${e[3] ? JSON.stringify(e[3]) : ''}</div>
-        `;
-        tl.appendChild(div);
-      });
+      const evts = Array.isArray(record.events) ? record.events : (record.event ? [record.event] : []);
+
+      if (evts.length === 0) {
+        tl.innerHTML = '<div style="color:var(--muted);font-size:0.84rem;">No individual event actions recorded for this visitor yet.</div>';
+      } else {
+        evts.forEach(e => {
+          const div = document.createElement('div');
+          div.className = 'timeline-item';
+          div.innerHTML = `
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="mono" style="color:var(--accent)">${e[0] || 'time'}</span>
+              <b>${e[1] || 'action'}</b>
+            </div>
+            <div style="color:var(--muted);font-size:0.8rem">${e[2] || ''} ${e[3] ? JSON.stringify(e[3]) : ''}</div>
+          `;
+          tl.appendChild(div);
+        });
+      }
 
       drawerOverlay.classList.add('is-open');
       drawer.classList.add('is-open');
@@ -1726,58 +1494,40 @@
       drawer.classList.remove('is-open');
     });
 
-    // --- FILTER & SEARCH ---
-    document.querySelectorAll('.table-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.table-tab').forEach(t => t.classList.remove('is-active'));
-        tab.classList.add('is-active');
-        const filter = tab.getAttribute('data-filter');
-        if (filter === 'all') {
-          renderTable(visitorData);
-        } else {
-          renderTable(visitorData.filter(x => x.intent === filter));
-        }
-      });
-    });
-
-    document.getElementById('stream-search').addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase();
-      renderTable(visitorData.filter(x =>
-        x.vid.toLowerCase().includes(q) ||
-        x.referrer.toLowerCase().includes(q) ||
-        x.landing.toLowerCase().includes(q) ||
-        x.intentLabel.toLowerCase().includes(q)
-      ));
-    });
-
-    // --- CSV EXPORT ---
+    // --- CSV EXPORT (ACTUAL DATA ONLY) ---
     document.getElementById('btn-export-csv').addEventListener('click', () => {
-      const headers = ['VisitorID', 'Intent', 'Referrer', 'LandingPage', 'ScrollDepth', 'TopDwell', 'Device', 'LastActive'];
-      const rows = visitorData.map(v => [
-        v.vid,
-        `"${v.intentLabel}"`,
-        `"${v.referrer}"`,
-        `"${v.landing}"`,
-        v.scrollDepth,
-        `"${v.topDwell}"`,
-        `"${v.device}"`,
-        `"${v.time}"`
+      if (actualRecords.length === 0) {
+        alert('No actual visitor telemetry records to export yet.');
+        return;
+      }
+      const headers = ['VisitorID', 'SessionID', 'Referrer', 'LandingPage', 'ScrollDepth', 'Timestamp'];
+      const rows = actualRecords.map(r => [
+        `"${r.vid || ''}"`,
+        `"${r.sid || ''}"`,
+        `"${r.ref || 'direct'}"`,
+        `"${r.landing || '/'}"`,
+        `"${r.depth || '0%'}"`,
+        `"${r.receivedAt || ''}"`
       ]);
       const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement('a');
       link.setAttribute('href', encodedUri);
-      link.setAttribute('download', `zeriotic_telemetry_export_${Date.now()}.csv`);
+      link.setAttribute('download', `zeriotic_actual_telemetry_${Date.now()}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     });
 
-    document.getElementById('btn-refresh').addEventListener('click', () => {
-      loadTelemetryReports();
-    });
+    // Auto-refresh actual records every 15 seconds while portal is open
+    setInterval(() => {
+      const lock = document.getElementById('vault-lock');
+      if (lock.classList.contains('is-unlocked')) {
+        loadActualTelemetryReports();
+      }
+    }, 15000);
 
-    // Run Auth Verification on Boot
+    // Boot
     checkAuth();
   </script>
 </body>

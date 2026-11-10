@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import nodemailer from 'nodemailer';
 import path from 'node:path';
+import fs from 'node:fs';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
@@ -82,7 +83,24 @@ app.post('/api/contact', async (req, res) => {
 });
 
 // Telemetry buffer & admin reporting endpoint
-const telemetryBuffer = [];
+const TELEMETRY_FILE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'telemetry_data.json');
+
+function loadTelemetryFile() {
+  try {
+    if (fs.existsSync(TELEMETRY_FILE)) {
+      return JSON.parse(fs.readFileSync(TELEMETRY_FILE, 'utf8'));
+    }
+  } catch {}
+  return [];
+}
+
+function saveTelemetryFile(data) {
+  try {
+    fs.writeFileSync(TELEMETRY_FILE, JSON.stringify(data.slice(0, 2000)), 'utf8');
+  } catch {}
+}
+
+const telemetryBuffer = loadTelemetryFile();
 const MAX_TELEMETRY_LOGS = 2000;
 const ADMIN_KEY = process.env.ADMIN_KEY || 'zeriotic-admin-77';
 
@@ -190,6 +208,7 @@ app.post('/api/telemetry', (req, res) => {
       receivedAt: new Date().toISOString()
     });
     if (telemetryBuffer.length > MAX_TELEMETRY_LOGS) telemetryBuffer.pop();
+    saveTelemetryFile(telemetryBuffer);
   }
   res.json({ ok: true, stored: true });
 });
