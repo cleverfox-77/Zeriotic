@@ -26,6 +26,7 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         privacy: path.resolve(__dirname, 'privacy.html'),
+        portal: path.resolve(__dirname, 'portal/index.html'),
         variant3d: path.resolve(__dirname, 'work/variant3d.html'),
         mira: path.resolve(__dirname, 'work/mira.html'),
         melemTokyo: path.resolve(__dirname, 'work/melem-tokyo.html'),

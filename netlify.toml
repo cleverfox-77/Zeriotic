@@ -34,6 +34,12 @@
   to = "/.netlify/functions/contact"
   status = 200
 
+# Telemetry beacon & protected admin reporting endpoint
+[[redirects]]
+  from = "/api/telemetry"
+  to = "/.netlify/functions/telemetry"
+  status = 200
+
 # Retired page: old links and crawlers go to the homepage.
 [[redirects]]
   from = "/work/how-zeriotic-renders"

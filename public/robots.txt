@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /portal/
 
 # AI / answer-engine crawlers, explicitly welcomed (an explicit list means a
 # future wildcard edit cannot silently block one of them)

@@ -80,6 +80,32 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
+// Telemetry buffer & admin reporting endpoint
+const telemetryBuffer = [];
+const MAX_TELEMETRY_LOGS = 2000;
+const ADMIN_KEY = process.env.ADMIN_KEY || 'zeriotic-admin-77';
+
+app.post('/api/telemetry', (req, res) => {
+  const data = req.body;
+  if (data && data.vid) {
+    telemetryBuffer.unshift({
+      ...data,
+      ip: req.ip,
+      receivedAt: new Date().toISOString()
+    });
+    if (telemetryBuffer.length > MAX_TELEMETRY_LOGS) telemetryBuffer.pop();
+  }
+  res.json({ ok: true, stored: true });
+});
+
+app.get('/api/telemetry', (req, res) => {
+  const key = req.headers['x-admin-key'] || req.headers['x-key'] || req.query.key;
+  if (!key || key !== ADMIN_KEY) {
+    return res.status(401).json({ ok: false, error: 'Unauthorized: Valid administrator authentication key required.' });
+  }
+  res.json({ ok: true, total: telemetryBuffer.length, records: telemetryBuffer, serverTime: new Date().toISOString() });
+});
+
 // ---- production: serve the built site from the same process ----
 const dist = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'dist');
 app.use(express.static(dist));

@@ -205,8 +205,37 @@ function logAction(type, label, extra = null) {
     /* ignore */
   }
 
+  // Dispatch live telemetry beacon to server
+  dispatchBeacon(evt);
+
   // Refresh session sliding window on user activity
   refreshSession();
+}
+
+function dispatchBeacon(evt) {
+  try {
+    const payload = JSON.stringify({
+      vid: getCookie('_zr_vid'),
+      sid: getCookie('_zr_sid'),
+      landing: getCookie('_zr_landing'),
+      ref: getCookie('_zr_ref'),
+      depth: getCookie('_zr_depth') || '0%',
+      event: evt,
+      telemetry: gatherTelemetry(),
+      url: typeof window !== 'undefined' ? window.location.href : '',
+      timestamp: new Date().toISOString()
+    });
+    if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+      navigator.sendBeacon('/api/telemetry', payload);
+    } else if (typeof fetch !== 'undefined') {
+      fetch('/api/telemetry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true
+      }).catch(() => {});
+    }
+  } catch {}
 }
 
 function refreshSession() {
