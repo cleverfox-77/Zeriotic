@@ -46,11 +46,10 @@ export function initCursor() {
   function tick() {
     x += (tx - x) * 0.18; y += (ty - y) * 0.18;
     scale += (tScale - scale) * 0.16;
-    wrap.style.transform = `translate(${x - 56}px, ${y - 56}px)`;
-    inner.style.transform = `scale(${scale})`;
-    circle.style.transform = `scale(${scale})`;
-    if (isDrag && !holding) { drag.style.opacity = 1; drag.style.transform = 'scale(1)'; }
-    else { drag.style.opacity = 0; drag.style.transform = 'scale(.8)'; }
+    wrap.style.transform = `translate3d(${x - 56}px, ${y - 56}px, 0)`;
+    inner.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    if (isDrag && !holding) { drag.style.opacity = 1; drag.style.transform = 'translate(-50%, -50%) scale(1)'; }
+    else { drag.style.opacity = 0; drag.style.transform = 'translate(-50%, -50%) scale(.8)'; }
 
     if (holding) {
       hold = Math.min(performance.now() - downT, HOLD_MS);
@@ -58,9 +57,9 @@ export function initCursor() {
       ring.style.strokeDashoffset = String(245 * (1 - k));
       prompt.style.opacity = k > 0.05 ? 1 : 0;
       holdInner.style.transform = `scale(${0.2 + k * 0.8})`;
-      progress.style.opacity = 1; progress.style.transform = 'scale(1)';
+      progress.style.opacity = 1; progress.style.transform = 'translate(-50%, -50%) scale(1)';
     } else {
-      progress.style.opacity = 0; progress.style.transform = 'scale(.8)';
+      progress.style.opacity = 0; progress.style.transform = 'translate(-50%, -50%) scale(.8)';
       holdInner.style.transform = 'scale(0)';
     }
     requestAnimationFrame(tick);

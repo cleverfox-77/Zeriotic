@@ -192,9 +192,9 @@ body.menu-open .chrome--top { z-index:80; }
 }
 .cursor { position:fixed; top:0; left:0; z-index:11000; pointer-events:none !important; will-change:transform; }
 .cursor *, .cursor__wrap, .cursor__inner, .cursor__circle, .cursor__hold, .cursor__hold-inner, .cursor__click-hold-prompt, .cursor__drag, .cursor__progress { pointer-events:none !important; }
-.cursor__wrap { position:relative; width:112px; height:112px; contain:layout paint; }
-.cursor__inner { position:absolute; left:50%; top:50%; width:35px; height:35px; transform:translate(-50%,-50%); }
-.cursor__circle { position:absolute; inset:0; border:1.5px solid #212121; border-radius:50%; transition:background .3s; }
+.cursor__wrap { position:relative; width:112px; height:112px; overflow:visible; }
+.cursor__inner { position:absolute; left:50%; top:50%; width:35px; height:35px; transform:translate(-50%,-50%); transform-origin:center center; will-change:transform; }
+.cursor__circle { position:absolute; inset:0; border:1.5px solid #212121; border-radius:50%; box-sizing:border-box; transition:background .3s; }
 .cursor__hold { position:absolute; left:50%; top:50%; width:35px; height:35px; transform:translate(-50%,-50%); border-radius:50%; overflow:hidden; }
 .cursor__hold-inner { position:absolute; inset:0; background:#212121; border-radius:50%; transform:scale(0); }
 .cursor__click-hold-prompt { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); opacity:0; font-size:.5rem; text-transform:uppercase; letter-spacing:.14em; white-space:nowrap; pointer-events:none; }
