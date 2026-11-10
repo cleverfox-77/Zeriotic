@@ -167,3 +167,19 @@ em, i, cite { font-style: normal; }
 h1, h2 { font-weight: 400; letter-spacing: -.025em; }
 code, pre, kbd, samp { font-family: var(--font-sans); }
 input, select, textarea, button { font-family: inherit; }
+
+.js-cookie-settings {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+.js-cookie-settings:hover {
+  opacity: 1;
+}

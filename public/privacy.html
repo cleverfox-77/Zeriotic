@@ -23,7 +23,7 @@
     </a>
   </header>
 
-  <main>
+  <main data-router-wrapper><div data-router-view="work">
     <div class="page-hero">
       <div class="eyebrow"><span>Legal</span></div>
       <h1>Privacy Policy</h1>
@@ -38,8 +38,26 @@
       </section>
 
       <section class="page-section">
-        <h2>2. Analytics and tracking</h2>
-        <p>We use Plausible Analytics, a privacy-friendly, cookieless analytics tool. Plausible does not track you across devices or websites, does not collect personal data, and does not use cookies. All site measurement is aggregated and anonymous, helping us understand overall site performance without compromising your privacy.</p>
+        <h2>2. Analytics, visitor telemetry and cookies</h2>
+        <p>Zeriotic measures site performance and visitor journeys to understand how prospective clients, engineering teams and partners discover and explore our work. We use both aggregated measurement and client-side telemetry cookies.</p>
+        <p><strong>Your consent choices:</strong> When you first visit zeriotic.com, we display a cookie banner giving you two direct choices:</p>
+        <ul>
+          <li><strong>Accept all cookies:</strong> Enables full visitor activity and telemetry cookies, allowing us to measure scroll depth milestones (25% to 100%), chapter dwell times, CTA interactions, and referral attribution.</li>
+          <li><strong>Accept necessary cookies only:</strong> Disables all tracking, telemetry and attribution cookies. Only the strictly necessary cookie required to remember your preference is saved.</li>
+        </ul>
+        <p><strong>Cookies and storage keys used on zeriotic.com:</strong></p>
+        <ul>
+          <li><code>zr_consent</code> (Strictly Necessary, 1 year): Remembers whether you chose all cookies or necessary cookies only.</li>
+          <li><code>zr_prefs</code> (Strictly Necessary, 1 year): Stores granular category choices (necessary, analytics, attribution).</li>
+          <li><code>_zr_vid</code> (Activity &amp; Telemetry, 1 year): A pseudonymous visitor identifier to distinguish unique visitors across visits.</li>
+          <li><code>_zr_sid</code> (Activity &amp; Telemetry, 30 minutes rolling): A session identifier refreshed on active browsing.</li>
+          <li><code>_zr_first_seen</code> &amp; <code>_zr_last_seen</code> (Activity &amp; Telemetry, 1 year): Timestamps of initial discovery and recent interaction.</li>
+          <li><code>_zr_visit_count</code> (Activity &amp; Telemetry, 1 year): Total number of browsing sessions.</li>
+          <li><code>_zr_depth</code> (Activity &amp; Telemetry, 30 minutes): Highest scroll depth milestone reached on the page.</li>
+          <li><code>_zr_act</code> (Activity &amp; Telemetry, 30 minutes): Rolling event stream of recent actions (button clicks, section views).</li>
+          <li><code>_zr_ref</code>, <code>_zr_landing</code> &amp; <code>_zr_utm</code> (Attribution, 180 days): Initial referring domain, entry landing page, and campaign attribution parameters.</li>
+        </ul>
+        <p>You can change or revoke your cookie choices at any time by clicking <button type="button" class="js-cookie-settings" style="text-decoration:underline;cursor:pointer;">Cookie settings</button> in the footer of any page.</p>
       </section>
 
       <section class="page-section">
@@ -67,10 +85,12 @@
         <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:hello@zeriotic.com">hello@zeriotic.com</a>.</p>
       </section>
     </div>
-  </main>
+  </div></main>
 
-  <div class="page-footer">
+  <div class="page-footer" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
     <a href="/" class="btn btn--ghost">Back to home</a>
+    <button type="button" class="js-cookie-settings">Cookie settings</button>
   </div>
+  <script type="module" src="/src/features/tracker.js"></script>
 </body>
 </html>

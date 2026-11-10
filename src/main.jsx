@@ -1,14 +1,16 @@
 import './style.css';
 import './chapters.css';
 import './preorder.js';
+import './features/tracker.js';
 import { initArt } from './ui/art.js';
 
-/** Cookieless analytics, once per event name per page load. */
+/** Cookieless analytics + extreme visitor activity tracking. */
 const tracked = new Set();
 function track(name, props) {
   if (tracked.has(name)) return;
   tracked.add(name);
   window.plausible?.trackEvent?.(name, { props });
+  window.ZerioticTracker?.track?.('event', name, props);
 }
 window.__track = track;
 
